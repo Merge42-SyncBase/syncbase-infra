@@ -1,0 +1,7 @@
+.env
+build/
+output/
+__pycache__/
+*.py[cod]
+*.tfstate
+*.tfstate.*
