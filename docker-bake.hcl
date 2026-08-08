@@ -11,7 +11,7 @@ group "default" {
 }
 
 target "go-binary" {
-  context    = ".."
+  context    = "cwd://"
   dockerfile = "infra/docker/go.Dockerfile"
 }
 
