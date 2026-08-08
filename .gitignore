@@ -1,4 +1,6 @@
 .env
+environments/*/.env
+environments/*/secrets/
 build/
 output/
 __pycache__/

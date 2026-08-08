@@ -16,13 +16,22 @@ done
 [[ -r "$SYNCBASE_MCP_TOKEN_FILE" ]] || { echo "MCP token file unreadable" >&2; exit 66; }
 
 project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-compose_file="${SYNCBASE_COMPOSE_FILE:-$project_root/infra/compose.yml}"
 expected_version="${SYNCBASE_EXPECTED_DOCUMENT_VERSION:-2}"
 [[ "$expected_version" =~ ^[1-9][0-9]*$ ]] || {
   echo "SYNCBASE_EXPECTED_DOCUMENT_VERSION must be a positive integer" >&2
   exit 64
 }
-compose=(docker compose -f "$compose_file")
+if [[ -n "${SYNCBASE_COMPOSE_FILE:-}" ]]; then
+  compose=(docker compose -f "$SYNCBASE_COMPOSE_FILE")
+elif [[ -n "${COMPOSE_FILE:-}" ]]; then
+  compose=(docker compose)
+else
+  compose=(
+    docker compose
+    -f "$project_root/infra/compose.yml"
+    -f "$project_root/infra/environments/local/compose.yml"
+  )
+fi
 web_url="${SYNCBASE_WEB_URL%/}"
 mcp_url="${SYNCBASE_MCP_URL%/}"
 mcp_token="$(tr -d '\n' <"$SYNCBASE_MCP_TOKEN_FILE")"

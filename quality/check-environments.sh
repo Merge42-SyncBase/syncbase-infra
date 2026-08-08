@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$project_root"
+
+common_env=(
+  SYNCBASE_POSTGRES_OWNER_PASSWORD=owner-test-password
+  SYNCBASE_WEB_DB_PASSWORD=web-test-password
+  SYNCBASE_WORKER_DB_PASSWORD=worker-test-password
+  SYNCBASE_MCP_DB_PASSWORD=mcp-test-password
+  SYNCBASE_ADMIN_PASSWORD_BCRYPT=bcrypt-test-placeholder
+  SYNCBASE_MCP_TOKEN_FILE=/tmp/syncbase-environment-check-token
+  SYNCBASE_MCP_TOKEN_SHA256=0000000000000000000000000000000000000000000000000000000000000000
+  SYNCBASE_PUBLIC_BASE_URL=https://syncbase.example.test
+  SYNCBASE_ORT_LIBRARY_FILE=libonnxruntime.so.1.26.0
+)
+
+local_json="$(env "${common_env[@]}" docker compose \
+  -f infra/compose.yml \
+  -f infra/environments/local/compose.yml \
+  config --format json)"
+prod_json="$(env "${common_env[@]}" \
+  SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
+  SYNCBASE_WORKER_IMAGE=registry.example/syncbase-worker:test \
+  SYNCBASE_MIGRATE_IMAGE=registry.example/syncbase-migrate:test \
+  SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
+  docker compose \
+  -f infra/compose.yml \
+  -f infra/environments/prod/compose.yml \
+  config --format json)"
+
+jq -e --arg root "$project_root" '
+  .name == "syncbase" and
+  .services.web.build.context == $root and
+  .services.mcp.build.context == $root and
+  .services.web.environment.SYNCBASE_COOKIE_SECURE == "false"
+' >/dev/null <<<"$local_json"
+
+jq -e '
+  .name == "syncbase-prod" and
+  (.services.web.build | not) and
+  (.services.worker.build | not) and
+  (.services.mcp.build | not) and
+  .services.web.image == "registry.example/syncbase-web:test" and
+  .services.web.environment.SYNCBASE_COOKIE_SECURE == "true" and
+  all(.services.web.ports[]; .host_ip == "127.0.0.1") and
+  all(.services.mcp.ports[]; .host_ip == "127.0.0.1")
+' >/dev/null <<<"$prod_json"
+
+printf 'ENVIRONMENT_CHECK_PASS local=build prod=images prod_bind=loopback\n'

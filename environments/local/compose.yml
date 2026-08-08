@@ -1,0 +1,37 @@
+name: syncbase
+
+x-go-build: &go-build
+  context: ..
+  dockerfile: infra/docker/go.Dockerfile
+
+services:
+  migrate:
+    build:
+      <<: *go-build
+      args:
+        TARGET_PACKAGE: ./was/cmd/migrate
+
+  web:
+    build:
+      <<: *go-build
+      args:
+        TARGET_PACKAGE: ./was/cmd/web
+    environment:
+      SYNCBASE_COOKIE_SECURE: "false"
+      SYNCBASE_ENVIRONMENT_LABEL: Local · PostgreSQL · Go
+    ports:
+      - "${SYNCBASE_WEB_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_WEB_PORT:-8080}:8080"
+
+  worker:
+    build:
+      <<: *go-build
+      args:
+        TARGET_PACKAGE: ./was/cmd/worker
+
+  mcp:
+    build:
+      <<: *go-build
+      args:
+        TARGET_PACKAGE: ./mcp/cmd/mcp
+    ports:
+      - "${SYNCBASE_MCP_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_MCP_PORT:-8081}:8081"
