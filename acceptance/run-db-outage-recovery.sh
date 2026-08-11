@@ -17,6 +17,10 @@ done
 
 project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 expected_version="${SYNCBASE_EXPECTED_DOCUMENT_VERSION:-2}"
+expected_document_id="${SYNCBASE_EXPECTED_DOCUMENT_ID:-}"
+if [[ -n "$expected_document_id" && -r "$expected_document_id" ]]; then
+  expected_document_id="$(tr -d '\r\n' <"$expected_document_id")"
+fi
 [[ "$expected_version" =~ ^[1-9][0-9]*$ ]] || {
   echo "SYNCBASE_EXPECTED_DOCUMENT_VERSION must be a positive integer" >&2
   exit 64
@@ -38,11 +42,13 @@ mcp_token="$(tr -d '\n' <"$SYNCBASE_MCP_TOKEN_FILE")"
 request_body="$(jq -cn --arg query "$SYNCBASE_SEARCH_QUERY" \
   '{jsonrpc:"2.0",id:7,method:"tools/call",params:{name:"search_documents",arguments:{query:$query,limit:20}}}')"
 postgres_stopped=false
+temporary_dir="$(mktemp -d)"
 
 restore_database() {
   if [[ "$postgres_stopped" == true ]]; then
     "${compose[@]}" start postgres >/dev/null 2>&1 || true
   fi
+  rm -rf "$temporary_dir"
 }
 trap restore_database EXIT
 
@@ -64,13 +70,21 @@ call_mcp() {
 
 assert_active_version() {
   local response="$1"
+  if [[ -n "$expected_document_id" ]]; then
+    jq -e --arg document "$expected_document_id" --argjson expected "$expected_version" '
+      any(.result.structuredContent.results[]?;
+          .document_id == $document and .document_version == $expected)
+    ' >/dev/null <<<"$response"
+    return
+  fi
   jq -e --argjson expected "$expected_version" '
-    (.result.structuredContent.results | length) > 0 and
-    all(.result.structuredContent.results[]; .document_version == $expected)
-  ' >/dev/null <<<"$response"
+      (.result.structuredContent.results | length) > 0 and
+      all(.result.structuredContent.results[]; .document_version == $expected)
+    ' >/dev/null <<<"$response"
 }
 
 before_mcp="$(service_id mcp)"
+before_api="$(service_id api)"
 before_web="$(service_id web)"
 before_worker="$(service_id worker)"
 assert_active_version "$(call_mcp)"
@@ -84,11 +98,19 @@ jq -e '
   any(.result.content[]?; .type == "text" and .text == "TEMPORARILY_UNAVAILABLE")
 ' >/dev/null <<<"$unavailable_response"
 
-web_outage="$(curl --fail --silent --show-error --max-time 15 \
+api_outage_body="$temporary_dir/api-outage.json"
+api_outage_status="$(curl --silent --show-error --max-time 15 \
   --cookie "$SYNCBASE_SESSION_COOKIE_JAR" \
+  --output "$api_outage_body" --write-out '%{http_code}' \
   --get --data-urlencode "q=$SYNCBASE_SEARCH_QUERY" \
-  "$web_url/search")"
-grep -q 'MCP 검색이 잠시 지연되고 있습니다' <<<"$web_outage"
+  "$web_url/api/v1/search" || true)"
+[[ "$api_outage_status" == "503" ]] || {
+  echo "API outage search status=$api_outage_status, want 503" >&2
+  cat "$api_outage_body" >&2
+  exit 1
+}
+jq -e '.error.code == "TEMPORARILY_UNAVAILABLE" and .error.retryable == true' \
+  "$api_outage_body" >/dev/null
 
 "${compose[@]}" start postgres >/dev/null
 postgres_stopped=false
@@ -106,6 +128,7 @@ done
 
 assert_active_version "$(call_mcp)"
 [[ "$before_mcp" == "$(service_id mcp)" ]]
+[[ "$before_api" == "$(service_id api)" ]]
 [[ "$before_web" == "$(service_id web)" ]]
 [[ "$before_worker" == "$(service_id worker)" ]]
 

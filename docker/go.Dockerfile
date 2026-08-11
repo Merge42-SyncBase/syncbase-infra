@@ -8,14 +8,12 @@ ARG BINARY=syncbase
 WORKDIR /src
 
 COPY go.work ./
-COPY frontend/go.mod ./frontend/go.mod
 COPY vector-embedding/go.mod vector-embedding/go.sum ./vector-embedding/
 COPY was/go.mod was/go.sum ./was/
 COPY mcp/go.mod mcp/go.sum ./mcp/
 COPY was/qualification/pdf-gate/go/go.mod was/qualification/pdf-gate/go/go.sum ./was/qualification/pdf-gate/go/
 RUN --mount=type=cache,target=/go/pkg/mod go mod download all
 
-COPY frontend ./frontend
 COPY vector-embedding ./vector-embedding
 COPY was ./was
 COPY mcp ./mcp

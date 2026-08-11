@@ -5,12 +5,15 @@ services:
     image: ${SYNCBASE_MIGRATE_IMAGE:?required}
     pull_policy: always
 
-  web:
-    image: ${SYNCBASE_WEB_IMAGE:?required}
+  api:
+    image: ${SYNCBASE_API_IMAGE:?required}
     pull_policy: always
     environment:
       SYNCBASE_COOKIE_SECURE: "true"
-      SYNCBASE_ENVIRONMENT_LABEL: AWS EC2 · Production
+
+  web:
+    image: ${SYNCBASE_WEB_IMAGE:?required}
+    pull_policy: always
     ports:
       - "${SYNCBASE_WEB_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_WEB_PORT:-8080}:8080"
 

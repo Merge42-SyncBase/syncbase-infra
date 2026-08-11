@@ -11,7 +11,7 @@ variable "IMAGE_PREFIX" {
 }
 
 group "default" {
-  targets = ["web", "worker", "migrate", "mcp"]
+  targets = ["web", "api", "worker", "migrate", "mcp"]
 }
 
 target "go-binary" {
@@ -19,12 +19,18 @@ target "go-binary" {
   dockerfile = "infra/docker/go.Dockerfile"
 }
 
-target "web" {
+target "api" {
   inherits = ["go-binary"]
   args = {
     TARGET_PACKAGE = "./was/cmd/web"
   }
-  tags = ["${REGISTRY}/${IMAGE_PREFIX}web:${TAG}"]
+  tags = ["${REGISTRY}/${IMAGE_PREFIX}api:${TAG}"]
+}
+
+target "web" {
+  context    = "cwd://frontend"
+  dockerfile = "Dockerfile"
+  tags       = ["${REGISTRY}/${IMAGE_PREFIX}web:${TAG}"]
 }
 
 target "worker" {

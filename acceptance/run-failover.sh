@@ -139,25 +139,17 @@ SQL
 
 probe || { echo "MCP search must succeed before failover" >&2; exit 1; }
 
-upload_page="$temporary_dir/upload.html"
-upload_headers="$temporary_dir/upload-headers.txt"
-curl --fail --silent --show-error --cookie "$SYNCBASE_SESSION_COOKIE_JAR" \
-  "$SYNCBASE_WEB_URL/documents/new" >"$upload_page"
-csrf_token="$(perl -ne 'if (/name="_csrf"[^>]*content="([^"]+)"/) { print $1; exit }' "$upload_page")"
-[[ -n "$csrf_token" ]] || { echo "CSRF token not found" >&2; exit 1; }
+csrf_token="$(curl --fail --silent --show-error --cookie "$SYNCBASE_SESSION_COOKIE_JAR" \
+  --header 'Accept: application/json' "$SYNCBASE_WEB_URL/api/v1/session" | jq -er '.csrfToken')"
 request_key="failover-$(openssl rand -hex 16)"
-curl --fail --silent --show-error --cookie "$SYNCBASE_SESSION_COOKIE_JAR" \
-  --dump-header "$upload_headers" --output /dev/null \
-  --form "csrf=$csrf_token" \
+registration="$(curl --fail --silent --show-error --cookie "$SYNCBASE_SESSION_COOKIE_JAR" \
+  --header 'Accept: application/json' --header "X-CSRF-Token: $csrf_token" \
   --form "documentName=$SYNCBASE_SAMPLE_DOCUMENT_NAME failover" \
   --form "requestKey=$request_key" \
   --form "file=@$SYNCBASE_SAMPLE_PDF;type=application/pdf" \
-  "$SYNCBASE_WEB_URL/documents"
-location="$(awk 'BEGIN{IGNORECASE=1} /^location:/ {gsub("\r", "", $2); print $2}' \
-  "$upload_headers" | tail -n 1)"
-document_id="${location#/documents/}"
-document_id="${document_id%%\?*}"
-[[ "$location" == /documents/* && "$document_id" =~ ^[0-9a-f-]{36}$ ]] || {
+  "$SYNCBASE_WEB_URL/api/v1/documents")"
+document_id="$(jq -er '.documentId' <<<"$registration")"
+[[ "$document_id" =~ ^[0-9a-f-]{36}$ ]] || {
   echo "failover processing registration failed" >&2
   exit 1
 }

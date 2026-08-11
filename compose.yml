@@ -66,9 +66,9 @@ services:
         condition: service_completed_successfully
     restart: "no"
 
-  web:
+  api:
     <<: *app
-    image: ${SYNCBASE_WEB_IMAGE:-syncbase/web:local}
+    image: ${SYNCBASE_API_IMAGE:-syncbase/api:local}
     environment:
       SYNCBASE_DATABASE_URL: postgres://syncbase_web:${SYNCBASE_WEB_DB_PASSWORD:?required}@postgres:5432/syncbase?sslmode=disable
       SYNCBASE_ORIGINAL_ROOT: /data/originals
@@ -76,13 +76,19 @@ services:
       SYNCBASE_ADMIN_PASSWORD_BCRYPT: ${SYNCBASE_ADMIN_PASSWORD_BCRYPT:?required}
       SYNCBASE_COOKIE_SECURE: ${SYNCBASE_COOKIE_SECURE:-false}
       SYNCBASE_WEB_ADDR: :8080
-      SYNCBASE_ENVIRONMENT_LABEL: ${SYNCBASE_ENVIRONMENT_LABEL:-PostgreSQL · Go}
       SYNCBASE_MCP_URL: http://mcp:8081/mcp
       SYNCBASE_MCP_TOKEN_FILE: /run/secrets/mcp_client_token
     volumes:
       - originals:/data/originals
     secrets:
       - mcp_client_token
+
+  web:
+    image: ${SYNCBASE_WEB_IMAGE:-syncbase/web:local}
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_started
 
   worker:
     <<: *app

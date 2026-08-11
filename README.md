@@ -2,11 +2,11 @@
 
 이 저장소는 애플리케이션 소스가 아니라 실행 조립만 소유한다.
 
-- `compose.yml`: 환경 공통 PostgreSQL/pgvector, migrate, web, worker, MCP 계약
+- `compose.yml`: 환경 공통 PostgreSQL/pgvector, migrate, React `web`, Go `api`, worker, MCP 계약
 - `environments/local/`: 소스 build와 loopback 포트를 추가하는 local override
 - `environments/prod/`: GHCR image와 AWS EC2 운영 기본값을 추가하는 prod override
 - `docker/go.Dockerfile`: superproject의 Go workspace를 빌드하는 공통 이미지
-- `docker-bake.hcl`: web, worker, migrate, MCP 이미지 빌드 행렬
+- `docker-bake.hcl`: React `web`, Go `api`/worker/migrate, MCP 이미지 빌드 행렬
 - `deploy/`: 보호된 환경 파일 생성, EC2 release 전송, readiness/rollback
 - `postgres/`: 최소 권한 역할 및 GRANT 검증
 - `acceptance/`: P0, 브라우저, DB 장애·복구, OpenSQL 장애 시연
@@ -19,7 +19,8 @@
 ```sh
 cp infra/environments/local/.env.example infra/environments/local/.env
 vector-embedding/ops/model/fetch-e5-small.sh infra/build/models/multilingual-e5-small
-vector-embedding/ops/model/fetch-onnxruntime.sh infra/build/runtime linux-amd64
+# Docker daemon architecture에 맞춰 linux-amd64 또는 linux-arm64를 선택한다.
+vector-embedding/ops/model/fetch-onnxruntime.sh infra/build/runtime linux-arm64
 docker compose \
   --env-file infra/environments/local/.env \
   -f infra/compose.yml \
@@ -32,7 +33,7 @@ PostgreSQL 및 원문 volume을 그대로 사용한다.
 
 ## Production
 
-Production override는 로컬 build를 포함하지 않으며 네 개의 immutable image가 반드시
+Production override는 로컬 build를 포함하지 않으며 다섯 개의 immutable image가 반드시
 필요하다. GitHub Actions는 `sha-<commit>` 태그로 GHCR에 push한 후 EC2의
 `$HOME/syncbase/releases/<tag>`로 release bundle을 전송한다. readiness 실패 시
 `current`가 가리키던 직전 release image로 자동 복구한다.
@@ -45,5 +46,8 @@ Production override는 로컬 build를 포함하지 않으며 네 개의 immutab
 infra/quality/check-environments.sh
 docker buildx bake -f infra/docker-bake.hcl --print
 ```
+
+`web`은 정적 SPA 및 same-origin `/api/` proxy만 제공한다. PostgreSQL, MCP token,
+원문 저장소는 `api`/worker/MCP에만 전달된다.
 
 `docker-bake.hcl`은 Terraform이 아니라 Docker Buildx가 읽는 HCL이다.

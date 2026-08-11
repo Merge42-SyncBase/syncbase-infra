@@ -11,69 +11,120 @@ required=(
 for name in "${required[@]}"; do
   [[ -n "${!name:-}" ]] || { echo "missing $name" >&2; exit 64; }
 done
-[[ -r "$SYNCBASE_SAMPLE_PDF" ]] || { echo "sample PDF unreadable" >&2; exit 66; }
-[[ -r "$SYNCBASE_SAMPLE_PDF_V2" ]] || { echo "sample v2 PDF unreadable" >&2; exit 66; }
+for file in "$SYNCBASE_SAMPLE_PDF" "$SYNCBASE_SAMPLE_PDF_V2"; do
+  [[ -r "$file" ]] || { echo "sample PDF unreadable: $file" >&2; exit 66; }
+done
 command -v npx >/dev/null 2>&1 || {
   echo "npx is required; install Node.js and npm" >&2
   exit 69
 }
 
 project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-test_file="$project_root/frontend/test/upload-recovery.playwright.js"
-output_dir="${SYNCBASE_PLAYWRIGHT_OUTPUT_DIR:-$project_root/output/playwright/upload-recovery-ci}"
-version="0.1.18"
+output_dir="${SYNCBASE_PLAYWRIGHT_OUTPUT_DIR:-$project_root/output/playwright/upload-real-api}"
 session="syncbase-upload-${GITHUB_RUN_ID:-$$}-${GITHUB_RUN_ATTEMPT:-1}"
-temporary_dir="$(mktemp -d "${TMPDIR:-/tmp}/syncbase-upload-browser.XXXXXX")"
-browser_open=false
-cleanup() {
-  if [[ "$browser_open" == true ]]; then
-    playwright_cli close >/dev/null 2>&1 || true
-  fi
-  rm -rf "$temporary_dir"
-}
-trap cleanup EXIT
+pwcli="${CODEX_HOME:-$HOME/.codex}/skills/playwright/scripts/playwright_cli.sh"
+storage_key='syncbase.upload./documents/new'
+new_document_name="브라우저 실제 등록 $(date +%s)"
+
 mkdir -p "$output_dir"
 output_dir="$(cd "$output_dir" && pwd)"
-install -m 0644 "$SYNCBASE_SAMPLE_PDF" "$output_dir/sample-v1.pdf"
-install -m 0644 "$SYNCBASE_SAMPLE_PDF_V2" "$output_dir/sample-v2.pdf"
-
-web_url="${SYNCBASE_WEB_URL%/}"
-cookie_jar="$temporary_dir/session-cookie"
-storage_state="$temporary_dir/storage-state.json"
-curl --fail --silent --show-error --location \
-  --cookie-jar "$cookie_jar" \
-  --data-urlencode "username=$SYNCBASE_ADMIN_USERNAME" \
-  --data-urlencode "password=$SYNCBASE_ADMIN_PASSWORD" \
-  "$web_url/login" >/dev/null
-session_cookie="$(awk '$6 == "syncbase_session" {print $7}' "$cookie_jar" | tail -n 1)"
-[[ -n "$session_cookie" ]] || { echo "browser test login did not create a session" >&2; exit 1; }
-cookie_domain="${web_url#*://}"
-cookie_domain="${cookie_domain%%/*}"
-cookie_domain="${cookie_domain%%:*}"
-cookie_secure=false
-[[ "$web_url" == https://* ]] && cookie_secure=true
-jq -n \
-  --arg value "$session_cookie" \
-  --arg domain "$cookie_domain" \
-  --argjson secure "$cookie_secure" \
-  '{cookies:[{name:"syncbase_session",value:$value,domain:$domain,path:"/",expires:-1,httpOnly:true,secure:$secure,sameSite:"Lax"}],origins:[]}' \
-  >"$storage_state"
 
 playwright_cli() {
-  npx --yes --package "@playwright/cli@$version" playwright-cli -s="$session" "$@"
+  if [[ -x "$pwcli" ]]; then
+    "$pwcli" -s="$session" "$@"
+    return
+  fi
+  npx --yes --package '@playwright/cli@0.1.18' playwright-cli -s="$session" "$@"
 }
 
-cd "$output_dir"
-playwright_cli open "$web_url/login"
-browser_open=true
-playwright_cli state-load "$storage_state"
-playwright_cli goto "$web_url/documents/new"
-status=0
-playwright_cli run-code --filename "$test_file" || status=$?
-cleanup
-trap - EXIT
-if [[ "$status" -ne 0 ]]; then
-  exit "$status"
-fi
+wait_for_browser_expression() {
+  local expression="$1"
+  local description="$2"
+  local deadline=$(( $(date +%s) + 120 ))
+  while (( $(date +%s) < deadline )); do
+    if [[ "$(playwright_cli --raw eval "$expression")" == "true" ]]; then
+      return
+    fi
+    sleep 2
+  done
+  echo "timed out waiting for $description" >&2
+  return 1
+}
 
-printf 'UPLOAD_BROWSER_PASS file_replacement=true pending_recovery=true\n'
+upload_file() {
+  local file="$1"
+  # The accessible projection identifies the nested input rather than its
+  # label. Opening the real chooser explicitly preserves the browser's normal
+  # change event; upload then supplies the selected local PDF to that chooser.
+  playwright_cli eval "document.querySelector('input[type=file]').click()" > /dev/null
+  playwright_cli upload "$file" > /dev/null
+  wait_for_browser_expression "document.querySelector('.preflight') !== null" "PDF preflight"
+}
+
+read_upload_state() {
+  local raw
+  raw="$(playwright_cli --raw localstorage-get "$storage_key")"
+  printf '%s' "${raw#*=}"
+}
+
+cleanup() {
+  playwright_cli tracing-stop >/dev/null 2>&1 || true
+  playwright_cli video-stop >/dev/null 2>&1 || true
+  playwright_cli close >/dev/null 2>&1 || true
+}
+trap cleanup EXIT
+
+playwright_cli open "$SYNCBASE_WEB_URL/login" > /dev/null
+playwright_cli resize 1280 800 > /dev/null
+playwright_cli video-start "$output_dir/upload-real-api.webm" --size 1280x800 > /dev/null
+playwright_cli tracing-start > /dev/null
+
+playwright_cli fill "input[autocomplete='username']" "$SYNCBASE_ADMIN_USERNAME" > /dev/null
+playwright_cli fill "input[autocomplete='current-password']" "$SYNCBASE_ADMIN_PASSWORD" > /dev/null
+playwright_cli click "button:has-text('로그인')" > /dev/null
+wait_for_browser_expression "location.pathname === '/documents'" "document list after login"
+
+playwright_cli click "a[href='/documents/new']" > /dev/null
+wait_for_browser_expression "location.pathname === '/documents/new'" "PDF registration page"
+
+upload_file "$SYNCBASE_SAMPLE_PDF"
+first_state="$(read_upload_state)"
+first_key="$(jq --raw-output '.requestKey' <<<"$first_state")"
+first_hash="$(jq --raw-output '.hash' <<<"$first_state")"
+[[ "$first_key" != "null" && "$first_hash" != "null" && "$(jq --raw-output '.submitted' <<<"$first_state")" == "false" ]] || {
+  echo "first preflight did not persist a recoverable state" >&2
+  exit 1
+}
+
+playwright_cli click "button:has-text('파일 교체')" > /dev/null
+upload_file "$SYNCBASE_SAMPLE_PDF_V2"
+replacement_state="$(read_upload_state)"
+replacement_key="$(jq --raw-output '.requestKey' <<<"$replacement_state")"
+replacement_hash="$(jq --raw-output '.hash' <<<"$replacement_state")"
+[[ "$replacement_key" != "$first_key" && "$replacement_hash" != "$first_hash" &&
+  "$(jq --raw-output '.submitted' <<<"$replacement_state")" == "false" ]] || {
+  echo "replacement PDF did not rotate recoverable upload identity" >&2
+  exit 1
+}
+playwright_cli screenshot --filename "$output_dir/upload-preflight-replacement.png" --full-page > /dev/null
+
+playwright_cli click "button:has-text('파일 교체')" > /dev/null
+upload_file "$SYNCBASE_SAMPLE_PDF"
+playwright_cli fill "input[required]" "$new_document_name" > /dev/null
+playwright_cli click "button:has-text('문서 등록')" > /dev/null
+wait_for_browser_expression "location.pathname.startsWith('/documents/') && location.pathname !== '/documents/new'" "document detail after registration"
+playwright_cli screenshot --filename "$output_dir/upload-registered-real-api.png" --full-page > /dev/null
+
+wait_for_browser_expression "document.body.innerText.includes('검색 가능')" "active document version"
+wait_for_browser_expression "document.body.innerText.includes('현재 검색 버전')" "published document version"
+playwright_cli screenshot --filename "$output_dir/upload-active-real-api.png" --full-page > /dev/null
+
+playwright_cli click "a:has-text('원문 열기')" > /dev/null
+wait_for_browser_expression "location.pathname.startsWith('/sources/')" "source viewer route"
+wait_for_browser_expression "document.querySelector('canvas')?.width > 0" "rendered source PDF"
+wait_for_browser_expression "document.body.innerText.includes('검색 근거 위치')" "source provenance panel"
+playwright_cli screenshot --filename "$output_dir/source-viewer-real-api.png" --full-page > /dev/null
+playwright_cli tracing-stop > /dev/null
+playwright_cli video-stop > /dev/null
+
+printf 'UPLOAD_BROWSER_PASS real_api=true video=%s/upload-real-api.webm\n' "$output_dir"

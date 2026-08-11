@@ -2,12 +2,12 @@
 
 ## Topology
 
-GitHub Actions가 네 개의 immutable image를 GHCR에 push하고, 승인된 `production`
+GitHub Actions가 다섯 개의 immutable image를 GHCR에 push하고, 승인된 `production`
 Environment에서 SSH를 사용해 release bundle을 EC2에 전송한다.
 
 ```text
 GitHub production Environment
-  -> GHCR: web / worker / migrate / mcp
+  -> GHCR: web / api / worker / migrate / mcp
   -> SSH: compose, PostgreSQL role scripts, pinned E5/ONNX artifacts, protected env
   -> EC2: docker compose pull + migrate + readiness
 ```
@@ -57,8 +57,9 @@ Secrets를 Environment 범위에 등록한다.
 
 ## Network exposure
 
-기본 설정은 Web `127.0.0.1:8080`, MCP `127.0.0.1:8081`이다. 다음 중 하나로 HTTPS를
-종료한다.
+기본 설정은 React/Nginx Web `127.0.0.1:8080`, MCP `127.0.0.1:8081`이다. Go API는
+Compose 내부 네트워크에만 존재하고 Web의 `/api/` proxy를 통해서만 접근한다. 다음 중
+하나로 HTTPS를 종료한다.
 
 1. EC2 host의 Caddy/Nginx가 443을 받고 loopback 포트로 proxy
 2. ALB가 HTTPS를 종료하고, `SYNCBASE_*_BIND_ADDRESS=0.0.0.0`로 변경한 뒤 EC2

@@ -22,6 +22,7 @@ local_json="$(env "${common_env[@]}" docker compose \
   config --format json)"
 prod_json="$(env "${common_env[@]}" \
   SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
+  SYNCBASE_API_IMAGE=registry.example/syncbase-api:test \
   SYNCBASE_WORKER_IMAGE=registry.example/syncbase-worker:test \
   SYNCBASE_MIGRATE_IMAGE=registry.example/syncbase-migrate:test \
   SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
@@ -32,18 +33,21 @@ prod_json="$(env "${common_env[@]}" \
 
 jq -e --arg root "$project_root" '
   .name == "syncbase" and
-  .services.web.build.context == $root and
+  .services.api.build.context == $root and
+  .services.web.build.context == ($root + "/frontend") and
   .services.mcp.build.context == $root and
-  .services.web.environment.SYNCBASE_COOKIE_SECURE == "false"
+  .services.api.environment.SYNCBASE_COOKIE_SECURE == "false"
 ' >/dev/null <<<"$local_json"
 
 jq -e '
   .name == "syncbase-prod" and
   (.services.web.build | not) and
+  (.services.api.build | not) and
   (.services.worker.build | not) and
   (.services.mcp.build | not) and
   .services.web.image == "registry.example/syncbase-web:test" and
-  .services.web.environment.SYNCBASE_COOKIE_SECURE == "true" and
+  .services.api.image == "registry.example/syncbase-api:test" and
+  .services.api.environment.SYNCBASE_COOKIE_SECURE == "true" and
   all(.services.web.ports[]; .host_ip == "127.0.0.1") and
   all(.services.mcp.ports[]; .host_ip == "127.0.0.1")
 ' >/dev/null <<<"$prod_json"

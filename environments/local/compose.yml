@@ -11,14 +11,18 @@ services:
       args:
         TARGET_PACKAGE: ./was/cmd/migrate
 
-  web:
+  api:
     build:
       <<: *go-build
       args:
         TARGET_PACKAGE: ./was/cmd/web
     environment:
       SYNCBASE_COOKIE_SECURE: "false"
-      SYNCBASE_ENVIRONMENT_LABEL: Local · PostgreSQL · Go
+
+  web:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
     ports:
       - "${SYNCBASE_WEB_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_WEB_PORT:-8080}:8080"
 
