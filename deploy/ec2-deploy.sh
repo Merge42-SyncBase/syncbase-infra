@@ -81,6 +81,17 @@ ssh_options=(
 )
 remote="$SYNCBASE_EC2_USER@$SYNCBASE_EC2_HOST"
 remote_archive=".syncbase-${SYNCBASE_RELEASE_ID}.tar.gz"
+registry_logged_in=false
+
+cleanup() {
+  rm -rf "$temporary_dir"
+  if [[ "$registry_logged_in" == true ]]; then
+    # The validated registry host is intentionally expanded by the deployment runner.
+    # shellcheck disable=SC2029
+    ssh "${ssh_options[@]}" "$remote" docker logout "$registry_host" >/dev/null 2>&1 || true
+  fi
+}
+trap cleanup EXIT
 
 scp "${ssh_options[@]}" "$archive" "$remote:$remote_archive"
 
@@ -98,6 +109,7 @@ if [[ -n "${SYNCBASE_REGISTRY_TOKEN_FILE:-}" ]]; then
   # shellcheck disable=SC2029
   ssh "${ssh_options[@]}" "$remote" "${registry_login[@]}" \
     <"$SYNCBASE_REGISTRY_TOKEN_FILE"
+  registry_logged_in=true
 fi
 
 ssh "${ssh_options[@]}" "$remote" bash -s -- \

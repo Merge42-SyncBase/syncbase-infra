@@ -4,9 +4,14 @@ set -euo pipefail
 release_dir="${1:?usage: activate-release.sh RELEASE_DIR CURRENT_LINK [HEALTH_PORT]}"
 current_link="${2:?usage: activate-release.sh RELEASE_DIR CURRENT_LINK [HEALTH_PORT]}"
 health_port="${3:-8080}"
+release_retention="${SYNCBASE_RELEASE_RETENTION:-5}"
 
 if [[ ! "$health_port" =~ ^[1-9][0-9]{0,4}$ ]] || ((health_port > 65535)); then
   echo "invalid health port" >&2
+  exit 64
+fi
+if [[ ! "$release_retention" =~ ^[1-9][0-9]*$ ]]; then
+  echo "SYNCBASE_RELEASE_RETENTION must be a positive integer" >&2
   exit 64
 fi
 
@@ -62,4 +67,15 @@ if [[ "$healthy" != true ]]; then
 fi
 
 ln -sfn "$release_dir" "$current_link"
-printf 'PROD_ACTIVATE_PASS release=%s health_port=%s\n' "$release_dir" "$health_port"
+release_parent="$(dirname "$release_dir")"
+mapfile -t releases < <(find "$release_parent" -mindepth 1 -maxdepth 1 -type d -printf '%T@ %p\n' | sort -rn | cut -d ' ' -f2-)
+for index in "${!releases[@]}"; do
+  if ((index < release_retention)); then
+    continue
+  fi
+  stale_release="${releases[$index]}"
+  if [[ "$stale_release" == "$release_parent/"* && -d "$stale_release" && ! -L "$stale_release" ]]; then
+    rm -rf -- "$stale_release"
+  fi
+done
+printf 'PROD_ACTIVATE_PASS release=%s health_port=%s retained=%s\n' "$release_dir" "$health_port" "$release_retention"

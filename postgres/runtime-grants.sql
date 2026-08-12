@@ -13,7 +13,8 @@ GRANT SELECT ON TABLE
     syncbase.document_version,
     syncbase.processing_run,
     syncbase.queue_control,
-    syncbase.upload_request
+    syncbase.upload_request,
+    syncbase.browser_session
 TO syncbase_web;
 GRANT INSERT, UPDATE ON TABLE
     syncbase.document,
@@ -22,6 +23,7 @@ GRANT INSERT, UPDATE ON TABLE
     syncbase.queue_control,
     syncbase.upload_request
 TO syncbase_web;
+GRANT INSERT, DELETE ON TABLE syncbase.browser_session TO syncbase_web;
 GRANT INSERT ON TABLE syncbase.change_log TO syncbase_web;
 GRANT USAGE ON SEQUENCE syncbase.change_log_sequence_id_seq TO syncbase_web;
 
@@ -66,6 +68,12 @@ BEGIN
        OR NOT has_table_privilege('syncbase_web', 'syncbase.document', 'UPDATE')
        OR has_table_privilege('syncbase_web', 'syncbase.document', 'DELETE') THEN
         RAISE EXCEPTION 'syncbase_web privileges do not match the runtime contract';
+    END IF;
+    IF NOT has_table_privilege('syncbase_web', 'syncbase.browser_session', 'SELECT')
+       OR NOT has_table_privilege('syncbase_web', 'syncbase.browser_session', 'INSERT')
+       OR NOT has_table_privilege('syncbase_web', 'syncbase.browser_session', 'DELETE')
+       OR has_table_privilege('syncbase_web', 'syncbase.browser_session', 'UPDATE') THEN
+        RAISE EXCEPTION 'syncbase_web browser session privileges do not match the runtime contract';
     END IF;
     IF NOT has_table_privilege('syncbase_worker', 'syncbase.search_chunk', 'SELECT')
        OR NOT has_table_privilege('syncbase_worker', 'syncbase.search_chunk', 'INSERT')

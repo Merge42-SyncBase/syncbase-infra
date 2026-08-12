@@ -80,6 +80,7 @@ services:
       SYNCBASE_WEB_ADDR: :8080
       SYNCBASE_MCP_URL: http://mcp:8081/mcp
       SYNCBASE_MCP_TOKEN_FILE: /run/secrets/mcp_client_token
+      SYNCBASE_WORKER_READY_URL: http://worker:8082/readyz
     volumes:
       - originals:/data/originals
     secrets:
@@ -101,6 +102,7 @@ services:
       SYNCBASE_ORIGINAL_ROOT: /data/originals
       SYNCBASE_WORKER_ID: worker-1
       SYNCBASE_WORKER_POLL_INTERVAL: 1s
+      SYNCBASE_WORKER_HEALTH_ADDR: :8082
     volumes:
       - originals:/data/originals
       - ./build/models/multilingual-e5-small:/models:ro

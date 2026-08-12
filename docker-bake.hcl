@@ -14,7 +14,15 @@ group "default" {
   targets = ["web", "api", "worker", "migrate", "mcp"]
 }
 
+target "attested-image" {
+  attest = [
+    "type=provenance,mode=max",
+    "type=sbom"
+  ]
+}
+
 target "go-binary" {
+  inherits = ["attested-image"]
   context    = "cwd://"
   dockerfile = "infra/docker/go.Dockerfile"
 }
@@ -28,6 +36,7 @@ target "api" {
 }
 
 target "web" {
+  inherits   = ["attested-image"]
   context    = "cwd://frontend"
   dockerfile = "Dockerfile"
   tags       = ["${REGISTRY}/${IMAGE_PREFIX}web:${TAG}"]
