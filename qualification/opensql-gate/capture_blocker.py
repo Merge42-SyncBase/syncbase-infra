@@ -106,7 +106,7 @@ def artifact_paths() -> tuple[Path, ...]:
         ROOT / "was/internal/adapters/postgres/store.go",
         ROOT / "was/internal/adapters/postgres/migrate.go",
         ROOT / "infra/acceptance/run-failover.sh",
-        ROOT / "docs/backend-architecture.md",
+        ROOT / "docs/repository-layout.md",
     )
 
 
