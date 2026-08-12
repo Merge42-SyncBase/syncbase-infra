@@ -69,6 +69,8 @@ services:
   api:
     <<: *app
     image: ${SYNCBASE_API_IMAGE:-syncbase/api:local}
+    user: "0:0"
+    entrypoint: ["/usr/local/bin/syncbase-api-entrypoint"]
     environment:
       SYNCBASE_DATABASE_URL: postgres://syncbase_web:${SYNCBASE_WEB_DB_PASSWORD:?required}@postgres:5432/syncbase?sslmode=disable
       SYNCBASE_ORIGINAL_ROOT: /data/originals

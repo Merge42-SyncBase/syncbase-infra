@@ -25,13 +25,14 @@ RUN --mount=type=cache,target=/go/pkg/mod \
 FROM ${RUNTIME_IMAGE}
 ARG BINARY=syncbase
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates libgomp1 \
+    && apt-get install -y --no-install-recommends ca-certificates libgomp1 util-linux \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --gid 10001 syncbase \
     && useradd --uid 10001 --gid 10001 --no-create-home --shell /usr/sbin/nologin syncbase \
     && mkdir -p /app /data/originals \
     && chown -R syncbase:syncbase /app /data
 COPY --from=build "/out/${BINARY}" /app/syncbase
+COPY --chmod=0755 infra/docker/api-entrypoint.sh /usr/local/bin/syncbase-api-entrypoint
 USER 10001:10001
 WORKDIR /app
 ENTRYPOINT ["/app/syncbase"]

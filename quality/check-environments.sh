@@ -36,6 +36,8 @@ jq -e --arg root "$project_root" '
   .services.api.build.context == $root and
   .services.web.build.context == ($root + "/frontend") and
   .services.mcp.build.context == $root and
+  .services.api.user == "0:0" and
+  .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "false"
 ' >/dev/null <<<"$local_json"
 
@@ -47,6 +49,8 @@ jq -e '
   (.services.mcp.build | not) and
   .services.web.image == "registry.example/syncbase-web:test" and
   .services.api.image == "registry.example/syncbase-api:test" and
+  .services.api.user == "0:0" and
+  .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "true" and
   all(.services.web.ports[]; .host_ip == "127.0.0.1") and
   all(.services.mcp.ports[]; .host_ip == "127.0.0.1")
