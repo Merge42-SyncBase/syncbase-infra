@@ -2,11 +2,11 @@
 
 ## Topology
 
-GitHub Actions가 다섯 개의 immutable image를 GHCR에 push하고, 승인된 `production`
-Environment에서 SSH를 사용해 release bundle을 EC2에 전송한다.
+GitHub Actions가 다섯 개의 immutable image를 GHCR에 push하고, 확인된 `main`
+commit에서 SSH를 사용해 release bundle을 EC2에 전송한다.
 
 ```text
-GitHub production Environment
+GitHub Actions release gate
   -> GHCR: web / api / worker / migrate / mcp
   -> SSH: compose, PostgreSQL role scripts, pinned E5/ONNX artifacts, protected env
   -> EC2: docker compose pull + migrate + readiness
@@ -29,14 +29,16 @@ GitHub-hosted runner의 주소 전체에 SSH를 공개하는 구성은 권장하
 Manager로 교체한다. `PROD_EC2_KNOWN_HOSTS`에는 별도 채널로 fingerprint를 확인한 host
 key만 저장한다.
 
-## GitHub Environment and secrets
+## GitHub Actions secrets and release gate
 
-Repository에 `production` Environment를 만들고 required reviewer를 설정한다. 다음
-Secrets를 Environment 범위에 등록한다.
+현재 organization은 GitHub Free의 private repository를 사용한다. 이 조합에서는
+protected environment 및 environment secret을 설정할 수 없으므로, 다음 secrets를
+repository 또는 접근 대상 repository로 제한한 organization secret에 등록한다. `production`
+Environment 이름은 배포 이력 표시에 사용할 수 있지만 승인 게이트로 간주하지 않는다.
 
 | Secret | 의미 |
 | --- | --- |
-| `SUBMODULE_TOKEN` | private component submodule을 읽을 수 있는 fine-grained PAT 또는 GitHub App token |
+| `SUBMODULE_TOKEN` | 다섯 private component를 읽는 Contents: read 전용 short-lived GitHub App/fine-grained token |
 | `PROD_EC2_HOST` | EC2 public/private DNS 또는 IPv4 |
 | `PROD_EC2_USER` | Docker 권한이 있는 SSH 사용자 |
 | `PROD_EC2_SSH_PRIVATE_KEY` | 해당 사용자용 private key |
@@ -70,15 +72,16 @@ Compose 내부 네트워크에만 존재하고 Web의 `/api/` proxy를 통해서
 
 ## Deployment
 
-`.github/workflows/deploy-prod.yml`의 `workflow_dispatch`를 실행하고 `production`
-Environment 승인을 완료한다. Workflow는 다음을 자동으로 검증한다.
+정확한 `main` SHA에서 `platform-ci`와 `p0-acceptance`가 모두 성공한 뒤,
+`.github/workflows/deploy-prod.yml`의 `workflow_dispatch`를 실행하고 `DEPLOY`를
+입력한다. Workflow는 다음을 자동으로 검증한다.
 
 - component submodule checkout
-- SHA-tagged GHCR image build/push
+- SHA-tagged GHCR image build/push, SBOM/provenance attestation 및 digest 고정
 - pinned model/runtime checksum
 - protected `.env`와 MCP token 생성
 - strict host-key SSH 전송
-- Compose config, pull, migrate 및 readiness
+- Compose config, pull, migrate 및 PostgreSQL·MCP·worker를 포함한 readiness
 - 실패 시 직전 release 복구
 
 실제 AWS 주소와 credential은 어느 파일에도 commit하지 않는다.
