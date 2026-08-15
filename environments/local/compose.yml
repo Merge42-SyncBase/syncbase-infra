@@ -1,23 +1,73 @@
 name: syncbase
 
-x-go-build: &go-build
-  context: ..
-  dockerfile: infra/docker/go.Dockerfile
+x-was-build: &was-build
+  context: ../was
+  dockerfile: Dockerfile
+  secrets:
+    - github_token
 
 services:
+  postgres:
+    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: syncbase
+      POSTGRES_USER: syncbase
+      POSTGRES_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U syncbase -d syncbase"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  roles:
+    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
+    environment:
+      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
+      SYNCBASE_WEB_DB_PASSWORD: ${SYNCBASE_WEB_DB_PASSWORD:?required}
+      SYNCBASE_WORKER_DB_PASSWORD: ${SYNCBASE_WORKER_DB_PASSWORD:?required}
+      SYNCBASE_MCP_DB_PASSWORD: ${SYNCBASE_MCP_DB_PASSWORD:?required}
+    volumes:
+      - ./postgres:/opt/syncbase/postgres:ro
+    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/configure-roles.sh"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
+
+  permissions:
+    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
+    environment:
+      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
+    volumes:
+      - ./postgres:/opt/syncbase/postgres:ro
+    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/apply-grants.sh"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: "no"
+
   migrate:
     build:
-      <<: *go-build
+      <<: *was-build
       args:
-        TARGET_PACKAGE: ./was/cmd/migrate
+        TARGET_PACKAGE: ./cmd/migrate
+    depends_on:
+      roles:
+        condition: service_completed_successfully
 
   api:
     build:
-      <<: *go-build
+      <<: *was-build
       args:
-        TARGET_PACKAGE: ./was/cmd/web
+        TARGET_PACKAGE: ./cmd/web
     environment:
       SYNCBASE_COOKIE_SECURE: "false"
+    depends_on:
+      permissions:
+        condition: service_completed_successfully
 
   web:
     build:
@@ -28,14 +78,28 @@ services:
 
   worker:
     build:
-      <<: *go-build
+      <<: *was-build
       args:
-        TARGET_PACKAGE: ./was/cmd/worker
+        TARGET_PACKAGE: ./cmd/worker
+    depends_on:
+      permissions:
+        condition: service_completed_successfully
 
   mcp:
     build:
-      <<: *go-build
-      args:
-        TARGET_PACKAGE: ./mcp/cmd/mcp
+      context: ../mcp
+      dockerfile: Dockerfile
+      secrets:
+        - github_token
+    depends_on:
+      permissions:
+        condition: service_completed_successfully
     ports:
       - "${SYNCBASE_MCP_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_MCP_PORT:-8081}:8081"
+
+volumes:
+  postgres-data:
+
+secrets:
+  github_token:
+    file: ${SYNCBASE_GITHUB_TOKEN_FILE:?required}
