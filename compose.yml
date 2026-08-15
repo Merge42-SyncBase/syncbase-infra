@@ -5,7 +5,7 @@ x-app: &app
   environment:
     SYNCBASE_MINIMUM_SCORE: "0.62"
   depends_on:
-    permissions:
+    migrate:
       condition: service_completed_successfully
 
 x-model-environment: &model-environment
@@ -14,56 +14,11 @@ x-model-environment: &model-environment
   SYNCBASE_ORT_LIBRARY_PATH: /runtime/${SYNCBASE_ORT_LIBRARY_FILE:?required}
 
 services:
-  postgres:
-    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
-    restart: unless-stopped
-    environment:
-      POSTGRES_DB: syncbase
-      POSTGRES_USER: syncbase
-      POSTGRES_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U syncbase -d syncbase"]
-      interval: 2s
-      timeout: 3s
-      retries: 30
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
-  roles:
-    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
-    environment:
-      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
-      SYNCBASE_WEB_DB_PASSWORD: ${SYNCBASE_WEB_DB_PASSWORD:?required}
-      SYNCBASE_WORKER_DB_PASSWORD: ${SYNCBASE_WORKER_DB_PASSWORD:?required}
-      SYNCBASE_MCP_DB_PASSWORD: ${SYNCBASE_MCP_DB_PASSWORD:?required}
-    volumes:
-      - ./postgres:/opt/syncbase/postgres:ro
-    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/configure-roles.sh"]
-    depends_on:
-      postgres:
-        condition: service_healthy
-    restart: "no"
-
   migrate:
     image: ${SYNCBASE_MIGRATE_IMAGE:-syncbase/migrate:local}
     environment:
-      SYNCBASE_DATABASE_URL: postgres://syncbase:${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}@postgres:5432/syncbase?sslmode=disable
+      SYNCBASE_DATABASE_URL: postgres://syncbase:${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
       SYNCBASE_MINIMUM_SCORE: "0.62"
-    depends_on:
-      roles:
-        condition: service_completed_successfully
-    restart: "no"
-
-  permissions:
-    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
-    environment:
-      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
-    volumes:
-      - ./postgres:/opt/syncbase/postgres:ro
-    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/apply-grants.sh"]
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
     restart: "no"
 
   api:
@@ -72,7 +27,7 @@ services:
     user: "0:0"
     entrypoint: ["/usr/local/bin/syncbase-api-entrypoint"]
     environment:
-      SYNCBASE_DATABASE_URL: postgres://syncbase_web:${SYNCBASE_WEB_DB_PASSWORD:?required}@postgres:5432/syncbase?sslmode=disable
+      SYNCBASE_DATABASE_URL: postgres://syncbase_web:${SYNCBASE_WEB_DB_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
       SYNCBASE_ORIGINAL_ROOT: /data/originals
       SYNCBASE_ADMIN_USERNAME: ${SYNCBASE_ADMIN_USERNAME:-admin}
       SYNCBASE_ADMIN_PASSWORD_BCRYPT: ${SYNCBASE_ADMIN_PASSWORD_BCRYPT:?required}
@@ -98,7 +53,7 @@ services:
     image: ${SYNCBASE_WORKER_IMAGE:-syncbase/worker:local}
     environment:
       <<: *model-environment
-      SYNCBASE_DATABASE_URL: postgres://syncbase_worker:${SYNCBASE_WORKER_DB_PASSWORD:?required}@postgres:5432/syncbase?sslmode=disable
+      SYNCBASE_DATABASE_URL: postgres://syncbase_worker:${SYNCBASE_WORKER_DB_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
       SYNCBASE_ORIGINAL_ROOT: /data/originals
       SYNCBASE_WORKER_ID: worker-1
       SYNCBASE_WORKER_POLL_INTERVAL: 1s
@@ -113,7 +68,7 @@ services:
     image: ${SYNCBASE_MCP_IMAGE:-syncbase/mcp:local}
     environment:
       <<: *model-environment
-      SYNCBASE_DATABASE_URL: postgres://syncbase_mcp:${SYNCBASE_MCP_DB_PASSWORD:?required}@postgres:5432/syncbase?sslmode=disable
+      SYNCBASE_DATABASE_URL: postgres://syncbase_mcp:${SYNCBASE_MCP_DB_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
       SYNCBASE_MCP_TOKEN_SHA256: ${SYNCBASE_MCP_TOKEN_SHA256:?required}
       SYNCBASE_MCP_ALLOWED_HOSTS: ${SYNCBASE_MCP_ALLOWED_HOSTS:-localhost,127.0.0.1,mcp}
       SYNCBASE_MCP_ALLOWED_ORIGINS: ${SYNCBASE_MCP_ALLOWED_ORIGINS:-}
@@ -124,7 +79,6 @@ services:
       - ./build/runtime:/runtime:ro
 
 volumes:
-  postgres-data:
   originals:
 
 secrets:

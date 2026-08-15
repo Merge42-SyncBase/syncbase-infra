@@ -43,6 +43,7 @@ Environment 이름은 배포 이력 표시에 사용할 수 있지만 승인 게
 | `PROD_EC2_USER` | Docker 권한이 있는 SSH 사용자 |
 | `PROD_EC2_SSH_PRIVATE_KEY` | 해당 사용자용 private key |
 | `PROD_EC2_KNOWN_HOSTS` | 검증된 EC2 SSH host key line |
+| `PROD_DB_HOST` | 외부 OpenSQL host (이 compose는 Postgres를 컨테이너로 띄우지 않음) |
 | `PROD_POSTGRES_OWNER_PASSWORD` | PostgreSQL owner 비밀번호 |
 | `PROD_WEB_DB_PASSWORD` | web 전용 DB role 비밀번호 |
 | `PROD_WORKER_DB_PASSWORD` | worker 전용 DB role 비밀번호 |

@@ -16,7 +16,11 @@ common_env=(
   SYNCBASE_ORT_LIBRARY_FILE=libonnxruntime.so.1.26.0
 )
 
-local_json="$(env "${common_env[@]}" docker compose \
+local_json="$(env "${common_env[@]}" \
+  SYNCBASE_DB_HOST=postgres \
+  SYNCBASE_DB_SSLMODE=disable \
+  SYNCBASE_GITHUB_TOKEN_FILE=/tmp/syncbase-environment-check-token \
+  docker compose \
   -f infra/compose.yml \
   -f infra/environments/local/compose.yml \
   config --format json)"
@@ -26,6 +30,8 @@ prod_json="$(env "${common_env[@]}" \
   SYNCBASE_WORKER_IMAGE=registry.example/syncbase-worker:test \
   SYNCBASE_MIGRATE_IMAGE=registry.example/syncbase-migrate:test \
   SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
+  SYNCBASE_DB_HOST=opensql.example.test \
+  SYNCBASE_DB_SSLMODE=require \
   docker compose \
   -f infra/compose.yml \
   -f infra/environments/prod/compose.yml \
@@ -33,12 +39,15 @@ prod_json="$(env "${common_env[@]}" \
 
 jq -e --arg root "$project_root" '
   .name == "syncbase" and
-  .services.api.build.context == $root and
+  .services.api.build.context == ($root + "/was") and
   .services.web.build.context == ($root + "/frontend") and
-  .services.mcp.build.context == $root and
+  .services.mcp.build.context == ($root + "/mcp") and
   .services.api.user == "0:0" and
   .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
-  .services.api.environment.SYNCBASE_COOKIE_SECURE == "false"
+  .services.api.environment.SYNCBASE_COOKIE_SECURE == "false" and
+  (.services.postgres != null) and
+  (.services.roles != null) and
+  (.services.permissions != null)
 ' >/dev/null <<<"$local_json"
 
 jq -e '
@@ -53,7 +62,11 @@ jq -e '
   .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "true" and
   all(.services.web.ports[]; .host_ip == "127.0.0.1") and
-  all(.services.mcp.ports[]; .host_ip == "127.0.0.1")
+  all(.services.mcp.ports[]; .host_ip == "127.0.0.1") and
+  (.services.postgres == null) and
+  (.services.roles == null) and
+  (.services.permissions == null) and
+  (.volumes["postgres-data"] == null)
 ' >/dev/null <<<"$prod_json"
 
 printf 'ENVIRONMENT_CHECK_PASS local=build prod=images prod_bind=loopback\n'
