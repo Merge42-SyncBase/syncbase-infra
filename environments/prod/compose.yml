@@ -1,6 +1,10 @@
 name: syncbase-prod
 
 services:
+  models:
+    image: ${SYNCBASE_MODEL_FETCHER_IMAGE:?required}
+    pull_policy: always
+
   migrate:
     image: ${SYNCBASE_MIGRATE_IMAGE:?required}
     pull_policy: always

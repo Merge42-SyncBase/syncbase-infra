@@ -30,6 +30,7 @@ prod_json="$(env "${common_env[@]}" \
   SYNCBASE_WORKER_IMAGE=registry.example/syncbase-worker:test \
   SYNCBASE_MIGRATE_IMAGE=registry.example/syncbase-migrate:test \
   SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
+  SYNCBASE_MODEL_FETCHER_IMAGE=registry.example/syncbase-model-fetcher:test \
   SYNCBASE_DB_HOST=opensql.example.test \
   SYNCBASE_DB_SSLMODE=require \
   docker compose \
@@ -47,7 +48,8 @@ jq -e --arg root "$project_root" '
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "false" and
   (.services.postgres != null) and
   (.services.roles != null) and
-  (.services.permissions != null)
+  (.services.permissions != null) and
+  (.services.models != null)
 ' >/dev/null <<<"$local_json"
 
 jq -e '
@@ -64,8 +66,9 @@ jq -e '
   all(.services.web.ports[]; .host_ip == "127.0.0.1") and
   all(.services.mcp.ports[]; .host_ip == "127.0.0.1") and
   (.services.postgres == null) and
-  (.services.roles == null) and
-  (.services.permissions == null) and
+  (.services.roles != null) and
+  (.services.permissions != null) and
+  (.services.models != null) and
   (.volumes["postgres-data"] == null)
 ' >/dev/null <<<"$prod_json"
 

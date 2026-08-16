@@ -4,9 +4,6 @@ x-app: &app
   restart: unless-stopped
   environment:
     SYNCBASE_MINIMUM_SCORE: "0.62"
-  depends_on:
-    migrate:
-      condition: service_completed_successfully
 
 x-model-environment: &model-environment
   SYNCBASE_MODEL_PATH: /models/model.onnx
@@ -14,11 +11,51 @@ x-model-environment: &model-environment
   SYNCBASE_ORT_LIBRARY_PATH: /runtime/${SYNCBASE_ORT_LIBRARY_FILE:?required}
 
 services:
+  roles:
+    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
+    environment:
+      SYNCBASE_DB_HOST: ${SYNCBASE_DB_HOST:?required}
+      SYNCBASE_DB_PORT: ${SYNCBASE_DB_PORT:-5432}
+      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
+      SYNCBASE_WEB_DB_PASSWORD: ${SYNCBASE_WEB_DB_PASSWORD:?required}
+      SYNCBASE_WORKER_DB_PASSWORD: ${SYNCBASE_WORKER_DB_PASSWORD:?required}
+      SYNCBASE_MCP_DB_PASSWORD: ${SYNCBASE_MCP_DB_PASSWORD:?required}
+    volumes:
+      - ./postgres:/opt/syncbase/postgres:ro
+    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/configure-roles.sh"]
+    restart: "no"
+
   migrate:
     image: ${SYNCBASE_MIGRATE_IMAGE:-syncbase/migrate:local}
     environment:
       SYNCBASE_DATABASE_URL: postgres://syncbase:${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
       SYNCBASE_MINIMUM_SCORE: "0.62"
+    depends_on:
+      roles:
+        condition: service_completed_successfully
+    restart: "no"
+
+  permissions:
+    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
+    environment:
+      SYNCBASE_DB_HOST: ${SYNCBASE_DB_HOST:?required}
+      SYNCBASE_DB_PORT: ${SYNCBASE_DB_PORT:-5432}
+      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
+    volumes:
+      - ./postgres:/opt/syncbase/postgres:ro
+    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/apply-grants.sh"]
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: "no"
+
+  models:
+    image: ${SYNCBASE_MODEL_FETCHER_IMAGE:-syncbase/model-fetcher:local}
+    environment:
+      SYNCBASE_ORT_LIBRARY_FILE: ${SYNCBASE_ORT_LIBRARY_FILE:?required}
+    volumes:
+      - models-data:/models
+      - runtime-data:/runtime
     restart: "no"
 
   api:
@@ -40,6 +77,11 @@ services:
       - originals:/data/originals
     secrets:
       - mcp_client_token
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      permissions:
+        condition: service_completed_successfully
 
   web:
     image: ${SYNCBASE_WEB_IMAGE:-syncbase/web:local}
@@ -60,8 +102,15 @@ services:
       SYNCBASE_WORKER_HEALTH_ADDR: :8082
     volumes:
       - originals:/data/originals
-      - ./build/models/multilingual-e5-small:/models:ro
-      - ./build/runtime:/runtime:ro
+      - models-data:/models:ro
+      - runtime-data:/runtime:ro
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      permissions:
+        condition: service_completed_successfully
+      models:
+        condition: service_completed_successfully
 
   mcp:
     <<: *app
@@ -75,11 +124,20 @@ services:
       SYNCBASE_PUBLIC_BASE_URL: ${SYNCBASE_PUBLIC_BASE_URL:?required}
       SYNCBASE_MCP_ADDR: :8081
     volumes:
-      - ./build/models/multilingual-e5-small:/models:ro
-      - ./build/runtime:/runtime:ro
+      - models-data:/models:ro
+      - runtime-data:/runtime:ro
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      permissions:
+        condition: service_completed_successfully
+      models:
+        condition: service_completed_successfully
 
 volumes:
   originals:
+  models-data:
+  runtime-data:
 
 secrets:
   mcp_client_token:

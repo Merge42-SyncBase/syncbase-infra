@@ -22,41 +22,18 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
+  # roles/permissions/models are already defined in the base compose.yml;
+  # this just adds the local-only wait on the postgres container above.
   roles:
-    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
-    environment:
-      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
-      SYNCBASE_WEB_DB_PASSWORD: ${SYNCBASE_WEB_DB_PASSWORD:?required}
-      SYNCBASE_WORKER_DB_PASSWORD: ${SYNCBASE_WORKER_DB_PASSWORD:?required}
-      SYNCBASE_MCP_DB_PASSWORD: ${SYNCBASE_MCP_DB_PASSWORD:?required}
-    volumes:
-      - ./postgres:/opt/syncbase/postgres:ro
-    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/configure-roles.sh"]
     depends_on:
       postgres:
         condition: service_healthy
-    restart: "no"
-
-  permissions:
-    image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
-    environment:
-      SYNCBASE_POSTGRES_OWNER_PASSWORD: ${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}
-    volumes:
-      - ./postgres:/opt/syncbase/postgres:ro
-    entrypoint: ["/bin/sh", "/opt/syncbase/postgres/apply-grants.sh"]
-    depends_on:
-      migrate:
-        condition: service_completed_successfully
-    restart: "no"
 
   migrate:
     build:
       <<: *was-build
       args:
         TARGET_PACKAGE: ./cmd/migrate
-    depends_on:
-      roles:
-        condition: service_completed_successfully
 
   api:
     build:
@@ -65,9 +42,6 @@ services:
         TARGET_PACKAGE: ./cmd/web
     environment:
       SYNCBASE_COOKIE_SECURE: "false"
-    depends_on:
-      permissions:
-        condition: service_completed_successfully
 
   web:
     build:
@@ -81,9 +55,6 @@ services:
       <<: *was-build
       args:
         TARGET_PACKAGE: ./cmd/worker
-    depends_on:
-      permissions:
-        condition: service_completed_successfully
 
   mcp:
     build:
@@ -91,9 +62,6 @@ services:
       dockerfile: Dockerfile
       secrets:
         - github_token
-    depends_on:
-      permissions:
-        condition: service_completed_successfully
     ports:
       - "${SYNCBASE_MCP_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_MCP_PORT:-8081}:8081"
 
