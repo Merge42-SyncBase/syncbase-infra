@@ -15,7 +15,53 @@
 참조하기만 하면 되고(prod), local override만 소스에서 직접 build한다. 모든 명령은 이 네
 저장소가 sibling으로 나란히 checkout된 상위 폴더에서 실행한다.
 
-## Local
+## Quick Start (일반 사용자 — 소스 checkout 불필요)
+
+`syncbase-infra`만 clone하면 됩니다. `was`/`mcp`/`embedding`/`frontend` 소스는 필요 없습니다 —
+전부 GHCR에 이미 public image로 올라가 있습니다. 필요한 건 자신의 OpenSQL(PostgreSQL 호환)
+엔드포인트뿐입니다.
+
+```sh
+git clone https://github.com/Merge42-SyncBase/syncbase-infra.git
+cd syncbase-infra
+cp environments/prod/.env.example environments/prod/.env
+```
+
+`environments/prod/.env`를 열어 값을 채웁니다:
+- `SYNCBASE_DB_HOST`/`PORT`/`NAME`/`SSLMODE`: 자신의 OpenSQL 접속 정보
+- `SYNCBASE_*_DB_PASSWORD`, `SYNCBASE_POSTGRES_OWNER_PASSWORD`: 아래 role 생성 시 쓸 비밀번호(직접 정함)
+- `SYNCBASE_ADMIN_PASSWORD_BCRYPT`, `SYNCBASE_MCP_TOKEN_SHA256` 등 나머지 값
+
+역할/권한은 compose가 자동으로 만들어주지 않습니다(외부 DB에 자동으로 role을 만드는 건
+위험해서 의도적으로 뺐습니다). 최초 1회만 수동으로 실행합니다:
+
+```sh
+PGHOST=<your-opensql-host> PGPORT=5432 PGUSER=<superuser> PGPASSWORD=<superuser-pw> \
+  psql -d syncbase -f postgres/runtime-roles.sql
+PGHOST=<your-opensql-host> PGPORT=5432 PGUSER=<superuser> PGPASSWORD=<superuser-pw> \
+  psql -d syncbase -f postgres/runtime-grants.sql
+```
+
+그 다음:
+
+```sh
+docker compose \
+  --env-file environments/prod/.env \
+  -f compose.yml \
+  -f environments/prod/compose.yml \
+  pull
+docker compose \
+  --env-file environments/prod/.env \
+  -f compose.yml \
+  -f environments/prod/compose.yml \
+  up -d
+```
+
+`http://127.0.0.1:8080`에서 운영 콘솔에 접속합니다. `worker`/`mcp`는 E5 임베딩 모델과 ONNX
+Runtime 파일이 필요합니다 — 아래 "Local" 섹션의 모델 다운로드 스크립트를 참고하세요
+(이 경우 `syncbase-embedding`만 별도로 clone하면 됩니다, 다른 소스는 여전히 필요 없습니다).
+
+## Local (SyncBase 개발자용 — 소스에서 직접 빌드)
 
 ```sh
 cp infra/environments/local/.env.example infra/environments/local/.env
