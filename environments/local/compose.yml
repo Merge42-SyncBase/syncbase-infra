@@ -1,11 +1,5 @@
 name: syncbase
 
-x-was-build: &was-build
-  context: ../was
-  dockerfile: Dockerfile
-  secrets:
-    - github_token
-
 services:
   postgres:
     image: pgvector/pgvector@sha256:d2ef61f42ef767baa5a1475393303cc235bcd92febd9d7014eddb48b41f3bad0
@@ -22,52 +16,28 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  # roles/permissions/models are already defined in the base compose.yml;
-  # this just adds the local-only wait on the postgres container above.
+  # roles/permissions/models/migrate/api/web/worker/mcp are already defined
+  # in the base compose.yml and pull published GHCR images by default (see
+  # SYNCBASE_*_IMAGE in .env). This overlay only adds the local Postgres
+  # container above and its wiring. To build one of was/mcp/frontend from
+  # your own local source instead of pulling, layer the matching
+  # build-*.yml file on top (see README).
   roles:
     depends_on:
       postgres:
         condition: service_healthy
 
-  migrate:
-    build:
-      <<: *was-build
-      args:
-        TARGET_PACKAGE: ./cmd/migrate
-
   api:
-    build:
-      <<: *was-build
-      args:
-        TARGET_PACKAGE: ./cmd/web
     environment:
       SYNCBASE_COOKIE_SECURE: "false"
 
   web:
-    build:
-      context: ../frontend
-      dockerfile: Dockerfile
     ports:
       - "${SYNCBASE_WEB_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_WEB_PORT:-8080}:8080"
 
-  worker:
-    build:
-      <<: *was-build
-      args:
-        TARGET_PACKAGE: ./cmd/worker
-
   mcp:
-    build:
-      context: ../mcp
-      dockerfile: Dockerfile
-      secrets:
-        - github_token
     ports:
       - "${SYNCBASE_MCP_BIND_ADDRESS:-127.0.0.1}:${SYNCBASE_MCP_PORT:-8081}:8081"
 
 volumes:
   postgres-data:
-
-secrets:
-  github_token:
-    file: ${SYNCBASE_GITHUB_TOKEN_FILE:?required}

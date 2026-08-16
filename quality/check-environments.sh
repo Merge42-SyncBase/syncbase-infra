@@ -19,10 +19,30 @@ common_env=(
 local_json="$(env "${common_env[@]}" \
   SYNCBASE_DB_HOST=postgres \
   SYNCBASE_DB_SSLMODE=disable \
+  SYNCBASE_API_IMAGE=registry.example/syncbase-api:test \
+  SYNCBASE_WORKER_IMAGE=registry.example/syncbase-worker:test \
+  SYNCBASE_MIGRATE_IMAGE=registry.example/syncbase-migrate:test \
+  SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
+  SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
+  docker compose \
+  -f infra/compose.yml \
+  -f infra/environments/local/compose.yml \
+  config --format json)"
+local_build_json="$(env "${common_env[@]}" \
+  SYNCBASE_DB_HOST=postgres \
+  SYNCBASE_DB_SSLMODE=disable \
+  SYNCBASE_API_IMAGE=registry.example/syncbase-api:test \
+  SYNCBASE_WORKER_IMAGE=registry.example/syncbase-worker:test \
+  SYNCBASE_MIGRATE_IMAGE=registry.example/syncbase-migrate:test \
+  SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
+  SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
   SYNCBASE_GITHUB_TOKEN_FILE=/tmp/syncbase-environment-check-token \
   docker compose \
   -f infra/compose.yml \
   -f infra/environments/local/compose.yml \
+  -f infra/environments/local/build-was.yml \
+  -f infra/environments/local/build-mcp.yml \
+  -f infra/environments/local/build-frontend.yml \
   config --format json)"
 prod_json="$(env "${common_env[@]}" \
   SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
@@ -38,11 +58,14 @@ prod_json="$(env "${common_env[@]}" \
   -f infra/environments/prod/compose.yml \
   config --format json)"
 
-jq -e --arg root "$project_root" '
+jq -e '
   .name == "syncbase" and
-  .services.api.build.context == ($root + "/was") and
-  .services.web.build.context == ($root + "/frontend") and
-  .services.mcp.build.context == ($root + "/mcp") and
+  (.services.api.build | not) and
+  (.services.web.build | not) and
+  (.services.mcp.build | not) and
+  .services.api.image == "registry.example/syncbase-api:test" and
+  .services.web.image == "registry.example/syncbase-web:test" and
+  .services.mcp.image == "registry.example/syncbase-mcp:test" and
   .services.api.user == "0:0" and
   .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "false" and
@@ -51,6 +74,17 @@ jq -e --arg root "$project_root" '
   (.services.permissions != null) and
   (.services.models != null)
 ' >/dev/null <<<"$local_json"
+
+# With all three build-*.yml overlays layered on, was/mcp/frontend should
+# build from their sibling source directories instead of pulling.
+jq -e --arg root "$project_root" '
+  .services.api.build.context == ($root + "/was") and
+  .services.worker.build.context == ($root + "/was") and
+  .services.migrate.build.context == ($root + "/was") and
+  .services.mcp.build.context == ($root + "/mcp") and
+  .services.web.build.context == ($root + "/frontend") and
+  .services.api.environment.SYNCBASE_COOKIE_SECURE == "false"
+' >/dev/null <<<"$local_build_json"
 
 jq -e '
   .name == "syncbase-prod" and
@@ -72,4 +106,4 @@ jq -e '
   (.volumes["postgres-data"] == null)
 ' >/dev/null <<<"$prod_json"
 
-printf 'ENVIRONMENT_CHECK_PASS local=build prod=images prod_bind=loopback\n'
+printf 'ENVIRONMENT_CHECK_PASS local=images local_build_overlay=build prod=images prod_bind=loopback\n'

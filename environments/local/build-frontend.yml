@@ -1,0 +1,19 @@
+# Optional overlay: build SyncBase-FE from your local checkout instead of
+# pulling the published image. Requires SyncBase-FE checked out at
+# ../frontend relative to this file's parent (i.e. a sibling of
+# syncbase-infra). No GitHub token needed — this repo has no private
+# module dependency.
+#
+# Usage:
+#   docker compose \
+#     -f compose.yml \
+#     -f environments/local/compose.yml \
+#     -f environments/local/build-frontend.yml \
+#     up --build
+name: syncbase
+
+services:
+  web:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile

@@ -1,0 +1,25 @@
+# Optional overlay: build syncbase-mcp from your local checkout instead of
+# pulling the published image. Requires syncbase-mcp checked out at ../mcp
+# relative to this file's parent (i.e. a sibling of syncbase-infra), and
+# SYNCBASE_GITHUB_TOKEN_FILE set (syncbase-was/syncbase-embedding are
+# private modules).
+#
+# Usage:
+#   docker compose \
+#     -f compose.yml \
+#     -f environments/local/compose.yml \
+#     -f environments/local/build-mcp.yml \
+#     up --build
+name: syncbase
+
+services:
+  mcp:
+    build:
+      context: ../mcp
+      dockerfile: Dockerfile
+      secrets:
+        - github_token
+
+secrets:
+  github_token:
+    file: ${SYNCBASE_GITHUB_TOKEN_FILE:?required}

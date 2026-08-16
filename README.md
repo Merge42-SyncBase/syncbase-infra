@@ -47,22 +47,46 @@ docker compose \
 설정)와 `models`(E5 임베딩 모델 + ONNX Runtime 다운로드)는 `up`할 때마다 자동으로 도는
 1회성 컨테이너입니다(멱등이라 반복 실행해도 안전) — 별도로 미리 준비할 게 없습니다.
 
-## Local (SyncBase 개발자용 — 소스에서 직접 빌드)
+## Local (SyncBase 개발자용)
+
+기본은 GHCR published image를 pull한다 — `syncbase-infra` 하나만 clone하면 된다
+(단, DB는 컨테이너 Postgres를 쓴다는 점이 [Quick Start](#quick-start-일반-사용자--소스-checkout-불필요)와의
+차이다).
 
 ```sh
 cp infra/environments/local/.env.example infra/environments/local/.env
-# SYNCBASE_GITHUB_TOKEN_FILE에 지정한 파일에 Contents:read 권한 GitHub 토큰을 저장한다
-# (syncbase-embedding이 private module이라 was/mcp를 소스 build할 때 필요하다).
+docker compose \
+  --env-file infra/environments/local/.env \
+  -f infra/compose.yml \
+  -f infra/environments/local/compose.yml \
+  up
+```
+
+모델/ONNX Runtime 다운로드, DB role/권한 설정 전부 `models`/`roles`/`permissions`
+1회성 컨테이너가 자동으로 처리한다.
+
+### 특정 컴포넌트만 소스에서 빌드하기
+
+지금 고치고 있는 레포 하나만 소스로 빌드하고 싶다면(예: `syncbase-was`), 해당 레포를
+`syncbase-infra`의 sibling 디렉터리로 clone한 뒤 build overlay를 하나 더 얹는다:
+
+```sh
+# ../was 에 syncbase-was를 clone해둔 상태에서
+# SYNCBASE_GITHUB_TOKEN_FILE에 Contents:read 권한 GitHub 토큰 파일 경로를 저장한다
+# (syncbase-embedding이 private module이라 소스 build 시 인증이 필요하다).
 gh auth token > ~/.syncbase-github-token
 docker compose \
   --env-file infra/environments/local/.env \
   -f infra/compose.yml \
   -f infra/environments/local/compose.yml \
+  -f infra/environments/local/build-was.yml \
   up --build
 ```
 
-모델/ONNX Runtime 다운로드, DB role/권한 설정 전부 `models`/`roles`/`permissions`
-1회성 컨테이너가 자동으로 처리합니다. 별도 스크립트를 미리 실행할 필요가 없습니다.
+`syncbase-mcp`는 `build-mcp.yml`(`../mcp` 필요), `SyncBase-FE`는 `build-frontend.yml`
+(`../frontend` 필요, GitHub 토큰 불필요)를 같은 방식으로 얹는다. 여러 개를 동시에 소스
+빌드하고 싶으면 해당 파일들을 전부 `-f`에 얹으면 된다 — 강제로 넷 다 checkout할 필요는
+없다.
 
 기존 `syncbase` Compose project 이름과 volume 이름을 유지하므로 환경 분리 전의 local
 PostgreSQL 및 원문 volume을 그대로 사용한다.
