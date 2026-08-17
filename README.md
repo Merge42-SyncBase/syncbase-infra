@@ -15,11 +15,9 @@
 참조하기만 하면 되고(prod), local override만 소스에서 직접 build한다. 모든 명령은 이 네
 저장소가 sibling으로 나란히 checkout된 상위 폴더에서 실행한다.
 
-## Quick Start (일반 사용자 — 소스 checkout 불필요)
+## Quick Start
 
-`syncbase-infra`만 clone하면 됩니다. `was`/`mcp`/`embedding`/`frontend` 소스는 필요 없습니다 —
-전부 GHCR에 이미 public image로 올라가 있습니다. 필요한 건 자신의 OpenSQL(PostgreSQL 호환)
-엔드포인트뿐입니다.
+`syncbase-infra`만 clone하면 됩니다. `was`/`mcp`/`embedding`/`frontend` 소스는 필요 없습니다 — 전부 GHCR에 이미 public image로 올라가 있습니다. 필요한 건 자신의 OpenSQL(PostgreSQL 호환) 엔드포인트뿐입니다.
 
 ```sh
 git clone https://github.com/Merge42-SyncBase/syncbase-infra.git
@@ -42,69 +40,3 @@ docker compose \
   -f environments/prod/compose.yml \
   up -d
 ```
-
-`http://127.0.0.1:8080`에서 운영 콘솔에 접속합니다. `roles`/`permissions`(DB 역할·권한
-설정)와 `models`(E5 임베딩 모델 + ONNX Runtime 다운로드)는 `up`할 때마다 자동으로 도는
-1회성 컨테이너입니다(멱등이라 반복 실행해도 안전) — 별도로 미리 준비할 게 없습니다.
-
-## Local (SyncBase 개발자용)
-
-기본은 GHCR published image를 pull한다 — `syncbase-infra` 하나만 clone하면 된다
-(단, DB는 컨테이너 Postgres를 쓴다는 점이 [Quick Start](#quick-start-일반-사용자--소스-checkout-불필요)와의
-차이다).
-
-```sh
-cp infra/environments/local/.env.example infra/environments/local/.env
-docker compose \
-  --env-file infra/environments/local/.env \
-  -f infra/compose.yml \
-  -f infra/environments/local/compose.yml \
-  up
-```
-
-모델/ONNX Runtime 다운로드, DB role/권한 설정 전부 `models`/`roles`/`permissions`
-1회성 컨테이너가 자동으로 처리한다.
-
-### 특정 컴포넌트만 소스에서 빌드하기
-
-지금 고치고 있는 레포 하나만 소스로 빌드하고 싶다면(예: `syncbase-was`), 해당 레포를
-`syncbase-infra`의 sibling 디렉터리로 clone한 뒤 build overlay를 하나 더 얹는다:
-
-```sh
-# ../was 에 syncbase-was를 clone해둔 상태에서
-# SYNCBASE_GITHUB_TOKEN_FILE에 Contents:read 권한 GitHub 토큰 파일 경로를 저장한다
-# (syncbase-embedding이 private module이라 소스 build 시 인증이 필요하다).
-gh auth token > ~/.syncbase-github-token
-docker compose \
-  --env-file infra/environments/local/.env \
-  -f infra/compose.yml \
-  -f infra/environments/local/compose.yml \
-  -f infra/environments/local/build-was.yml \
-  up --build
-```
-
-`syncbase-mcp`는 `build-mcp.yml`(`../mcp` 필요), `SyncBase-FE`는 `build-frontend.yml`
-(`../frontend` 필요, GitHub 토큰 불필요)를 같은 방식으로 얹는다. 여러 개를 동시에 소스
-빌드하고 싶으면 해당 파일들을 전부 `-f`에 얹으면 된다 — 강제로 넷 다 checkout할 필요는
-없다.
-
-기존 `syncbase` Compose project 이름과 volume 이름을 유지하므로 환경 분리 전의 local
-PostgreSQL 및 원문 volume을 그대로 사용한다.
-
-## Production
-
-Production override는 로컬 build를 포함하지 않으며 다섯 개의 immutable image가 반드시
-필요하다. GitHub Actions는 `sha-<commit>` 태그로 GHCR에 push한 후 EC2의
-`$HOME/syncbase/releases/<tag>`로 release bundle을 전송한다. readiness 실패 시
-`current`가 가리키던 직전 release image로 자동 복구한다.
-
-설정과 GitHub Secrets는 `environments/prod/README.md`를 따른다.
-
-## 검증
-
-```sh
-infra/quality/check-environments.sh
-```
-
-`web`은 정적 SPA 및 same-origin `/api/` proxy만 제공한다. PostgreSQL, MCP token,
-원문 저장소는 `api`/worker/MCP에만 전달된다.
