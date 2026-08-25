@@ -122,8 +122,10 @@ services:
       SYNCBASE_MCP_ALLOWED_HOSTS: ${SYNCBASE_MCP_ALLOWED_HOSTS:-localhost,127.0.0.1,mcp}
       SYNCBASE_MCP_ALLOWED_ORIGINS: ${SYNCBASE_MCP_ALLOWED_ORIGINS:-}
       SYNCBASE_PUBLIC_BASE_URL: ${SYNCBASE_PUBLIC_BASE_URL:?required}
+      SYNCBASE_ORIGINAL_ROOT: /data/originals
       SYNCBASE_MCP_ADDR: :8081
     volumes:
+      - originals:/data/originals:ro
       - models-data:/models:ro
       - runtime-data:/runtime:ro
     depends_on:
