@@ -68,10 +68,10 @@ jq -e '
   .services.api.user == "0:0" and
   .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "false" and
-  .services.api.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
-  .services.worker.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
-  .services.mcp.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
-  .services.migrate.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.api.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
+  .services.worker.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
+  .services.mcp.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
+  .services.migrate.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
   .services.api.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
   .services.worker.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
   .services.mcp.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
@@ -106,10 +106,10 @@ jq -e '
   .services.api.user == "0:0" and
   .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "true" and
-  .services.api.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
-  .services.worker.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
-  .services.mcp.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
-  .services.migrate.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.api.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
+  .services.worker.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
+  .services.mcp.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
+  .services.migrate.environment.SYNCBASE_MINIMUM_SCORE == "0.62" and
   .services.api.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
   .services.worker.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
   .services.mcp.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and

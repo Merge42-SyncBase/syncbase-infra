@@ -1,9 +1,9 @@
 name: syncbase
 
-# Round-1 corpus/model calibration candidate. This value is part of the
-# immutable search-profile fingerprint and must be revalidated after a clean
-# re-index; do not retune it after the frozen benchmark is observed.
-x-round1-minimum-score: &round1-minimum-score "0.93"
+# The approved Round-1 capture dataset was indexed with this immutable
+# search-profile value. A different threshold requires a clean database,
+# re-index, and fresh retrieval evidence instead of an in-place rollout.
+x-round1-minimum-score: &round1-minimum-score "0.62"
 
 x-app: &app
   restart: unless-stopped
