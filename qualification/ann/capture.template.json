@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.0",
+  "run_id": "REQUIRED_UTC_RUN_ID",
+  "repository_revisions": {
+    "frontend": "REQUIRED_FULL_SHA",
+    "embedding": "REQUIRED_FULL_SHA",
+    "was": "REQUIRED_FULL_SHA",
+    "infra": "REQUIRED_FULL_SHA",
+    "mcp": "REQUIRED_FULL_SHA"
+  },
+  "database": {
+    "identity_sha256": "REQUIRED_DATABASE_IDENTITY_SHA256",
+    "extension": "vector",
+    "extension_version": "REQUIRED_CAPTURED_VERSION",
+    "supported_methods": []
+  },
+  "selected_method": "exact",
+  "index": null,
+  "plan": null,
+  "metrics": {
+    "corpus_chunk_count": 0,
+    "exact_recall_at_5": 0.0,
+    "ann_recall_at_5": 0.0
+  },
+  "artifact_hashes": {}
+}

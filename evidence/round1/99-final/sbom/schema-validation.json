@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "validated_at": "2026-08-25T00:49:28Z",
+  "sbom": "syncbase-round1-DRAFT.cdx.json",
+  "sbom_sha256": "de03c6ca8d76e05f302edab6effc536d10dc16764d183d7dc8913f1a66dec99c",
+  "standard": "CycloneDX 1.5 JSON",
+  "schema_repository": "https://github.com/CycloneDX/specification",
+  "schema_commit": "840bcd79c9a190ed51d1eda2db904abc85f78f32",
+  "schema_sha256": {
+    "bom-1.5.schema.json": "2d956c1d05c092695457a91f3b5c57c749793c013ec224a0935807cfc8ae4480",
+    "spdx.schema.json": "54a6288292bc6c90b0d3952f5f939f17436fa76704ffe68a46e5b78539c7cc1b",
+    "jsf-0.82.schema.json": "8bae002c25e723db7ee1f26afde680ae1a2b1a8f6b4b4b0fd65dc3becb090aae"
+  },
+  "validator": {
+    "ajv-cli": "5.0.0",
+    "ajv-formats": "3.0.1",
+    "ajv-formats-draft2019": "1.6.1",
+    "draft": "draft-07",
+    "format_validation": true
+  },
+  "claim_status": "DRAFT_VALIDATION_ONLY_NOT_CLM_015_PASS"
+}

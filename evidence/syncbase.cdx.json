@@ -1,0 +1,3901 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:cdx:bd89e136-4d16-5db3-8982-0daf7fa7e1c5",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-08-19T05:01:51Z",
+    "tools": [
+      {
+        "vendor": "anchore",
+        "name": "syft",
+        "version": "latest",
+        "description": "generated-by"
+      },
+      {
+        "vendor": "Merge42-SyncBase",
+        "name": "team",
+        "version": "2026-D-8",
+        "description": "manual-review"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "syncbase",
+      "version": "1.0",
+      "purl": "pkg:generic/syncbase@2026-D-8"
+    },
+    "properties": [
+      {
+        "name": "syncbase:contest",
+        "value": "KOSSA 2026 OSS Developer Conference - Tmax OpenSQL track"
+      },
+      {
+        "name": "syncbase:round1-deadline",
+        "value": "2026-08-27T18:00:00+09:00"
+      },
+      {
+        "name": "syncbase:requirement",
+        "value": "osscontest.kr/notice/39 SBOM (required)"
+      },
+      {
+        "name": "syncbase:format-choice",
+        "value": "CycloneDX 1.6 JSON (contest notice does not pin a format; team decision 2026-08-19)"
+      }
+    ]
+  },
+  "components": [
+    {
+      "bom-ref": "pkg:github/actions/checkout@v4?package-id=fa2e67b8c20f75f3",
+      "type": "library",
+      "name": "actions/checkout",
+      "version": "v4",
+      "cpe": "cpe:2.3:a:actions\\/checkout:actions\\/checkout:v4:*:*:*:*:*:*:*",
+      "purl": "pkg:github/actions/checkout@v4",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:github/actions/setup-go@v5?package-id=5a8420ad01a9d4b7",
+      "type": "library",
+      "name": "actions/setup-go",
+      "version": "v5",
+      "cpe": "cpe:2.3:a:actions\\/setup-go:actions\\/setup-go:v5:*:*:*:*:*:*:*",
+      "purl": "pkg:github/actions/setup-go@v5",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup-go:actions\\/setup_go:v5:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup_go:actions\\/setup-go:v5:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup_go:actions\\/setup_go:v5:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-go:v5:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_go:v5:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:github/docker/build-push-action@v6?package-id=50e58a9f5673ff66",
+      "type": "library",
+      "name": "docker/build-push-action",
+      "version": "v6",
+      "cpe": "cpe:2.3:a:docker\\/build-push-action:docker\\/build-push-action:v6:*:*:*:*:*:*:*",
+      "purl": "pkg:github/docker/build-push-action@v6",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build-push-action:docker\\/build_push_action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build_push_action:docker\\/build-push-action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build_push_action:docker\\/build_push_action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build-push:docker\\/build-push-action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build-push:docker\\/build_push_action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build_push:docker\\/build-push-action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build_push:docker\\/build_push_action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build:docker\\/build-push-action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/build:docker\\/build_push_action:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:github/docker/login-action@v3?package-id=5c8d2a421ed0b658",
+      "type": "library",
+      "name": "docker/login-action",
+      "version": "v3",
+      "cpe": "cpe:2.3:a:docker\\/login-action:docker\\/login-action:v3:*:*:*:*:*:*:*",
+      "purl": "pkg:github/docker/login-action@v3",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/login-action:docker\\/login_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/login_action:docker\\/login-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/login_action:docker\\/login_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/login:docker\\/login-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/login:docker\\/login_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:github/docker/setup-buildx-action@v3?package-id=af0671cbb4bda57e",
+      "type": "library",
+      "name": "docker/setup-buildx-action",
+      "version": "v3",
+      "cpe": "cpe:2.3:a:docker\\/setup-buildx-action:docker\\/setup-buildx-action:v3:*:*:*:*:*:*:*",
+      "purl": "pkg:github/docker/setup-buildx-action@v3",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup-buildx-action:docker\\/setup_buildx_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_buildx_action:docker\\/setup-buildx-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_buildx_action:docker\\/setup_buildx_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup-buildx:docker\\/setup-buildx-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup-buildx:docker\\/setup_buildx_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_buildx:docker\\/setup-buildx-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_buildx:docker\\/setup_buildx_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup:docker\\/setup-buildx-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup:docker\\/setup_buildx_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:github/docker/setup-qemu-action@v3?package-id=c65d15893b239f78",
+      "type": "library",
+      "name": "docker/setup-qemu-action",
+      "version": "v3",
+      "cpe": "cpe:2.3:a:docker\\/setup-qemu-action:docker\\/setup-qemu-action:v3:*:*:*:*:*:*:*",
+      "purl": "pkg:github/docker/setup-qemu-action@v3",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup-qemu-action:docker\\/setup_qemu_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_qemu_action:docker\\/setup-qemu-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_qemu_action:docker\\/setup_qemu_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup-qemu:docker\\/setup-qemu-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup-qemu:docker\\/setup_qemu_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_qemu:docker\\/setup-qemu-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup_qemu:docker\\/setup_qemu_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup:docker\\/setup-qemu-action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:docker\\/setup:docker\\/setup_qemu_action:v3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/emirpasic/gods@v1.18.1?package-id=091896950bf83083",
+      "type": "library",
+      "name": "github.com/emirpasic/gods",
+      "version": "v1.18.1",
+      "cpe": "cpe:2.3:a:emirpasic:gods:v1.18.1:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/emirpasic/gods@v1.18.1",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:FXtiHYKDGKCW2KzwZKx0iC0PQmdlorYgdFG9jPXJ1Bc="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/mitchellh/colorstring@v0.0.0-20190213212951-d06e56a500db?package-id=bffdeec494091b54",
+      "type": "library",
+      "name": "github.com/mitchellh/colorstring",
+      "version": "v0.0.0-20190213212951-d06e56a500db",
+      "cpe": "cpe:2.3:a:mitchellh:colorstring:v0.0.0-20190213212951-d06e56a500db:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/mitchellh/colorstring@v0.0.0-20190213212951-d06e56a500db",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:62I3jR2EmQ4l5rM/4FEfDWcRD+abF5XlKShorW5LRoQ="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/patrickmn/go-cache@v2.1.0%2Bincompatible?package-id=80775b15187a8fa8",
+      "type": "library",
+      "name": "github.com/patrickmn/go-cache",
+      "version": "v2.1.0+incompatible",
+      "cpe": "cpe:2.3:a:patrickmn:go-cache:v2.1.0\\+incompatible:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/patrickmn/go-cache@v2.1.0%2Bincompatible",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:patrickmn:go_cache:v2.1.0\\+incompatible:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:HRMgzkcYKYpi3C8ajMPV8OFXaaRUnok+kx1WdO15EQc="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/rivo/uniseg@v0.4.7?package-id=2c0de3c260aa0d91",
+      "type": "library",
+      "name": "github.com/rivo/uniseg",
+      "version": "v0.4.7",
+      "cpe": "cpe:2.3:a:rivo:uniseg:v0.4.7:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/rivo/uniseg@v0.4.7",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:WUdvkW8uEhrYfLC4ZzdpI2ztxP1I582+49Oc5Mq64VQ="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/schollz/progressbar/v2@v2.15.0?package-id=d1d7eb66be46e84a",
+      "type": "library",
+      "name": "github.com/schollz/progressbar/v2",
+      "version": "v2.15.0",
+      "cpe": "cpe:2.3:a:schollz:progressbar\\/v2:v2.15.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/schollz/progressbar/v2@v2.15.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:dVzHQ8fHRmtPjD3K10jT3Qgn/+H+92jhPrhmxIJfDz8="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/stretchr/testify@v1.11.1?package-id=2dbf9db270c468dd",
+      "type": "library",
+      "name": "github.com/stretchr/testify",
+      "version": "v1.11.1",
+      "cpe": "cpe:2.3:a:stretchr:testify:v1.11.1:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/stretchr/testify@v1.11.1",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:7s2iGBzp5EwR7/aIZr8ao5+dra3wiQyKjjFuvgVKu7U="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "embedding-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/sugarme/regexpset@v0.0.0-20200920021344-4d4ec8eaf93c?package-id=c7321d48f7888912",
+      "type": "library",
+      "name": "github.com/sugarme/regexpset",
+      "version": "v0.0.0-20200920021344-4d4ec8eaf93c",
+      "cpe": "cpe:2.3:a:sugarme:regexpset:v0.0.0-20200920021344-4d4ec8eaf93c:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/sugarme/regexpset@v0.0.0-20200920021344-4d4ec8eaf93c",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:pwb4kNSHb4K89ymCaN+5lPH/MwnfSVg4rzGDh4d+iy4="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/sugarme/tokenizer@v0.3.0?package-id=b948ed069c726652",
+      "type": "library",
+      "name": "github.com/sugarme/tokenizer",
+      "version": "v0.3.0",
+      "cpe": "cpe:2.3:a:sugarme:tokenizer:v0.3.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/sugarme/tokenizer@v0.3.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:FE8DYbNSz/kSbgEo9l/RjgYHkIJYEdskumitFQBE9FE="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/yalue/onnxruntime_go@v1.31.0?package-id=0f7070e00291a94e",
+      "type": "library",
+      "name": "github.com/yalue/onnxruntime_go",
+      "version": "v1.31.0",
+      "cpe": "cpe:2.3:a:yalue:onnxruntime-go:v1.31.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/yalue/onnxruntime_go@v1.31.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:yalue:onnxruntime_go:v1.31.0:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:1ln4YW1SFOFfGJZXe3jNOb2JUSt+l2pEneZfV8HdtFA="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/text@v0.40.0?package-id=7e0014cb03004031",
+      "type": "library",
+      "name": "golang.org/x/text",
+      "version": "v0.40.0",
+      "cpe": "cpe:2.3:a:golang:text:v0.40.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/golang.org/x/text@v0.40.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:Ub2Z6/xjgF1WrYQz2nuITOEegKFtiIy+rieRJ5lHZKs="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:github/peter-evans/create-pull-request@v6?package-id=b064b23767572f56",
+      "type": "library",
+      "name": "peter-evans/create-pull-request",
+      "version": "v6",
+      "cpe": "cpe:2.3:a:peter-evans\\/create-pull-request:peter-evans\\/create-pull-request:v6:*:*:*:*:*:*:*",
+      "purl": "pkg:github/peter-evans/create-pull-request@v6",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter-evans\\/create-pull-request:peter_evans\\/create_pull_request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter_evans\\/create_pull_request:peter-evans\\/create-pull-request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter_evans\\/create_pull_request:peter_evans\\/create_pull_request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter-evans\\/create-pull:peter-evans\\/create-pull-request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter-evans\\/create-pull:peter_evans\\/create_pull_request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter_evans\\/create_pull:peter-evans\\/create-pull-request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter_evans\\/create_pull:peter_evans\\/create_pull_request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter-evans\\/create:peter-evans\\/create-pull-request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter-evans\\/create:peter_evans\\/create_pull_request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter_evans\\/create:peter-evans\\/create-pull-request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter_evans\\/create:peter_evans\\/create_pull_request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter:peter-evans\\/create-pull-request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:peter:peter_evans\\/create_pull_request:v6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "7561d461b00ff11d",
+      "type": "file",
+      "name": "/scan/.github/workflows/ci.yml",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "ea6a2b016af8a18f3e946d15f70b66d1f5c9bd42"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "2e1a17c06dad3417f419f263c0a542243a8db502e0e027522a26e8e07f00f93b"
+        }
+      ],
+      "properties": [
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "3fc5a8d3d86e9790",
+      "type": "file",
+      "name": "/scan/go.mod",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "2ca9a26ccb629d78987b6578fb589d84b3c1bf78"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "418cb7877a16281e3970a8b7d800971ba7e535227855fb9a59496ad3096efb66"
+        }
+      ],
+      "properties": [
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas@0.1.100?package-id=a6a069410e6cfe39",
+      "type": "library",
+      "name": "@napi-rs/canvas",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-android-arm64@0.1.100?package-id=5d381f9de8098137",
+      "type": "library",
+      "name": "@napi-rs/canvas-android-arm64",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-android-arm64:\\@napi-rs\\/canvas-android-arm64:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-android-arm64@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-android-arm64:\\@napi_rs\\/canvas_android_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_android_arm64:\\@napi-rs\\/canvas-android-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_android_arm64:\\@napi_rs\\/canvas_android_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-android:\\@napi-rs\\/canvas-android-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-android:\\@napi_rs\\/canvas_android_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_android:\\@napi-rs\\/canvas-android-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_android:\\@napi_rs\\/canvas_android_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-android-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_android_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-android-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_android_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-android-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_android_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-darwin-arm64@0.1.100?package-id=b7378ea81dfbc4ba",
+      "type": "library",
+      "name": "@napi-rs/canvas-darwin-arm64",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin-arm64:\\@napi-rs\\/canvas-darwin-arm64:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-darwin-arm64@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin-arm64:\\@napi_rs\\/canvas_darwin_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin_arm64:\\@napi-rs\\/canvas-darwin-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin_arm64:\\@napi_rs\\/canvas_darwin_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin:\\@napi-rs\\/canvas-darwin-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin:\\@napi_rs\\/canvas_darwin_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin:\\@napi-rs\\/canvas-darwin-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin:\\@napi_rs\\/canvas_darwin_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-darwin-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_darwin_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-darwin-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_darwin_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-darwin-arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_darwin_arm64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-darwin-x64@0.1.100?package-id=21e9ca562929b955",
+      "type": "library",
+      "name": "@napi-rs/canvas-darwin-x64",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin-x64:\\@napi-rs\\/canvas-darwin-x64:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-darwin-x64@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin-x64:\\@napi_rs\\/canvas_darwin_x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin_x64:\\@napi-rs\\/canvas-darwin-x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin_x64:\\@napi_rs\\/canvas_darwin_x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin:\\@napi-rs\\/canvas-darwin-x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-darwin:\\@napi_rs\\/canvas_darwin_x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin:\\@napi-rs\\/canvas-darwin-x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_darwin:\\@napi_rs\\/canvas_darwin_x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-darwin-x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_darwin_x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-darwin-x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_darwin_x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-darwin-x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_darwin_x64:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-linux-arm-gnueabihf@0.1.100?package-id=7f390847e78ca6e3",
+      "type": "library",
+      "name": "@napi-rs/canvas-linux-arm-gnueabihf",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm-gnueabihf:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-linux-arm-gnueabihf@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm-gnueabihf:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm_gnueabihf:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm_gnueabihf:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-linux-arm-gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_linux_arm_gnueabihf:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-linux-arm64-gnu@0.1.100?package-id=7c72d8f16e0078c8",
+      "type": "library",
+      "name": "@napi-rs/canvas-linux-arm64-gnu",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64-gnu:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-linux-arm64-gnu@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64-gnu:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64_gnu:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64_gnu:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-linux-arm64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_linux_arm64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-linux-arm64-musl@0.1.100?package-id=2ba789eff99a2ea7",
+      "type": "library",
+      "name": "@napi-rs/canvas-linux-arm64-musl",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64-musl:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-linux-arm64-musl@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64-musl:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64_musl:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64_musl:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-arm64:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_arm64:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-linux-arm64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_linux_arm64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-linux-riscv64-gnu@0.1.100?package-id=92351ed5de4bfaac",
+      "type": "library",
+      "name": "@napi-rs/canvas-linux-riscv64-gnu",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-riscv64-gnu:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-linux-riscv64-gnu@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-riscv64-gnu:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_riscv64_gnu:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_riscv64_gnu:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-riscv64:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-riscv64:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_riscv64:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_riscv64:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-linux-riscv64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_linux_riscv64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-linux-x64-gnu@0.1.100?package-id=d74a72bd1d587091",
+      "type": "library",
+      "name": "@napi-rs/canvas-linux-x64-gnu",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64-gnu:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-linux-x64-gnu@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64-gnu:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64_gnu:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64_gnu:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-linux-x64-gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_linux_x64_gnu:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-linux-x64-musl@0.1.100?package-id=48fe339285ae6fce",
+      "type": "library",
+      "name": "@napi-rs/canvas-linux-x64-musl",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64-musl:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-linux-x64-musl@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64-musl:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64_musl:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64_musl:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux-x64:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux_x64:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-linux:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_linux:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-linux-x64-musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_linux_x64_musl:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-win32-arm64-msvc@0.1.100?package-id=33658790a174a3ba",
+      "type": "library",
+      "name": "@napi-rs/canvas-win32-arm64-msvc",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-arm64-msvc:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-win32-arm64-msvc@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-arm64-msvc:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_arm64_msvc:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_arm64_msvc:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-arm64:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-arm64:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_arm64:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_arm64:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-win32-arm64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_win32_arm64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/%40napi-rs/canvas-win32-x64-msvc@0.1.100?package-id=0b1f20c1f82fd7f7",
+      "type": "library",
+      "name": "@napi-rs/canvas-win32-x64-msvc",
+      "version": "0.1.100",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-x64-msvc:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/%40napi-rs/canvas-win32-x64-msvc@0.1.100",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-x64-msvc:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_x64_msvc:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_x64_msvc:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-x64:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32-x64:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_x64:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32_x64:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas-win32:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas_win32:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi-rs\\/canvas:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi_rs\\/canvas:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi-rs\\/canvas-win32-x64-msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:\\@napi:\\@napi_rs\\/canvas_win32_x64_msvc:0.1.100:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:github/actions/setup-node@v4?package-id=0655ed1d97886acf",
+      "type": "library",
+      "name": "actions/setup-node",
+      "version": "v4",
+      "cpe": "cpe:2.3:a:actions\\/setup-node:actions\\/setup-node:v4:*:*:*:*:*:*:*",
+      "purl": "pkg:github/actions/setup-node@v4",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "github-actions-usage-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "github-action"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "github-actions-use-statement"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup-node:actions\\/setup_node:v4:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup_node:actions\\/setup-node:v4:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup_node:actions\\/setup_node:v4:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup:actions\\/setup-node:v4:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:actions\\/setup:actions\\/setup_node:v4:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/.github/workflows/ci.yml"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/cookie@1.1.1?package-id=c8eec62b9f3966a7",
+      "type": "library",
+      "name": "cookie",
+      "version": "1.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:cookie:cookie:1.1.1:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/cookie@1.1.1",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/pdfjs-dist@5.4.296?package-id=54ea5ac8cb64af97",
+      "type": "library",
+      "name": "pdfjs-dist",
+      "version": "5.4.296",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:pdfjs-dist:pdfjs-dist:5.4.296:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/pdfjs-dist@5.4.296",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:pdfjs-dist:pdfjs_dist:5.4.296:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:pdfjs_dist:pdfjs-dist:5.4.296:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:pdfjs_dist:pdfjs_dist:5.4.296:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:pdfjs:pdfjs-dist:5.4.296:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:pdfjs:pdfjs_dist:5.4.296:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/react@19.1.1?package-id=bc2321ddf62795ef",
+      "type": "library",
+      "name": "react",
+      "version": "19.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:react:react:19.1.1:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/react@19.1.1",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/react-dom@19.1.1?package-id=b5243f2311733f5c",
+      "type": "library",
+      "name": "react-dom",
+      "version": "19.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:react-dom:react-dom:19.1.1:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/react-dom@19.1.1",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react-dom:react_dom:19.1.1:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react_dom:react-dom:19.1.1:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react_dom:react_dom:19.1.1:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react:react-dom:19.1.1:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react:react_dom:19.1.1:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/react-router@7.18.2?package-id=c4b6538c6874c07e",
+      "type": "library",
+      "name": "react-router",
+      "version": "7.18.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:shopify:react-router:7.18.2:*:*:*:*:node.js:*:*",
+      "purl": "pkg:npm/react-router@7.18.2",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/react-router-dom@7.18.2?package-id=f77ac024e0d210eb",
+      "type": "library",
+      "name": "react-router-dom",
+      "version": "7.18.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:react-router-dom:react-router-dom:7.18.2:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/react-router-dom@7.18.2",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react-router-dom:react_router_dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react_router_dom:react-router-dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react_router_dom:react_router_dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react-router:react-router-dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react-router:react_router_dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react_router:react-router-dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react_router:react_router_dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react:react-router-dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:react:react_router_dom:7.18.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/scheduler@0.26.0?package-id=b8a71d60deb8aeed",
+      "type": "library",
+      "name": "scheduler",
+      "version": "0.26.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:scheduler:scheduler:0.26.0:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/scheduler@0.26.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/set-cookie-parser@2.7.2?package-id=69617d29d53cf676",
+      "type": "library",
+      "name": "set-cookie-parser",
+      "version": "2.7.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "cpe": "cpe:2.3:a:set-cookie-parser:set-cookie-parser:2.7.2:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/set-cookie-parser@2.7.2",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set-cookie-parser:set_cookie_parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set_cookie_parser:set-cookie-parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set_cookie_parser:set_cookie_parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set-cookie:set-cookie-parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set-cookie:set_cookie_parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set_cookie:set-cookie-parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set_cookie:set_cookie_parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set:set-cookie-parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:set:set_cookie_parser:2.7.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:npm/syncbase-frontend@0.2.0?package-id=97545080708a0c88",
+      "type": "library",
+      "name": "syncbase-frontend",
+      "version": "0.2.0",
+      "cpe": "cpe:2.3:a:syncbase-frontend:syncbase-frontend:0.2.0:*:*:*:*:*:*:*",
+      "purl": "pkg:npm/syncbase-frontend@0.2.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "javascript-lock-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "javascript"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "npm"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "javascript-npm-package-lock-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:syncbase-frontend:syncbase_frontend:0.2.0:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:syncbase_frontend:syncbase-frontend:0.2.0:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:syncbase_frontend:syncbase_frontend:0.2.0:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:syncbase:syncbase-frontend:0.2.0:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:syncbase:syncbase_frontend:0.2.0:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/package-lock.json"
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "fd71c2238fc07657",
+      "type": "file",
+      "name": "/scan/package-lock.json",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "398fe32f75d12a2aa3f8170d713d57e648146100"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "62aac0d1806528c02ca095d7bc5e50a2b0791303d24feedd7a3f91b738aa732f"
+        }
+      ],
+      "properties": [
+        {
+          "name": "syncbase:origin",
+          "value": "fe-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/merge42-syncbase/syncbase-embedding@v0.0.0-20260816133742-bf91ee529a7b?package-id=8495476ff83e7dbf",
+      "type": "library",
+      "name": "github.com/Merge42-SyncBase/syncbase-embedding",
+      "version": "v0.0.0-20260816133742-bf91ee529a7b",
+      "cpe": "cpe:2.3:a:Merge42-SyncBase:syncbase-embedding:v0.0.0-20260816133742-bf91ee529a7b:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/Merge42-SyncBase/syncbase-embedding@v0.0.0-20260816133742-bf91ee529a7b",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42-SyncBase:syncbase_embedding:v0.0.0-20260816133742-bf91ee529a7b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42_SyncBase:syncbase-embedding:v0.0.0-20260816133742-bf91ee529a7b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42_SyncBase:syncbase_embedding:v0.0.0-20260816133742-bf91ee529a7b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42:syncbase-embedding:v0.0.0-20260816133742-bf91ee529a7b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42:syncbase_embedding:v0.0.0-20260816133742-bf91ee529a7b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:Zz6pLQj8oWYnsODzZbVGHX6WSyZks8DxG+wQf0BdhVg="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/merge42-syncbase/syncbase-was@v0.0.0-20260816134057-40ff29103c5b?package-id=9c2a502ec893d91f",
+      "type": "library",
+      "name": "github.com/Merge42-SyncBase/syncbase-was",
+      "version": "v0.0.0-20260816134057-40ff29103c5b",
+      "cpe": "cpe:2.3:a:Merge42-SyncBase:syncbase-was:v0.0.0-20260816134057-40ff29103c5b:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260816134057-40ff29103c5b",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42-SyncBase:syncbase_was:v0.0.0-20260816134057-40ff29103c5b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42_SyncBase:syncbase-was:v0.0.0-20260816134057-40ff29103c5b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42_SyncBase:syncbase_was:v0.0.0-20260816134057-40ff29103c5b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42:syncbase-was:v0.0.0-20260816134057-40ff29103c5b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:Merge42:syncbase_was:v0.0.0-20260816134057-40ff29103c5b:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:IkoDF9vkMTPlJCeBBDnstM0QAhSXHMjvkLdTPEE1tQc="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/google/jsonschema-go@v0.4.3?package-id=854bb626977263ec",
+      "type": "library",
+      "name": "github.com/google/jsonschema-go",
+      "version": "v0.4.3",
+      "cpe": "cpe:2.3:a:google:jsonschema-go:v0.4.3:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/google/jsonschema-go@v0.4.3",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:google:jsonschema_go:v0.4.3:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:/DBOLZTfDow7pe2GmaJNhltueGTtDKICi8V8p+DQPd0="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/google/uuid@v1.6.0?package-id=f6424607fde0264b",
+      "type": "library",
+      "name": "github.com/google/uuid",
+      "version": "v1.6.0",
+      "cpe": "cpe:2.3:a:google:uuid:v1.6.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/google/uuid@v1.6.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/jackc/pgpassfile@v1.0.0?package-id=43a7b27bf2729128",
+      "type": "library",
+      "name": "github.com/jackc/pgpassfile",
+      "version": "v1.0.0",
+      "cpe": "cpe:2.3:a:jackc:pgpassfile:v1.0.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/jackc/pgpassfile@v1.0.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:/6Hmqy13Ss2zCq62VdNG8tM1wchn8zjSGOBJ6icpsIM="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/jackc/pgservicefile@v0.0.0-20240606120523-5a60cdf6a761?package-id=68c2db3c3399478c",
+      "type": "library",
+      "name": "github.com/jackc/pgservicefile",
+      "version": "v0.0.0-20240606120523-5a60cdf6a761",
+      "cpe": "cpe:2.3:a:jackc:pgservicefile:v0.0.0-20240606120523-5a60cdf6a761:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/jackc/pgservicefile@v0.0.0-20240606120523-5a60cdf6a761",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:iCEnooe7UlwOQYpKFhBabPMi4aNAfoODPEFNiAnClxo="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/jackc/pgx/v5@v5.10.0?package-id=48bff24e5fbc2d05",
+      "type": "library",
+      "name": "github.com/jackc/pgx/v5",
+      "version": "v5.10.0",
+      "cpe": "cpe:2.3:a:jackc:pgx:v5.10.0:*:*:*:*:go:*:*",
+      "purl": "pkg:golang/github.com/jackc/pgx/v5@v5.10.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:VhSvgU2jSli8o3AqIEOTJr7rZwAEUVo4E4XhR94Zfr0="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/jackc/puddle/v2@v2.2.2?package-id=a64feda35d1566ce",
+      "type": "library",
+      "name": "github.com/jackc/puddle/v2",
+      "version": "v2.2.2",
+      "cpe": "cpe:2.3:a:jackc:puddle\\/v2:v2.2.2:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/jackc/puddle/v2@v2.2.2",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:PR8nw+E/1w0GLuRFSmiioY6UooMp6KJv0/61nB7icHo="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/modelcontextprotocol/go-sdk@v1.7.0?package-id=ece4f307da9b0a54",
+      "type": "library",
+      "name": "github.com/modelcontextprotocol/go-sdk",
+      "version": "v1.7.0",
+      "cpe": "cpe:2.3:a:modelcontextprotocol:go-sdk:v1.7.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/modelcontextprotocol/go-sdk@v1.7.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:modelcontextprotocol:go_sdk:v1.7.0:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:yqjY2dsbKAC0LSuWZVBMrHgiG8ukXv6NRo0JiALay44="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/pgvector/pgvector-go@v0.4.1?package-id=57db73e0f5a32ef3",
+      "type": "library",
+      "name": "github.com/pgvector/pgvector-go",
+      "version": "v0.4.1",
+      "cpe": "cpe:2.3:a:pgvector:pgvector-go:v0.4.1:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/pgvector/pgvector-go@v0.4.1",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:pgvector:pgvector_go:v0.4.1:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:Oaj0mC0Ky8KaTweNHHpLwyFlN6a0nUFoo1vgSFTEhPI="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/segmentio/asm@v1.1.3?package-id=d1ebda30a903a174",
+      "type": "library",
+      "name": "github.com/segmentio/asm",
+      "version": "v1.1.3",
+      "cpe": "cpe:2.3:a:segmentio:asm:v1.1.3:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/segmentio/asm@v1.1.3",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:WM03sfUOENvvKexOLp+pCqgb/WDjsi7EK8gIsICtzhc="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/segmentio/encoding@v0.5.4?package-id=9ac72e90bcc39681",
+      "type": "library",
+      "name": "github.com/segmentio/encoding",
+      "version": "v0.5.4",
+      "cpe": "cpe:2.3:a:segmentio:encoding:v0.5.4:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/segmentio/encoding@v0.5.4",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:OW1VRern8Nw6ITAtwSZ7Idrl3MXCFwXHPgqESYfvNt0="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/yosida95/uritemplate/v3@v3.0.2?package-id=ba0d2aab72f03917",
+      "type": "library",
+      "name": "github.com/yosida95/uritemplate/v3",
+      "version": "v3.0.2",
+      "cpe": "cpe:2.3:a:yosida95:uritemplate\\/v3:v3.0.2:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/yosida95/uritemplate/v3@v3.0.2",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:Ed3Oyj9yrmi9087+NczuL5BwkIc4wvTb5zIM+UJPGz4="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/oauth2@v0.35.0?package-id=7b252a7445d4781d",
+      "type": "library",
+      "name": "golang.org/x/oauth2",
+      "version": "v0.35.0",
+      "cpe": "cpe:2.3:a:golang:x\\/oauth2:v0.35.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/golang.org/x/oauth2@v0.35.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:Mv2mzuHuZuY2+bkyWXIHMfhNdJAdwW3FuWeCPYN5GVQ="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/sync@v0.22.0?package-id=1e9b8c91e22e88f0",
+      "type": "library",
+      "name": "golang.org/x/sync",
+      "version": "v0.22.0",
+      "cpe": "cpe:2.3:a:golang:x\\/sync:v0.22.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/golang.org/x/sync@v0.22.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:SZjpbeLmrCk4xhRSZFNZW5gFUeCeFgjekvI/+gfScek="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/sys@v0.47.0?package-id=009b0ba8c25f5f40",
+      "type": "library",
+      "name": "golang.org/x/sys",
+      "version": "v0.47.0",
+      "cpe": "cpe:2.3:a:golang:x\\/sys:v0.47.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/golang.org/x/sys@v0.47.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/time@v0.15.0?package-id=d9baab7c2b8c8a86",
+      "type": "library",
+      "name": "golang.org/x/time",
+      "version": "v0.15.0",
+      "cpe": "cpe:2.3:a:golang:x\\/time:v0.15.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/golang.org/x/time@v0.15.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:bbrp8t3bGUeFOx08pvsMYRTCVSMk89u4tKbNOZbp88U="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "mcp-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/google/uuid@v1.6.0?package-id=801478ff1735bbd6",
+      "type": "library",
+      "name": "github.com/google/uuid",
+      "version": "v1.6.0",
+      "cpe": "cpe:2.3:a:google:uuid:v1.6.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/google/uuid@v1.6.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/qualification/pdf-gate/go/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/jolestar/go-commons-pool/v2@v2.1.2?package-id=92813e3293acf3a6",
+      "type": "library",
+      "name": "github.com/jolestar/go-commons-pool/v2",
+      "version": "v2.1.2",
+      "cpe": "cpe:2.3:a:jolestar:go-commons-pool\\/v2:v2.1.2:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/jolestar/go-commons-pool/v2@v2.1.2",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:jolestar:go_commons_pool\\/v2:v2.1.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:E+XGo58F23t7HtZiC/W6jzO2Ux2IccSH/yx4nD+J1CM="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/jolestar/go-commons-pool/v2@v2.1.2?package-id=9f87a0bfa954cfe4",
+      "type": "library",
+      "name": "github.com/jolestar/go-commons-pool/v2",
+      "version": "v2.1.2",
+      "cpe": "cpe:2.3:a:jolestar:go-commons-pool\\/v2:v2.1.2:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/jolestar/go-commons-pool/v2@v2.1.2",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:jolestar:go_commons_pool\\/v2:v2.1.2:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/qualification/pdf-gate/go/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:E+XGo58F23t7HtZiC/W6jzO2Ux2IccSH/yx4nD+J1CM="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/klippa-app/go-pdfium@v1.19.6?package-id=0554e88b8bba809a",
+      "type": "library",
+      "name": "github.com/klippa-app/go-pdfium",
+      "version": "v1.19.6",
+      "cpe": "cpe:2.3:a:klippa-app:go-pdfium:v1.19.6:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/klippa-app/go-pdfium@v1.19.6",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa-app:go_pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa_app:go-pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa_app:go_pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa:go-pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa:go_pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:MocMc/6ie+9eBFu+9tFMX66i3EDqnsMDoBtOy9Mx2/g="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/klippa-app/go-pdfium@v1.19.6?package-id=f39c30bff2c4a310",
+      "type": "library",
+      "name": "github.com/klippa-app/go-pdfium",
+      "version": "v1.19.6",
+      "cpe": "cpe:2.3:a:klippa-app:go-pdfium:v1.19.6:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/klippa-app/go-pdfium@v1.19.6",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa-app:go_pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa_app:go-pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa_app:go_pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa:go-pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:klippa:go_pdfium:v1.19.6:*:*:*:*:*:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/qualification/pdf-gate/go/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:MocMc/6ie+9eBFu+9tFMX66i3EDqnsMDoBtOy9Mx2/g="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/tetratelabs/wazero@v1.12.0?package-id=ce49657b84f26bbe",
+      "type": "library",
+      "name": "github.com/tetratelabs/wazero",
+      "version": "v1.12.0",
+      "cpe": "cpe:2.3:a:tetratelabs:wazero:v1.12.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/tetratelabs/wazero@v1.12.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:DuWcpNu/FzgEXgGBDp8J1Spc+CWOvvtvVyjKlaZopYU="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/github.com/tetratelabs/wazero@v1.12.0?package-id=20268e8be7b8c753",
+      "type": "library",
+      "name": "github.com/tetratelabs/wazero",
+      "version": "v1.12.0",
+      "cpe": "cpe:2.3:a:tetratelabs:wazero:v1.12.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/github.com/tetratelabs/wazero@v1.12.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/qualification/pdf-gate/go/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:DuWcpNu/FzgEXgGBDp8J1Spc+CWOvvtvVyjKlaZopYU="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/crypto@v0.54.0?package-id=68a75565a27fdb06",
+      "type": "library",
+      "name": "golang.org/x/crypto",
+      "version": "v0.54.0",
+      "cpe": "cpe:2.3:a:golang:crypto:v0.54.0:*:*:*:*:go:*:*",
+      "purl": "pkg:golang/golang.org/x/crypto@v0.54.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:go:ssh:v0.54.0:*:*:*:*:go:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:YLIA59K4fiNzHzjnZt2tUJQjQtUWfWbeHBqKtk3eScw="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/net@v0.57.0?package-id=620d19ff44ac9156",
+      "type": "library",
+      "name": "golang.org/x/net",
+      "version": "v0.57.0",
+      "cpe": "cpe:2.3:a:golang:networking:v0.57.0:*:*:*:*:go:*:*",
+      "purl": "pkg:golang/golang.org/x/net@v0.57.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:golang:net:v0.57.0:*:*:*:*:go:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:K5+3DljvIuDG9/Jv9rvyMywYNFCQ9RSUY6OOTTkT+tE="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/net@v0.57.0?package-id=5c0cb3ab27d91086",
+      "type": "library",
+      "name": "golang.org/x/net",
+      "version": "v0.57.0",
+      "cpe": "cpe:2.3:a:golang:networking:v0.57.0:*:*:*:*:go:*:*",
+      "purl": "pkg:golang/golang.org/x/net@v0.57.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:cpe23",
+          "value": "cpe:2.3:a:golang:net:v0.57.0:*:*:*:*:go:*:*"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/qualification/pdf-gate/go/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:K5+3DljvIuDG9/Jv9rvyMywYNFCQ9RSUY6OOTTkT+tE="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/sys@v0.47.0?package-id=d2a0f69b401fc923",
+      "type": "library",
+      "name": "golang.org/x/sys",
+      "version": "v0.47.0",
+      "cpe": "cpe:2.3:a:golang:x\\/sys:v0.47.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/golang.org/x/sys@v0.47.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/qualification/pdf-gate/go/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:o7XGOvZQCADBQQ4Y7VNq2dRWQR7JmOUW8Kxx4ZsNgWs="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "pkg:golang/golang.org/x/text@v0.40.0?package-id=4ac1434c5fb6120a",
+      "type": "library",
+      "name": "golang.org/x/text",
+      "version": "v0.40.0",
+      "cpe": "cpe:2.3:a:golang:text:v0.40.0:*:*:*:*:*:*:*",
+      "purl": "pkg:golang/golang.org/x/text@v0.40.0",
+      "properties": [
+        {
+          "name": "syft:package:foundBy",
+          "value": "go-module-file-cataloger"
+        },
+        {
+          "name": "syft:package:language",
+          "value": "go"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "go-module"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "go-module-entry"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "/qualification/pdf-gate/go/go.mod"
+        },
+        {
+          "name": "syft:metadata:h1Digest",
+          "value": "h1:Ub2Z6/xjgF1WrYQz2nuITOEegKFtiIy+rieRJ5lHZKs="
+        },
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    },
+    {
+      "bom-ref": "09ced8af2f6c8883",
+      "type": "file",
+      "name": "/scan/qualification/pdf-gate/go/go.mod",
+      "hashes": [
+        {
+          "alg": "SHA-1",
+          "content": "c4bc8a4730122f35b9bfeff17c02ef4332fa8cf1"
+        },
+        {
+          "alg": "SHA-256",
+          "content": "ed753ea11bd132cc42ced3abbd960d3d70d16b78b21c86c0aa64019dc69aec75"
+        }
+      ],
+      "properties": [
+        {
+          "name": "syncbase:origin",
+          "value": "was-"
+        }
+      ]
+    }
+  ]
+}
