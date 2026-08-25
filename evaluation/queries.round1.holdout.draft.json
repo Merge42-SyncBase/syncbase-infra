@@ -1,0 +1,749 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "syncbase-round1-holdout-v1",
+  "dataset_role": "PROSPECTIVE_HOLDOUT",
+  "prospective_holdout": true,
+  "query_exposure": "NOT_QUERIED_AT_DRAFT_CREATION",
+  "status": "DRAFT",
+  "description": "Prospective Round-1 holdout with 30 new query texts. It is locked to the calibration thresholds and fixture protocol but remains human-review and release-binding pending. Do not query a runtime before human approval and freeze.",
+  "benchmark_claim": "NOT_RUN",
+  "holdout_integrity": {
+    "calibration_dataset_id": "syncbase-round1-calibration-v1",
+    "calibration_dataset_file_sha256": "fa3ecd87382537a28115f04369ab75b1e8f2b32b63ceae0da6b62cba167a3564",
+    "calibration_query_text_set_sha256": "e71231e20fbcfc954a514ee6d1400f8d512008965b7e9c09483123ac731bd1ac",
+    "normalization": "NFKC_CASEFOLD_COLLAPSE_WHITESPACE_V1",
+    "required_exact_query_text_overlap": 0,
+    "required_factual_identifier_evidence_overlap": 0,
+    "runtime_exposure_status": "NOT_QUERIED"
+  },
+  "human_verification": {
+    "status": "PENDING",
+    "worksheet": "evaluation/holdout-ground-truth-verification.md",
+    "reviewer": null,
+    "reviewed_at": null
+  },
+  "bindings": {
+    "corpus_sha256": null,
+    "model_sha256": null,
+    "tokenizer_sha256": null,
+    "profile_sha256": null,
+    "database_identity_sha256": null,
+    "source_release_sha256": null,
+    "repository_revisions": {
+      "frontend": null,
+      "embedding": null,
+      "was": null,
+      "infra": null,
+      "mcp": null
+    }
+  },
+  "thresholds": {
+    "recall_at_5_min": 0.85,
+    "mrr_min": 0.75,
+    "citation_page_correctness_min": 1.0,
+    "superseded_version_leakage_max": 0,
+    "no_answer_false_positive_rate_max": 0.1,
+    "ann_recall_at_5_degradation_max": 0.02
+  },
+  "metric_contract": {
+    "version": "round1-citation-provenance-v1",
+    "retrieval_limit": 5,
+    "citation_page_correctness": {
+      "population": "ALL_RETURNED_HITS",
+      "empty_population_value": 0.0,
+      "required_checks": [
+        "RUNTIME_SOURCE_BINDING",
+        "RAW_PDF_SHA256",
+        "PAGE_IN_RANGE",
+        "SNIPPET_ON_CITED_PAGE",
+        "SOURCE_URL_TUPLE"
+      ]
+    }
+  },
+  "version_fixture_protocol": {
+    "strategy": "APPEND_ONE_INVARIANT_PDF_PAGE",
+    "v1_bytes": "UNCHANGED_PUBLIC_BASE_PDF",
+    "v2_bytes": "V1_PLUS_ONE_CANONICAL_MARKER_PAGE",
+    "generator_contract": "REPORTLAB_INVARIANT_1_THEN_PYPDF_APPEND",
+    "release_gate": "GENERATE_HASH_RENDER_HUMAN_APPROVE_BEFORE_FREEZE"
+  },
+  "version_fixture_plans": [
+    {
+      "id": "VP01",
+      "query_id": "V01",
+      "status": "READY",
+      "base_source": {
+        "source_file": "documents/sample-pdfs/서울특별시-현행규정/개방형직위운영내규_20260703.pdf",
+        "source_sha256": "13ff66350199550d8e384252d6ed5665ddd58e09b3ce3b8ba996a2fd61940d71",
+        "page": 1,
+        "supporting_excerpt": "개방형 직위의 운영 등에 필요한 사항을 규정함을 목적으로 한다."
+      },
+      "v1_source_sha256": "13ff66350199550d8e384252d6ed5665ddd58e09b3ce3b8ba996a2fd61940d71",
+      "v2_source_sha256": "5534d5914cb397c6ad9794c4dd24f73d366a899186917aaf5717cb53a03c4694",
+      "v2_source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V01-synthetic-supersession-v2.pdf",
+      "v2_render_file": "syncbase-infra/evaluation/fixtures/version-sensitive/renders/V01-final-page.png",
+      "machine_verification_manifest": "syncbase-infra/evaluation/fixtures/version-sensitive/manifest.json",
+      "v2_page": 11,
+      "v2_marker": "SYNCBASE-R1-V01",
+      "v2_only_text": "SYNCBASE-R1-V01 최신 적용 상태는 V2 전용 활성이다."
+    },
+    {
+      "id": "VP02",
+      "query_id": "V02",
+      "status": "READY",
+      "base_source": {
+        "source_file": "documents/sample-pdfs/서울특별시-현행규정/계약직원운영관리내규_20260703.pdf",
+        "source_sha256": "4664832b612072d32fc746de914bcecc7a22397687e273af186911e0f286bbb1",
+        "page": 2,
+        "supporting_excerpt": "계약직원은 경영목표, 인력구조 등을 감안하여 예산의 범위 내에서"
+      },
+      "v1_source_sha256": "4664832b612072d32fc746de914bcecc7a22397687e273af186911e0f286bbb1",
+      "v2_source_sha256": "66fe7b29b77d3bcf4e62ebb2d47ecf67386c7cf66783a082b9d6e23e42a3cafa",
+      "v2_source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V02-synthetic-supersession-v2.pdf",
+      "v2_render_file": "syncbase-infra/evaluation/fixtures/version-sensitive/renders/V02-final-page.png",
+      "machine_verification_manifest": "syncbase-infra/evaluation/fixtures/version-sensitive/manifest.json",
+      "v2_page": 36,
+      "v2_marker": "SYNCBASE-R1-V02",
+      "v2_only_text": "SYNCBASE-R1-V02 최신 적용 상태는 V2 전용 활성이다."
+    },
+    {
+      "id": "VP03",
+      "query_id": "V03",
+      "status": "READY",
+      "base_source": {
+        "source_file": "documents/sample-pdfs/서울특별시-현행규정/규정관리규정_20260703.pdf",
+        "source_sha256": "d10b7f0392b95de3b65c4da74a06354e4d0b6214bb773c1d86c6fed5c1498a7b",
+        "page": 2,
+        "supporting_excerpt": "규정안의 입안은 당해 안건의 소관부서에서 함을 원칙으로 한다."
+      },
+      "v1_source_sha256": "d10b7f0392b95de3b65c4da74a06354e4d0b6214bb773c1d86c6fed5c1498a7b",
+      "v2_source_sha256": "3391d46ff5693606d98f5c3bd9648c03c842a2404613289b4464317a5bd2618f",
+      "v2_source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V03-synthetic-supersession-v2.pdf",
+      "v2_render_file": "syncbase-infra/evaluation/fixtures/version-sensitive/renders/V03-final-page.png",
+      "machine_verification_manifest": "syncbase-infra/evaluation/fixtures/version-sensitive/manifest.json",
+      "v2_page": 17,
+      "v2_marker": "SYNCBASE-R1-V03",
+      "v2_only_text": "SYNCBASE-R1-V03 최신 적용 상태는 V2 전용 활성이다."
+    },
+    {
+      "id": "VP04",
+      "query_id": "V04",
+      "status": "READY",
+      "base_source": {
+        "source_file": "documents/sample-pdfs/서울특별시-현행규정/위원회_관리_규정_20260703.pdf",
+        "source_sha256": "82b8206478750a0c6b3cb337da395a52a9918514617c243b58648feeda15ab9d",
+        "page": 3,
+        "supporting_excerpt": "위원회의 결의는 구성위원 과반수의 출석과 출석위원의 과반수로 하여야 한다."
+      },
+      "v1_source_sha256": "82b8206478750a0c6b3cb337da395a52a9918514617c243b58648feeda15ab9d",
+      "v2_source_sha256": "c37c73ea863d4ff2d3313f730a06376b674b9cbea678e59804474f4ad4109358",
+      "v2_source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V04-synthetic-supersession-v2.pdf",
+      "v2_render_file": "syncbase-infra/evaluation/fixtures/version-sensitive/renders/V04-final-page.png",
+      "machine_verification_manifest": "syncbase-infra/evaluation/fixtures/version-sensitive/manifest.json",
+      "v2_page": 9,
+      "v2_marker": "SYNCBASE-R1-V04",
+      "v2_only_text": "SYNCBASE-R1-V04 최신 적용 상태는 V2 전용 활성이다."
+    },
+    {
+      "id": "VP05",
+      "query_id": "V05",
+      "status": "READY",
+      "base_source": {
+        "source_file": "documents/sample-pdfs/서울특별시-현행규정/직원_학위취득_지원관리내규_20260703.pdf",
+        "source_sha256": "4cd1a62fb0802c7802d05b45ef319d735ce1712f9420f8d2ddfb9be3b6829dff",
+        "page": 2,
+        "supporting_excerpt": "정규학기의 등록금으로 입학금, 기성회비, 수업료를 포함한다."
+      },
+      "v1_source_sha256": "4cd1a62fb0802c7802d05b45ef319d735ce1712f9420f8d2ddfb9be3b6829dff",
+      "v2_source_sha256": "99f44bef484474f6bae687e33acb6e65fc36ec2f5523e21bc2f594c6e9b7afd4",
+      "v2_source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V05-synthetic-supersession-v2.pdf",
+      "v2_render_file": "syncbase-infra/evaluation/fixtures/version-sensitive/renders/V05-final-page.png",
+      "machine_verification_manifest": "syncbase-infra/evaluation/fixtures/version-sensitive/manifest.json",
+      "v2_page": 8,
+      "v2_marker": "SYNCBASE-R1-V05",
+      "v2_only_text": "SYNCBASE-R1-V05 최신 적용 상태는 V2 전용 활성이다."
+    }
+  ],
+  "queries": [
+    {
+      "id": "HF01",
+      "category": "factual_paraphrase",
+      "query": "개방형직위 선발시험은 응시자가 볼 수 있도록 최소 며칠 동안 공고해야 하는가?",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V01-synthetic-supersession-v2.pdf",
+          "source_sha256": "5534d5914cb397c6ad9794c4dd24f73d366a899186917aaf5717cb53a03c4694",
+          "page": 2,
+          "supporting_excerpt": "10일 이상 공고하여야 한다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "5534d5914cb397c6ad9794c4dd24f73d366a899186917aaf5717cb53a03c4694",
+            "version": 2,
+            "pages": [2]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF02",
+      "category": "factual_paraphrase",
+      "query": "전문·일반·촉탁 계약직원의 계약기간은 원칙적으로 얼마 이내인가?",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V02-synthetic-supersession-v2.pdf",
+          "source_sha256": "66fe7b29b77d3bcf4e62ebb2d47ecf67386c7cf66783a082b9d6e23e42a3cafa",
+          "page": 3,
+          "supporting_excerpt": "전문계약직원, 일반계약직원 또는 촉탁계약직원의 계약기간은 1년 이내로 한다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "66fe7b29b77d3bcf4e62ebb2d47ecf67386c7cf66783a082b9d6e23e42a3cafa",
+            "version": 2,
+            "pages": [3]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF03",
+      "category": "factual_paraphrase",
+      "query": "공개 대상 규정은 어느 온라인 장소에 게시하는가?",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V03-synthetic-supersession-v2.pdf",
+          "source_sha256": "3391d46ff5693606d98f5c3bd9648c03c842a2404613289b4464317a5bd2618f",
+          "page": 5,
+          "supporting_excerpt": "규정은 공단 홈페이지에 게시하여 공개한다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "3391d46ff5693606d98f5c3bd9648c03c842a2404613289b4464317a5bd2618f",
+            "version": 2,
+            "pages": [5]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF04",
+      "category": "factual_paraphrase",
+      "query": "노동이사후보 투표는 보통 몇 시에 시작해 몇 시에 마감하는가?",
+      "candidate_evidence": [
+        {
+          "source_file": "documents/sample-pdfs/서울특별시-현행규정/노동이사후보_선거관리_내규_20260703.pdf",
+          "source_sha256": "2d7d49292f7831663822dbd75f5f64d4007211f434f01858f52800037d6f3b54",
+          "page": 4,
+          "supporting_excerpt": "투표는 해당일 오전 8시부터 시작하여 오후 6시에 마감"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "2d7d49292f7831663822dbd75f5f64d4007211f434f01858f52800037d6f3b54",
+            "version": 1,
+            "pages": [4]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF05",
+      "category": "factual_paraphrase",
+      "query": "출산·질병·재해 등 비상 사유로 지급일 전에 받을 수 있는 보수의 상한은 무엇인가?",
+      "candidate_evidence": [
+        {
+          "source_file": "documents/sample-pdfs/서울특별시-현행규정/보수규정_20260703.pdf",
+          "source_sha256": "325bf6c654dd9441843e87764d7a49b7bbe19a6564b7b24b66c455a3d2b6380b",
+          "page": 3,
+          "supporting_excerpt": "월 보수액의 한도내에서 지급할 수 있다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "325bf6c654dd9441843e87764d7a49b7bbe19a6564b7b24b66c455a3d2b6380b",
+            "version": 1,
+            "pages": [3]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF06",
+      "category": "factual_paraphrase",
+      "query": "회원권을 비수기에 이용하려면 체크인일 기준 어느 기간 안에 신청해야 하는가?",
+      "candidate_evidence": [
+        {
+          "source_file": "documents/sample-pdfs/서울특별시-현행규정/복지후생규정_20260703.pdf",
+          "source_sha256": "03e4525d3ddbbba3d6619e0997d7fc6047092826c17fc6ed1606c6f9f90b5550",
+          "page": 2,
+          "supporting_excerpt": "비수기에는 체크인 일자 기준 최소 3일전~최대 60일 전 기간 내 신청해야 하고"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "03e4525d3ddbbba3d6619e0997d7fc6047092826c17fc6ed1606c6f9f90b5550",
+            "version": 1,
+            "pages": [2]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF07",
+      "category": "factual_paraphrase",
+      "query": "사무를 위임받은 사람에게는 어떤 권한과 책임이 함께 생기는가?",
+      "candidate_evidence": [
+        {
+          "source_file": "documents/sample-pdfs/서울특별시-현행규정/사무위임전결규정_20260703.pdf",
+          "source_sha256": "91a5a4f0ea97d589e1e5868aa10f2e365933b7d8fb5022b713bdb105e1932e6b",
+          "page": 1,
+          "supporting_excerpt": "사무위임을 받은 자는 그 위임받은 업무의 처리에 필요한 권한을 가지며 동시에 그에 대한 책임을 진다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "91a5a4f0ea97d589e1e5868aa10f2e365933b7d8fb5022b713bdb105e1932e6b",
+            "version": 1,
+            "pages": [1]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF08",
+      "category": "factual_paraphrase",
+      "query": "시설관리직 신규 채용 시 둘 수 있는 수습기간은 어느 정도인가?",
+      "candidate_evidence": [
+        {
+          "source_file": "documents/sample-pdfs/서울특별시-현행규정/시설관리직직원관리규정_20260703.pdf",
+          "source_sha256": "47be4aec93ed9d515a0fa55260d1b9b88307a3feee0f19e197138663405dab64",
+          "page": 1,
+          "supporting_excerpt": "3개월 미만의 수습기간을 둘 수 있으며"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "47be4aec93ed9d515a0fa55260d1b9b88307a3feee0f19e197138663405dab64",
+            "version": 1,
+            "pages": [1]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF09",
+      "category": "factual_paraphrase",
+      "query": "위원회 구성에서 외부위원 비율은 어느 수준이 되도록 노력해야 하는가?",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V04-synthetic-supersession-v2.pdf",
+          "source_sha256": "c37c73ea863d4ff2d3313f730a06376b674b9cbea678e59804474f4ad4109358",
+          "page": 2,
+          "supporting_excerpt": "전체위원의 2분의 1이상 임명 또는 위촉되도록 노력하여야 한다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "c37c73ea863d4ff2d3313f730a06376b674b9cbea678e59804474f4ad4109358",
+            "version": 2,
+            "pages": [2]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HF10",
+      "category": "factual_paraphrase",
+      "query": "직원 학위취득 학자금은 한 사람에게 한 학기당 최대 얼마까지 지원되는가?",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V05-synthetic-supersession-v2.pdf",
+          "source_sha256": "99f44bef484474f6bae687e33acb6e65fc36ec2f5523e21bc2f594c6e9b7afd4",
+          "page": 1,
+          "supporting_excerpt": "학위취득 지원 학자금은 1인 1학기당 최대 100만원 한도 내"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "99f44bef484474f6bae687e33acb6e65fc36ec2f5523e21bc2f594c6e9b7afd4",
+            "version": 2,
+            "pages": [1]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HI01",
+      "category": "exact_identifier",
+      "query": "<별지 제3호 서식> 근무성적평정 결과 이의신청서",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V01-synthetic-supersession-v2.pdf",
+          "source_sha256": "5534d5914cb397c6ad9794c4dd24f73d366a899186917aaf5717cb53a03c4694",
+          "page": 10,
+          "supporting_excerpt": "근무성적평정 결과 이의신청서"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "5534d5914cb397c6ad9794c4dd24f73d366a899186917aaf5717cb53a03c4694",
+            "version": 2,
+            "pages": [10]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HI02",
+      "category": "exact_identifier",
+      "query": "<별지 제3호 서식> 인사기록카드",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V02-synthetic-supersession-v2.pdf",
+          "source_sha256": "66fe7b29b77d3bcf4e62ebb2d47ecf67386c7cf66783a082b9d6e23e42a3cafa",
+          "page": 24,
+          "supporting_excerpt": "인사기록카드"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "66fe7b29b77d3bcf4e62ebb2d47ecf67386c7cf66783a082b9d6e23e42a3cafa",
+            "version": 2,
+            "pages": [24]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HI03",
+      "category": "exact_identifier",
+      "query": "<별지 제2호 서식> 규정관리대장",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V03-synthetic-supersession-v2.pdf",
+          "source_sha256": "3391d46ff5693606d98f5c3bd9648c03c842a2404613289b4464317a5bd2618f",
+          "page": 16,
+          "supporting_excerpt": "규 정 관 리 대 장"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "3391d46ff5693606d98f5c3bd9648c03c842a2404613289b4464317a5bd2618f",
+            "version": 2,
+            "pages": [16]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HI04",
+      "category": "exact_identifier",
+      "query": "【별지 제4호】 노동이사후보 선거결과 공고",
+      "candidate_evidence": [
+        {
+          "source_file": "documents/sample-pdfs/서울특별시-현행규정/노동이사후보_선거관리_내규_20260703.pdf",
+          "source_sha256": "2d7d49292f7831663822dbd75f5f64d4007211f434f01858f52800037d6f3b54",
+          "page": 10,
+          "supporting_excerpt": "노동이사후보 선거결과 공고"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "2d7d49292f7831663822dbd75f5f64d4007211f434f01858f52800037d6f3b54",
+            "version": 1,
+            "pages": [10]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "HI05",
+      "category": "exact_identifier",
+      "query": "<별지 제4호 서식> 위임장",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V04-synthetic-supersession-v2.pdf",
+          "source_sha256": "c37c73ea863d4ff2d3313f730a06376b674b9cbea678e59804474f4ad4109358",
+          "page": 8,
+          "supporting_excerpt": "위 임 장"
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "c37c73ea863d4ff2d3313f730a06376b674b9cbea678e59804474f4ad4109358",
+            "version": 2,
+            "pages": [8]
+          }
+        ],
+        "forbidden": []
+      }
+    },
+    {
+      "id": "V01",
+      "category": "version_sensitive",
+      "query": "문서 표식 SYNCBASE-R1-V01이 나타내는 현재 활성 상태를 확인해 줘.",
+      "fixture_plan_id": "VP01",
+      "ground_truth_state": "VERIFIED_VERSION_PAIR",
+      "candidate_evidence_role": "SYNTHETIC_V2_MARKER_GROUND_TRUTH",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V01-synthetic-supersession-v2.pdf",
+          "source_sha256": "5534d5914cb397c6ad9794c4dd24f73d366a899186917aaf5717cb53a03c4694",
+          "page": 11,
+          "supporting_excerpt": "SYNCBASE-R1-V01 최신 적용 상태는 V2 전용 활성이다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "5534d5914cb397c6ad9794c4dd24f73d366a899186917aaf5717cb53a03c4694",
+            "version": 2,
+            "pages": [11]
+          }
+        ],
+        "forbidden": [
+          {
+            "source_sha256": "13ff66350199550d8e384252d6ed5665ddd58e09b3ce3b8ba996a2fd61940d71",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "V02",
+      "category": "version_sensitive",
+      "query": "SYNCBASE-R1-V02 표식이 가리키는 최신 적용 상태를 근거 페이지에서 찾아줘.",
+      "fixture_plan_id": "VP02",
+      "ground_truth_state": "VERIFIED_VERSION_PAIR",
+      "candidate_evidence_role": "SYNTHETIC_V2_MARKER_GROUND_TRUTH",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V02-synthetic-supersession-v2.pdf",
+          "source_sha256": "66fe7b29b77d3bcf4e62ebb2d47ecf67386c7cf66783a082b9d6e23e42a3cafa",
+          "page": 36,
+          "supporting_excerpt": "SYNCBASE-R1-V02 최신 적용 상태는 V2 전용 활성이다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "66fe7b29b77d3bcf4e62ebb2d47ecf67386c7cf66783a082b9d6e23e42a3cafa",
+            "version": 2,
+            "pages": [36]
+          }
+        ],
+        "forbidden": [
+          {
+            "source_sha256": "4664832b612072d32fc746de914bcecc7a22397687e273af186911e0f286bbb1",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "V03",
+      "category": "version_sensitive",
+      "query": "현재 적용 대상으로 확인해야 할 SYNCBASE-R1-V03의 상태는 무엇인가?",
+      "fixture_plan_id": "VP03",
+      "ground_truth_state": "VERIFIED_VERSION_PAIR",
+      "candidate_evidence_role": "SYNTHETIC_V2_MARKER_GROUND_TRUTH",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V03-synthetic-supersession-v2.pdf",
+          "source_sha256": "3391d46ff5693606d98f5c3bd9648c03c842a2404613289b4464317a5bd2618f",
+          "page": 17,
+          "supporting_excerpt": "SYNCBASE-R1-V03 최신 적용 상태는 V2 전용 활성이다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "3391d46ff5693606d98f5c3bd9648c03c842a2404613289b4464317a5bd2618f",
+            "version": 2,
+            "pages": [17]
+          }
+        ],
+        "forbidden": [
+          {
+            "source_sha256": "d10b7f0392b95de3b65c4da74a06354e4d0b6214bb773c1d86c6fed5c1498a7b",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "V04",
+      "category": "version_sensitive",
+      "query": "SYNCBASE-R1-V04 문서가 활성 적용 상태인지 출처와 함께 확인해 줘.",
+      "fixture_plan_id": "VP04",
+      "ground_truth_state": "VERIFIED_VERSION_PAIR",
+      "candidate_evidence_role": "SYNTHETIC_V2_MARKER_GROUND_TRUTH",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V04-synthetic-supersession-v2.pdf",
+          "source_sha256": "c37c73ea863d4ff2d3313f730a06376b674b9cbea678e59804474f4ad4109358",
+          "page": 9,
+          "supporting_excerpt": "SYNCBASE-R1-V04 최신 적용 상태는 V2 전용 활성이다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "c37c73ea863d4ff2d3313f730a06376b674b9cbea678e59804474f4ad4109358",
+            "version": 2,
+            "pages": [9]
+          }
+        ],
+        "forbidden": [
+          {
+            "source_sha256": "82b8206478750a0c6b3cb337da395a52a9918514617c243b58648feeda15ab9d",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "V05",
+      "category": "version_sensitive",
+      "query": "SYNCBASE-R1-V05에 기록된 V2 전용 적용 여부를 찾아 알려줘.",
+      "fixture_plan_id": "VP05",
+      "ground_truth_state": "VERIFIED_VERSION_PAIR",
+      "candidate_evidence_role": "SYNTHETIC_V2_MARKER_GROUND_TRUTH",
+      "candidate_evidence": [
+        {
+          "source_file": "syncbase-infra/evaluation/fixtures/version-sensitive/pdfs/V05-synthetic-supersession-v2.pdf",
+          "source_sha256": "99f44bef484474f6bae687e33acb6e65fc36ec2f5523e21bc2f594c6e9b7afd4",
+          "page": 8,
+          "supporting_excerpt": "SYNCBASE-R1-V05 최신 적용 상태는 V2 전용 활성이다."
+        }
+      ],
+      "expected": {
+        "no_answer": false,
+        "relevant": [
+          {
+            "source_sha256": "99f44bef484474f6bae687e33acb6e65fc36ec2f5523e21bc2f594c6e9b7afd4",
+            "version": 2,
+            "pages": [8]
+          }
+        ],
+        "forbidden": [
+          {
+            "source_sha256": "4cd1a62fb0802c7802d05b45ef319d735ce1712f9420f8d2ddfb9be3b6829dff",
+            "version": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "HN01",
+      "category": "no_answer",
+      "query": "재택근무용 장비 구입비의 월별 지원 한도는 얼마인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN02",
+      "category": "no_answer",
+      "query": "직원이 반려동물을 데리고 출근하려면 어떤 승인을 받아야 하는가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN03",
+      "category": "no_answer",
+      "query": "직원 전기차 충전비의 월 지원 상한을 알려 줘.",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN04",
+      "category": "no_answer",
+      "query": "사내 어린이집의 현재 대기 순번은 몇 번인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN05",
+      "category": "no_answer",
+      "query": "<별지 제99호 서식> 생성형 AI 사용승인서의 내용을 보여 줘.",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN06",
+      "category": "no_answer",
+      "query": "양자암호 통신 교육의 연간 의무 이수시간은 얼마인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN07",
+      "category": "no_answer",
+      "query": "이 규정들의 2027년 12월 31일 개정 예정 내용을 알려 줘.",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN08",
+      "category": "no_answer",
+      "query": "특정 직원의 개인 여권번호는 무엇인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN09",
+      "category": "no_answer",
+      "query": "현재 북서태평양 태풍의 실시간 위치를 알려 줘.",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "HN10",
+      "category": "no_answer",
+      "query": "재고 코드 QZ-8841 품목의 최신 구매 단가는 얼마인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    }
+  ]
+}

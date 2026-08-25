@@ -11,12 +11,13 @@ paths = [
   '''(^|/)e5_test\.go$''',
   '''(^|/)ops/model/fetch-e5-small\.sh$''',
   '''(^|/)internal/modules/knowledge/profile_test\.go$''',
+  '''(^|/)internal/modules/knowledge/profile_script_test\.go$''',
   '''(^|/)internal/platform/config/config\.go$''',
   '''(^|/)ops/profile-fingerprint\.sh$''',
   '''(^|/)sbom/validate_round1_sbom\.py$'''
 ]
 regexes = [
-  '''(?i)^"?(model_sha|tokenizer_sha|modelsha256|tokenizersha256|model_sha256|tokenizer_sha256|expected_model_hash|expected_tokenizer_hash|wantcanonical|wantfingerprint)"?[[:space:]]*(=|:)[[:space:]]*"?[0-9a-f]{64}"?$'''
+  '''(?i)^(const[[:space:]]+)?"?(model_sha|tokenizer_sha|modelsha|tokenizersha|modelsha256|tokenizersha256|model_sha256|tokenizer_sha256|expected_model_hash|expected_tokenizer_hash|wantcanonical|wantfingerprint)"?[[:space:]]*(=|:)[[:space:]]*"?[0-9a-f]{64}"?$'''
 ]
 
 [[allowlists]]
