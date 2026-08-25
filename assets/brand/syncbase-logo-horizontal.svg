@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" role="img" aria-labelledby="title desc">
+  <title id="title">SyncBase</title>
+  <desc id="desc">SyncBase horizontal logo with the Evidence Seam mark.</desc>
+  <g transform="translate(8 8)">
+    <path fill="#2463DE" d="M8 4h48a4 4 0 0 1 4 4v28c-5-5.4-10.2-8.5-17-8.5H28c-7.5 0-13.6-2.7-18.5-7.5L4 14.5V8a4 4 0 0 1 4-4Z"/>
+    <path fill="#0E1B2E" d="M4 22.5C9.5 28 15.8 31.5 24.5 31.5h14c7.5 0 13.5 2.7 18.5 7.5l3 3v14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V22.5Z"/>
+  </g>
+  <text x="88" y="53" fill="#0E1B2E" font-family="Pretendard Variable, Pretendard, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="37" font-weight="750" letter-spacing="-1.4">SyncBase</text>
+</svg>

@@ -3,7 +3,8 @@
   "state": "DRAFT_TEMPLATE_NOT_RELEASE_EVIDENCE",
   "project": {
     "name": "SyncBase",
-    "title_ko": "OpenSQL 기반 정합성 우선 AI 문서 관리·벡터 검색 플랫폼",
+    "title_ko": "OpenSQL 호환을 목표로 한 정합성 우선 AI 문서 관리·벡터 검색 플랫폼",
+    "title_upgrade_gate": "ACTUAL_OPENSQL_PRODUCT_IDENTITY_AND_SINGLE_NODE_SMOKE_REQUIRED",
     "representative_repository": "https://github.com/Merge42-SyncBase/syncbase-infra"
   },
   "release": {
@@ -82,6 +83,7 @@
     "multi_node_ha": "NOT_TESTED",
     "ann_application_plan": "NOT_RUN",
     "retrieval_benchmark": "NOT_RUN",
+    "single_node_db_outage_recovery_diagnostic": "NOT_RUN",
     "worker_recovery": "NOT_RUN",
     "grounding_contract": "NOT_RUN",
     "clean_room": "NOT_RUN"

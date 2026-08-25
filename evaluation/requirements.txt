@@ -1,0 +1,6 @@
+# Round-1 evidence-tool top-level Python dependencies.
+# Install in an isolated virtual environment; do not modify the application images.
+pdfplumber==0.11.9
+pypdf==6.10.0
+reportlab==4.4.9
+Pillow==12.3.0
