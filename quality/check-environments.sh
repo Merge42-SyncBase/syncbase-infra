@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-cd "$project_root"
+infra_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+workspace_root="${SYNCBASE_WORKSPACE_ROOT:-$(cd "$infra_root/.." && pwd)}"
 
 common_env=(
   SYNCBASE_POSTGRES_OWNER_PASSWORD=owner-test-password
@@ -25,8 +25,8 @@ local_json="$(env "${common_env[@]}" \
   SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
   SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
   docker compose \
-  -f infra/compose.yml \
-  -f infra/environments/local/compose.yml \
+  -f "$infra_root/compose.yml" \
+  -f "$infra_root/environments/local/compose.yml" \
   config --format json)"
 local_build_json="$(env "${common_env[@]}" \
   SYNCBASE_DB_HOST=postgres \
@@ -36,13 +36,12 @@ local_build_json="$(env "${common_env[@]}" \
   SYNCBASE_MIGRATE_IMAGE=registry.example/syncbase-migrate:test \
   SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
   SYNCBASE_MCP_IMAGE=registry.example/syncbase-mcp:test \
-  SYNCBASE_GITHUB_TOKEN_FILE=/tmp/syncbase-environment-check-token \
   docker compose \
-  -f infra/compose.yml \
-  -f infra/environments/local/compose.yml \
-  -f infra/environments/local/build-was.yml \
-  -f infra/environments/local/build-mcp.yml \
-  -f infra/environments/local/build-frontend.yml \
+  -f "$infra_root/compose.yml" \
+  -f "$infra_root/environments/local/compose.yml" \
+  -f "$infra_root/environments/local/build-was.yml" \
+  -f "$infra_root/environments/local/build-mcp.yml" \
+  -f "$infra_root/environments/local/build-frontend.yml" \
   config --format json)"
 prod_json="$(env "${common_env[@]}" \
   SYNCBASE_WEB_IMAGE=registry.example/syncbase-web:test \
@@ -54,8 +53,8 @@ prod_json="$(env "${common_env[@]}" \
   SYNCBASE_DB_HOST=opensql.example.test \
   SYNCBASE_DB_SSLMODE=require \
   docker compose \
-  -f infra/compose.yml \
-  -f infra/environments/prod/compose.yml \
+  -f "$infra_root/compose.yml" \
+  -f "$infra_root/environments/prod/compose.yml" \
   config --format json)"
 
 jq -e '
@@ -77,12 +76,12 @@ jq -e '
 
 # With all three build-*.yml overlays layered on, was/mcp/frontend should
 # build from their sibling source directories instead of pulling.
-jq -e --arg root "$project_root" '
-  .services.api.build.context == ($root + "/was") and
-  .services.worker.build.context == ($root + "/was") and
-  .services.migrate.build.context == ($root + "/was") and
-  .services.mcp.build.context == ($root + "/mcp") and
-  .services.web.build.context == ($root + "/frontend") and
+jq -e --arg root "$workspace_root" '
+  .services.api.build.context == ($root + "/syncbase-was") and
+  .services.worker.build.context == ($root + "/syncbase-was") and
+  .services.migrate.build.context == ($root + "/syncbase-was") and
+  .services.mcp.build.context == ($root + "/syncbase-mcp") and
+  .services.web.build.context == ($root + "/SyncBase-FE") and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "false"
 ' >/dev/null <<<"$local_build_json"
 

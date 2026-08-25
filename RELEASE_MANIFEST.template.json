@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "state": "DRAFT_TEMPLATE_NOT_RELEASE_EVIDENCE",
+  "project": {
+    "name": "SyncBase",
+    "title_ko": "OpenSQL 기반 정합성 우선 AI 문서 관리·벡터 검색 플랫폼",
+    "representative_repository": "https://github.com/Merge42-SyncBase/syncbase-infra"
+  },
+  "release": {
+    "target_tag": "v0.1.0-round1",
+    "candidate_tag": null,
+    "github_release_repository": "https://github.com/Merge42-SyncBase/syncbase-infra",
+    "github_release_url": null,
+    "created": false
+  },
+  "repositories": [
+    {
+      "id": "infra",
+      "url": "https://github.com/Merge42-SyncBase/syncbase-infra",
+      "local_directory": "syncbase-infra",
+      "tag": "v0.1.0-round1",
+      "commit_sha": null,
+      "anonymous_access": "NOT_VERIFIED",
+      "license": "Apache-2.0",
+      "license_sha256": null
+    },
+    {
+      "id": "was",
+      "url": "https://github.com/Merge42-SyncBase/syncbase-was",
+      "local_directory": "syncbase-was",
+      "tag": "v0.1.0-round1",
+      "commit_sha": null,
+      "anonymous_access": "NOT_VERIFIED",
+      "license": "Apache-2.0",
+      "license_sha256": null
+    },
+    {
+      "id": "mcp",
+      "url": "https://github.com/Merge42-SyncBase/syncbase-mcp",
+      "local_directory": "syncbase-mcp",
+      "tag": "v0.1.0-round1",
+      "commit_sha": null,
+      "anonymous_access": "NOT_VERIFIED",
+      "license": "Apache-2.0",
+      "license_sha256": null
+    },
+    {
+      "id": "embedding",
+      "url": "https://github.com/Merge42-SyncBase/syncbase-embedding",
+      "local_directory": "syncbase-embedding",
+      "tag": "v0.1.0-round1",
+      "commit_sha": null,
+      "anonymous_access": "NOT_VERIFIED",
+      "license": "Apache-2.0",
+      "license_sha256": null
+    },
+    {
+      "id": "frontend",
+      "url": "https://github.com/Merge42-SyncBase/SyncBase-FE",
+      "local_directory": "SyncBase-FE",
+      "tag": "v0.1.0-round1",
+      "commit_sha": null,
+      "anonymous_access": "NOT_VERIFIED",
+      "license": "Apache-2.0",
+      "license_sha256": null
+    }
+  ],
+  "runtime_inputs": {
+    "database_identity": null,
+    "database_version": null,
+    "database_profile_sha256": null,
+    "corpus_sha256": null,
+    "query_set_sha256": null,
+    "embedding_model": "intfloat/multilingual-e5-small",
+    "embedding_model_revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+    "embedding_model_sha256": "ca456c06b3a9505ddfd9131408916dd79290368331e7d76bb621f1cba6bc8665",
+    "tokenizer_sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39",
+    "search_profile_sha256": null
+  },
+  "qualification": {
+    "single_node_opensql": "NOT_RUN",
+    "multi_node_ha": "NOT_TESTED",
+    "ann_application_plan": "NOT_RUN",
+    "retrieval_benchmark": "NOT_RUN",
+    "worker_recovery": "NOT_RUN",
+    "grounding_contract": "NOT_RUN",
+    "clean_room": "NOT_RUN"
+  },
+  "artifacts": {
+    "evidence_bundle_sha256": null,
+    "sbom_sha256": null,
+    "ai_model_form_sha256": null,
+    "report_editable_sha256": null,
+    "report_pdf_sha256": null,
+    "submission_archive_sha256": null,
+    "youtube_url": null,
+    "youtube_duration_seconds": null
+  },
+  "gates": {
+    "credential_rotation_and_revocation": "NOT_VERIFIED",
+    "full_history_secret_scan": "NOT_VERIFIED",
+    "public_source_worktree_secret_scan": "NOT_VERIFIED",
+    "protected_material_audit": "NOT_VERIFIED",
+    "full_disk_secret_diagnostic": "NOT_RUN",
+    "license_and_attribution": "NOT_VERIFIED",
+    "five_repository_anonymous_access": "NOT_VERIFIED",
+    "immutable_release_identity": "NOT_CREATED",
+    "portal_submission": "NOT_SUBMITTED"
+  }
+}

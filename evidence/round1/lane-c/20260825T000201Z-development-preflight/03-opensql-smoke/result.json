@@ -1,0 +1,82 @@
+{
+  "artifact_hashes": {
+    "syncbase-infra/acceptance/run-db-outage-recovery.sh": "d8ae113a012a1f88c5e175cac7f9fcff70bd980ff64463c464af0481c333246b",
+    "syncbase-infra/quality/verify_repositories.py": "07ee54631869e4fb78bcf28866400507491512cf6d09e5814b058d206c3169d3",
+    "syncbase-was/internal/adapters/postgres/migrate.go": "c590fa5a3179f2f1ae81bb58f902937bfc97af706c496dd51b28819c17eca9cd",
+    "syncbase-was/internal/adapters/postgres/store.go": "80a0160bd6f5ff7858f269b90205781e9694aa38a3bafcdd228881467adfb21d"
+  },
+  "checks": [
+    {
+      "actual": 0,
+      "expected": ">=1 vendor OpenSQL package",
+      "id": "vendor-package",
+      "result": "BLOCKED"
+    },
+    {
+      "actual": "NOT_PROVEN",
+      "expected": "authoritative OpenSQL product and version identity",
+      "id": "product-identity",
+      "result": "BLOCKED"
+    },
+    {
+      "actual": 0,
+      "expected": ">=1 qualified database listener",
+      "id": "database-listener",
+      "result": "BLOCKED"
+    },
+    {
+      "actual": "NOT_EXECUTED",
+      "expected": "migrations, roles, pgvector, ingestion, active search, source",
+      "id": "smoke-flow",
+      "result": "BLOCKED"
+    }
+  ],
+  "completed_at": "2026-08-25T00:02:14.886882Z",
+  "environment": {
+    "arch": "UNAVAILABLE",
+    "db_listeners": 0,
+    "executables": {
+      "etcd": "MISSING",
+      "openproxy": "MISSING",
+      "opensql": "MISSING",
+      "patroni": "MISSING",
+      "pg_ctl": "MISSING",
+      "postgres": "MISSING",
+      "psql": "MISSING"
+    },
+    "kernel": "UNAVAILABLE",
+    "logical_cpus": 0,
+    "machine": "syncbase-opensql-ubuntu",
+    "matching_processes": 0,
+    "memory_kib": 0,
+    "opensql_version": "NOT_PROVEN",
+    "os": "UNAVAILABLE",
+    "package_files": 0,
+    "snapshot_error": "orbctl is not installed",
+    "vm_id_sha256": "UNAVAILABLE"
+  },
+  "evidence_grade": "UNAVAILABLE",
+  "failure_reason": "Actual OpenSQL product identity and the single-node application smoke flow have not been proven; PostgreSQL-compatible evidence cannot be promoted.",
+  "inputs": {
+    "capture_kind": "qualification-blocker",
+    "machine_profile": "syncbase-opensql-ubuntu"
+  },
+  "measurements": {
+    "db_listeners": 0,
+    "matching_processes": 0,
+    "package_files": 0
+  },
+  "overall_result": "BLOCKED",
+  "repository_revisions": {
+    "embedding": "bf91ee529a7bbfc61e741e88d70eeb16a4a85f92",
+    "frontend": "890cd1230a03a17ce5fe9fcaab7758ad0d195a8f",
+    "infra": "57d698c949b3e794bccf25cf66ff0c15ab62f8a0",
+    "mcp": "f5ce6d74df56e9595270cacd34e5f454a48cc635",
+    "was": "96b280759f8bbf205bfcc5b39cabbfc5c3965f4f"
+  },
+  "result_sha256": "9d8daf5726996c985aebce6d1362b9c94db4a4aa1bdb587a39880f2550f44656",
+  "run_id": "20260825T000201Z-development-preflight",
+  "schema_version": "1.0",
+  "started_at": "2026-08-25T00:02:14.668970Z",
+  "task_id": "C3_OPENSQL_SMOKE"
+}

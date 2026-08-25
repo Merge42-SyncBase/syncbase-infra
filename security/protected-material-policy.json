@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "repository": "syncbase-infra",
+  "state": "LOCAL_PROTECTED_RUNTIME_MATERIAL_POLICY",
+  "protected_paths": [
+    {
+      "path": "environments/prod/.env",
+      "type": "regular_file",
+      "mode": "0600",
+      "required": true
+    },
+    {
+      "path": "environments/prod/secrets/admin-password",
+      "type": "regular_file",
+      "mode": "0600",
+      "required": true
+    },
+    {
+      "path": "environments/prod/secrets/mcp-token",
+      "type": "regular_file",
+      "mode": "0600",
+      "required": true
+    },
+    {
+      "path": "environments/prod/secrets/mcp-token.sha256",
+      "type": "regular_file",
+      "mode": "0600",
+      "required": true
+    }
+  ],
+  "protected_roots": [
+    "environments/prod/.env",
+    "environments/prod/secrets"
+  ],
+  "forbidden_paths": [
+    "bootstrap-shared-env.sh"
+  ]
+}

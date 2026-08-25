@@ -70,7 +70,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-jq -e '.overall_result == "PASS" and .environment.evidence_grade == "ACTUAL_OPENSQL"' \
+jq -e '.overall_result == "PASS" and .evidence_grade == "ACTUAL_OPENSQL_SINGLE_NODE"' \
   "$SYNCBASE_G0_EVIDENCE_PATH" >/dev/null
 
 "$SYNCBASE_TOPOLOGY_CHECK_EXECUTABLE" \

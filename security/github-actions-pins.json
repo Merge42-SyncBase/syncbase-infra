@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "resolved_at": "2026-08-24T23:56:48Z",
+  "resolution_method": "git ls-remote against each official GitHub repository tag ref",
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "requested_major": "v4",
+      "resolved_version": "v4.4.0",
+      "commit_sha": "11d5960a326750d5838078e36cf38b85af677262",
+      "ref": "https://github.com/actions/checkout/releases/tag/v4.4.0"
+    },
+    {
+      "repository": "actions/setup-node",
+      "requested_major": "v4",
+      "resolved_version": "v4.4.0",
+      "commit_sha": "49933ea5288caeca8642d1e84afbd3f7d6820020",
+      "ref": "https://github.com/actions/setup-node/releases/tag/v4.4.0"
+    },
+    {
+      "repository": "actions/setup-go",
+      "requested_major": "v5",
+      "resolved_version": "v5.6.0",
+      "commit_sha": "40f1582b2485089dde7abd97c1529aa768e1baff",
+      "ref": "https://github.com/actions/setup-go/releases/tag/v5.6.0"
+    },
+    {
+      "repository": "docker/setup-qemu-action",
+      "requested_major": "v3",
+      "resolved_version": "v3.7.0",
+      "commit_sha": "c7c53464625b32c7a7e944ae62b3e17d2b600130",
+      "ref": "https://github.com/docker/setup-qemu-action/releases/tag/v3.7.0"
+    },
+    {
+      "repository": "docker/setup-buildx-action",
+      "requested_major": "v3",
+      "resolved_version": "v3.12.0",
+      "commit_sha": "8d2750c68a42422c14e847fe6c8ac0403b4cbd6f",
+      "ref": "https://github.com/docker/setup-buildx-action/releases/tag/v3.12.0"
+    },
+    {
+      "repository": "docker/login-action",
+      "requested_major": "v3",
+      "resolved_version": "v3.7.0",
+      "commit_sha": "c94ce9fb468520275223c153574b00df6fe4bcc9",
+      "ref": "https://github.com/docker/login-action/releases/tag/v3.7.0"
+    },
+    {
+      "repository": "docker/build-push-action",
+      "requested_major": "v6",
+      "resolved_version": "v6.19.2",
+      "commit_sha": "10e90e3645eae34f1e60eeb005ba3a3d33f178e8",
+      "ref": "https://github.com/docker/build-push-action/releases/tag/v6.19.2"
+    },
+    {
+      "repository": "peter-evans/create-pull-request",
+      "requested_major": "v6",
+      "resolved_version": "v6.1.0",
+      "commit_sha": "c5a7806660adbe173f04e3e038b0ccdcd758773c",
+      "ref": "https://github.com/peter-evans/create-pull-request/releases/tag/v6.1.0"
+    }
+  ]
+}

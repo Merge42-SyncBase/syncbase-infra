@@ -1,7 +1,6 @@
 # Optional overlay: build SyncBase-FE from your local checkout instead of
-# pulling the published image. Requires SyncBase-FE checked out at
-# ../frontend relative to this file's parent (i.e. a sibling of
-# syncbase-infra). No GitHub token needed — this repo has no private
+# pulling the published image. Requires SyncBase-FE checked out as the
+# canonical sibling of syncbase-infra. No GitHub token needed — this repo has no private
 # module dependency.
 #
 # Usage:
@@ -15,5 +14,5 @@ name: syncbase
 services:
   web:
     build:
-      context: ../frontend
+      context: ../SyncBase-FE
       dockerfile: Dockerfile

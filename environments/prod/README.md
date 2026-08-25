@@ -31,14 +31,14 @@ key만 저장한다.
 
 ## GitHub Actions secrets and release gate
 
-현재 organization은 GitHub Free의 private repository를 사용한다. 이 조합에서는
-protected environment 및 environment secret을 설정할 수 없으므로, 다음 secrets를
-repository 또는 접근 대상 repository로 제한한 organization secret에 등록한다. `production`
-Environment 이름은 배포 이력 표시에 사용할 수 있지만 승인 게이트로 간주하지 않는다.
+Round-1 source repositories and first-party Go modules are public, so source checkout과
+container build에는 GitHub personal access token을 사용하지 않는다. Production deployment
+credential은 repository 또는 접근 대상 repository로 제한한 organization secret에
+등록한다. `production` Environment 이름은 배포 이력 표시에 사용할 수 있지만 GitHub
+Free 정책을 별도로 확인하지 않은 상태에서는 승인 게이트로 간주하지 않는다.
 
 | Secret | 의미 |
 | --- | --- |
-| `SUBMODULE_TOKEN` | 다섯 private component를 읽는 Contents: read 전용 short-lived GitHub App/fine-grained token |
 | `PROD_EC2_HOST` | EC2 public/private DNS 또는 IPv4 |
 | `PROD_EC2_USER` | Docker 권한이 있는 SSH 사용자 |
 | `PROD_EC2_SSH_PRIVATE_KEY` | 해당 사용자용 private key |

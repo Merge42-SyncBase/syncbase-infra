@@ -1,0 +1,211 @@
+{
+  "schema_version": "1.0",
+  "dataset_id": "syncbase-round1-retrieval-v1",
+  "status": "DRAFT",
+  "description": "Complete every marked ground-truth field against the final corpus, then freeze before retrieval tuning.",
+  "bindings": {
+    "corpus_sha256": "REQUIRED_CORPUS_SHA256",
+    "model_sha256": "REQUIRED_MODEL_SHA256",
+    "tokenizer_sha256": "REQUIRED_TOKENIZER_SHA256",
+    "profile_sha256": "REQUIRED_PROFILE_SHA256",
+    "database_identity_sha256": "REQUIRED_DATABASE_IDENTITY_SHA256",
+    "source_release_sha256": "REQUIRED_SOURCE_RELEASE_SHA256",
+    "repository_revisions": {
+      "frontend": "REQUIRED_FULL_SHA",
+      "embedding": "REQUIRED_FULL_SHA",
+      "was": "REQUIRED_FULL_SHA",
+      "infra": "REQUIRED_FULL_SHA",
+      "mcp": "REQUIRED_FULL_SHA"
+    }
+  },
+  "thresholds": {
+    "recall_at_5_min": 0.85,
+    "mrr_min": 0.75,
+    "citation_page_correctness_min": 1.0,
+    "superseded_version_leakage_max": 0,
+    "no_answer_false_positive_rate_max": 0.1,
+    "ann_recall_at_5_degradation_max": 0.02
+  },
+  "queries": [
+    {
+      "id": "F01",
+      "category": "factual_paraphrase",
+      "query": "개방형 직위의 운영 목적은 무엇인가?",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F02",
+      "category": "factual_paraphrase",
+      "query": "계약직원의 채용과 계약 갱신은 어떤 기준으로 관리되는가?",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F03",
+      "category": "factual_paraphrase",
+      "query": "규정을 새로 만들거나 개정할 때 따라야 하는 절차를 설명해 줘.",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F04",
+      "category": "factual_paraphrase",
+      "query": "노동이사 후보 선거를 관리하는 기구의 역할은 무엇인가?",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F05",
+      "category": "factual_paraphrase",
+      "query": "직원의 보수는 어떤 항목과 원칙에 따라 정해지는가?",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F06",
+      "category": "factual_paraphrase",
+      "query": "복리후생 제도의 적용 대상과 지원 범위를 알려 줘.",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F07",
+      "category": "factual_paraphrase",
+      "query": "사무를 다른 직위에 위임하거나 전결할 수 있는 조건은 무엇인가?",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F08",
+      "category": "factual_paraphrase",
+      "query": "시설관리직 직원에게 적용되는 인사 관리 원칙을 요약해 줘.",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F09",
+      "category": "factual_paraphrase",
+      "query": "위원회의 구성과 의결 방식은 어떻게 정해져 있는가?",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "F10",
+      "category": "factual_paraphrase",
+      "query": "직원이 학위를 취득할 때 받을 수 있는 지원과 의무는 무엇인가?",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "I01",
+      "category": "exact_identifier",
+      "query": "TODO_EXACT_ARTICLE_OR_FORM_IDENTIFIER_01",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "I02",
+      "category": "exact_identifier",
+      "query": "TODO_EXACT_ARTICLE_OR_FORM_IDENTIFIER_02",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "I03",
+      "category": "exact_identifier",
+      "query": "TODO_EXACT_ARTICLE_OR_FORM_IDENTIFIER_03",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "I04",
+      "category": "exact_identifier",
+      "query": "TODO_EXACT_ARTICLE_OR_FORM_IDENTIFIER_04",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "I05",
+      "category": "exact_identifier",
+      "query": "TODO_EXACT_ARTICLE_OR_FORM_IDENTIFIER_05",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_SOURCE_SHA256", "version": 1, "pages": [1]}], "forbidden": []}
+    },
+    {
+      "id": "V01",
+      "category": "version_sensitive",
+      "query": "TODO_V2_ONLY_FACT_01",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_V2_SOURCE_SHA256", "version": 2, "pages": [1]}], "forbidden": [{"source_sha256": "TODO_V1_SOURCE_SHA256", "version": 1}]}
+    },
+    {
+      "id": "V02",
+      "category": "version_sensitive",
+      "query": "TODO_V2_ONLY_FACT_02",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_V2_SOURCE_SHA256", "version": 2, "pages": [1]}], "forbidden": [{"source_sha256": "TODO_V1_SOURCE_SHA256", "version": 1}]}
+    },
+    {
+      "id": "V03",
+      "category": "version_sensitive",
+      "query": "TODO_V2_ONLY_FACT_03",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_V2_SOURCE_SHA256", "version": 2, "pages": [1]}], "forbidden": [{"source_sha256": "TODO_V1_SOURCE_SHA256", "version": 1}]}
+    },
+    {
+      "id": "V04",
+      "category": "version_sensitive",
+      "query": "TODO_V2_ONLY_FACT_04",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_V2_SOURCE_SHA256", "version": 2, "pages": [1]}], "forbidden": [{"source_sha256": "TODO_V1_SOURCE_SHA256", "version": 1}]}
+    },
+    {
+      "id": "V05",
+      "category": "version_sensitive",
+      "query": "TODO_V2_ONLY_FACT_05",
+      "expected": {"no_answer": false, "relevant": [{"source_sha256": "TODO_V2_SOURCE_SHA256", "version": 2, "pages": [1]}], "forbidden": [{"source_sha256": "TODO_V1_SOURCE_SHA256", "version": 1}]}
+    },
+    {
+      "id": "N01",
+      "category": "no_answer",
+      "query": "화성 탐사선의 최신 착륙 지점은 어디인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N02",
+      "category": "no_answer",
+      "query": "2026년 비트코인 종가는 얼마인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N03",
+      "category": "no_answer",
+      "query": "회사의 고객별 매출액을 알려 줘.",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N04",
+      "category": "no_answer",
+      "query": "현재 서울의 실시간 미세먼지 농도는 얼마인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N05",
+      "category": "no_answer",
+      "query": "이 문서 작성자의 개인 휴대전화 번호는 무엇인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N06",
+      "category": "no_answer",
+      "query": "다음 주 주가가 오를 종목을 추천해 줘.",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N07",
+      "category": "no_answer",
+      "query": "대한민국 월드컵 대표팀의 다음 경기 결과는 무엇인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N08",
+      "category": "no_answer",
+      "query": "직원 식당의 오늘 점심 메뉴는 무엇인가?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N09",
+      "category": "no_answer",
+      "query": "OpenSQL의 비공개 내부 소스 코드를 보여 줘.",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    },
+    {
+      "id": "N10",
+      "category": "no_answer",
+      "query": "문서에 없는 임의의 휴가 승인번호 ZXQ-9999는 누가 발급했나?",
+      "expected": {"no_answer": true, "relevant": [], "forbidden": []}
+    }
+  ]
+}

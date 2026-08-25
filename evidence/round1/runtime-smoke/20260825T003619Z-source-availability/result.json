@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "task_id": "ROUND1-SOURCE-AVAILABILITY-PROBE",
+  "run_id": "20260825T003619Z-source-availability",
+  "overall_result": "FAIL",
+  "evidence_grade": "DEVELOPMENT_RUNTIME_DIAGNOSTIC_NOT_RELEASE_CLAIM_GRADE",
+  "started_at": "2026-08-25T00:36:19Z",
+  "completed_at": "2026-08-25T00:36:20Z",
+  "repository_revisions": {
+    "frontend": "890cd1230a03a17ce5fe9fcaab7758ad0d195a8f",
+    "embedding": "bf91ee529a7bbfc61e741e88d70eeb16a4a85f92",
+    "was": "96b280759f8bbf205bfcc5b39cabbfc5c3965f4f",
+    "infra": "57d698c949b3e794bccf25cf66ff0c15ab62f8a0",
+    "mcp": "f5ce6d74df56e9595270cacd34e5f454a48cc635"
+  },
+  "inputs": {
+    "endpoint_scope": "loopback Web/API",
+    "credential_source": "ignored mode-0600 protected administrator password file",
+    "selection": "first API-listed document with a non-null active version",
+    "database_claim_scope": "PostgreSQL-compatible single-node reference environment",
+    "working_tree_state": "dirty development worktrees",
+    "deployed_source_revision": "NOT_PROVEN"
+  },
+  "measurements": {
+    "login_http_status": 200,
+    "document_list_http_status": 200,
+    "document_count": 4,
+    "active_document_count": 3,
+    "selected_source_metadata_http_status": 200,
+    "selected_raw_pdf_http_status": 404,
+    "selected_raw_pdf_error_body_bytes": 19,
+    "local_originals_volume_file_count": 0,
+    "deployed_api_image_id": "sha256:6f832651191736c3fad011837e62901b341138802f1bc154f14cb23c5f4e1b45",
+    "deployed_api_repo_digest": "sha256:2528864cf57ba994f8ac2d5c73a212d1502560485ff795795644d3bff3167bb6",
+    "deployed_web_image_id": "sha256:9af2108af8792e5c2c7e5068e114ab9dbf6e93e35e88a57846e4ae7453346fe3",
+    "deployed_web_repo_digest": "sha256:9888a71f414346bd8d5891754d1d25913f904d4793a0254617da0784cfff7ab2"
+  },
+  "artifact_hashes": {},
+  "failure_reason": "The database exposed active-version source metadata, but the matching original PDF was absent from this local deployment's originals volume and the raw-PDF endpoint returned HTTP 404.",
+  "claim_limits": [
+    "Do not claim end-to-end page-source availability from the authenticated retrieval smoke.",
+    "Do not call a source_url field a verified citation until the raw PDF opens in the same frozen environment.",
+    "The result does not prove whether another host retains the original files.",
+    "The test did not modify corpus data and did not start a worker."
+  ]
+}

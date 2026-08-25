@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-08-25T00:31:46Z",
+  "scope": "Round-1 credential rotation/revocation and landing-page shutdown",
+  "evidence_grade": "SANITIZED_OPERATOR_RECORD_NOT_RELEASE_CLAIM_GRADE",
+  "results": {
+    "database_role_credentials": {
+      "status": "PASS_AT_ROTATION_TIME",
+      "roles_rotated": 4,
+      "new_credentials_accepted": 4,
+      "old_credentials_rejected": 4,
+      "runtime_role_sessions_terminated": true,
+      "retained_secret_values": false,
+      "fresh_self_contained_reproduction": false
+    },
+    "application_credentials": {
+      "admin_password_rotated": true,
+      "admin_plaintext_matches_configured_bcrypt": "PASS",
+      "mcp_token_rotated": true,
+      "mcp_token_matches_configured_digest": "PASS",
+      "authenticated_mcp_smoke": "PASS",
+      "missing_token_http_status": 401,
+      "invalid_token_http_status": 401
+    },
+    "protected_local_material": {
+      "checked_paths": 4,
+      "all_mode_0600": true,
+      "all_git_ignored": true,
+      "all_untracked": true,
+      "obsolete_untracked_bootstrap_file": "DELETED"
+    },
+    "source_release_secret_gate": {
+      "status": "PASS_DEVELOPMENT_WORKTREE",
+      "repositories_checked": 5,
+      "history_findings": 0,
+      "tracked_and_untracked_nonignored_findings": 0,
+      "unexpected_full_disk_findings": 0,
+      "protected_findings": 5,
+      "protected_findings_expected_and_nonblocking": true,
+      "scope_limit": "all local refs; remote or unfetched refs are not claimed",
+      "release_requirement": "rerun at a clean frozen commit"
+    },
+    "github_actions_secret_bindings": {
+      "secret_name": "GH_MODULES_TOKEN",
+      "repositories_checked": 3,
+      "remaining_repository_bindings": 0,
+      "underlying_pat_revocation": "NOT_PROVEN",
+      "impact": "Private cross-repository CI and auto-bump jobs remain intentionally disabled until a new least-privilege credential is installed or public-source dependencies remove the need."
+    },
+    "landing_page": {
+      "repository": "Merge42-SyncBase/SyncBase_randing",
+      "repository_visibility": "PUBLIC_UNCHANGED",
+      "github_pages_configuration": "ABSENT_HTTP_404",
+      "published_site_http_status": 404
+    },
+    "deployment": {
+      "local_mcp_with_rotated_credentials": "PASS",
+      "remote_web_worker_redeployment": "NOT_RUN",
+      "remote_runtime_continuity": "NOT_CLAIMED"
+    }
+  },
+  "release_blockers": [
+    "The owner of the underlying GitHub personal access token must revoke it in GitHub settings; deleting repository bindings does not prove token revocation.",
+    "A replacement least-privilege CI credential or a public-dependency workflow design is required before private cross-repository workflows can pass.",
+    "The development-worktree source gate passed, but source-release and evidence scans must pass again at a clean frozen commit.",
+    "Remote services must receive the rotated values and pass a deployment smoke before any availability claim."
+  ],
+  "excluded_sensitive_data": [
+    "passwords",
+    "bearer tokens",
+    "credential digests",
+    "database endpoint",
+    "database identity",
+    "document content",
+    "document identifiers"
+  ]
+}

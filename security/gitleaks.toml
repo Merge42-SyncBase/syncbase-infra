@@ -1,0 +1,43 @@
+title = "SyncBase Round-1 release secret scan"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Public SHA-256 artifact pins and deterministic profile fingerprints"
+condition = "AND"
+regexTarget = "match"
+paths = [
+  '''(^|/)e5_test\.go$''',
+  '''(^|/)ops/model/fetch-e5-small\.sh$''',
+  '''(^|/)internal/modules/knowledge/profile_test\.go$''',
+  '''(^|/)internal/platform/config/config\.go$''',
+  '''(^|/)ops/profile-fingerprint\.sh$''',
+  '''(^|/)sbom/validate_round1_sbom\.py$'''
+]
+regexes = [
+  '''(?i)^"?(model_sha|tokenizer_sha|modelsha256|tokenizersha256|model_sha256|tokenizer_sha256|expected_model_hash|expected_tokenizer_hash|wantcanonical|wantfingerprint)"?[[:space:]]*(=|:)[[:space:]]*"?[0-9a-f]{64}"?$'''
+]
+
+[[allowlists]]
+description = "Public E5 artifact SHA-256 values in the manifest template and runtime evidence"
+condition = "AND"
+regexTarget = "match"
+paths = [
+  '''(^|/)RELEASE_MANIFEST\.template\.json$''',
+  '''(^|/)evidence/round1/runtime-smoke/[^/]+/result\.json$'''
+]
+regexes = [
+  '''(?i)^"?(embedding_model_sha256|tokenizer_sha256)"?[[:space:]]*:[[:space:]]*"?[0-9a-f]{64}"?$'''
+]
+
+[[allowlists]]
+description = "Public tokenizer artifact SHA-256 reference in the generated CycloneDX SBOM"
+condition = "AND"
+regexTarget = "match"
+paths = [
+  '''(^|/)evidence/round1/99-final/sbom/syncbase-round1-DRAFT\.cdx\.json$'''
+]
+regexes = [
+  '''(?i)^tokenizer\.json:[0-9a-f]{64}"?$'''
+]

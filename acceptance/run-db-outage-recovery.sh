@@ -18,7 +18,7 @@ done
 [[ -r "$SYNCBASE_MCP_TOKEN_FILE" ]] || { echo "MCP token file unreadable" >&2; exit 66; }
 [[ -r "$SYNCBASE_SAMPLE_PDF" ]] || { echo "sample PDF unreadable" >&2; exit 66; }
 
-project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+infra_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 expected_version="${SYNCBASE_EXPECTED_DOCUMENT_VERSION:-2}"
 expected_document_id="${SYNCBASE_EXPECTED_DOCUMENT_ID:-}"
 if [[ -n "$expected_document_id" && -r "$expected_document_id" ]]; then
@@ -35,8 +35,8 @@ elif [[ -n "${COMPOSE_FILE:-}" ]]; then
 else
   compose=(
     docker compose
-    -f "$project_root/infra/compose.yml"
-    -f "$project_root/infra/environments/local/compose.yml"
+    -f "$infra_root/compose.yml"
+    -f "$infra_root/environments/local/compose.yml"
   )
 fi
 web_url="${SYNCBASE_WEB_URL%/}"
