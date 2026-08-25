@@ -68,6 +68,16 @@ jq -e '
   .services.api.user == "0:0" and
   .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "false" and
+  .services.api.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.worker.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.mcp.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.migrate.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.api.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
+  .services.worker.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
+  .services.mcp.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
+  ([.services.api.volumes[] | select(.source == "originals" and .target == "/data/originals" and .read_only != true)] | length) == 1 and
+  ([.services.worker.volumes[] | select(.source == "originals" and .target == "/data/originals" and .read_only != true)] | length) == 1 and
+  ([.services.mcp.volumes[] | select(.source == "originals" and .target == "/data/originals" and .read_only == true)] | length) == 1 and
   (.services.postgres != null) and
   (.services.roles != null) and
   (.services.permissions != null) and
@@ -96,6 +106,16 @@ jq -e '
   .services.api.user == "0:0" and
   .services.api.entrypoint == ["/usr/local/bin/syncbase-api-entrypoint"] and
   .services.api.environment.SYNCBASE_COOKIE_SECURE == "true" and
+  .services.api.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.worker.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.mcp.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.migrate.environment.SYNCBASE_MINIMUM_SCORE == "0.93" and
+  .services.api.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
+  .services.worker.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
+  .services.mcp.environment.SYNCBASE_ORIGINAL_ROOT == "/data/originals" and
+  ([.services.api.volumes[] | select(.source == "originals" and .target == "/data/originals" and .read_only != true)] | length) == 1 and
+  ([.services.worker.volumes[] | select(.source == "originals" and .target == "/data/originals" and .read_only != true)] | length) == 1 and
+  ([.services.mcp.volumes[] | select(.source == "originals" and .target == "/data/originals" and .read_only == true)] | length) == 1 and
   all(.services.web.ports[]; .host_ip == "127.0.0.1") and
   all(.services.mcp.ports[]; .host_ip == "127.0.0.1") and
   (.services.postgres == null) and

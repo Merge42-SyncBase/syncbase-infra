@@ -1,9 +1,12 @@
 name: syncbase
 
+# Round-1 corpus/model calibration candidate. This value is part of the
+# immutable search-profile fingerprint and must be revalidated after a clean
+# re-index; do not retune it after the frozen benchmark is observed.
+x-round1-minimum-score: &round1-minimum-score "0.93"
+
 x-app: &app
   restart: unless-stopped
-  environment:
-    SYNCBASE_MINIMUM_SCORE: "0.62"
 
 x-model-environment: &model-environment
   SYNCBASE_MODEL_PATH: /models/model.onnx
@@ -29,7 +32,7 @@ services:
     image: ${SYNCBASE_MIGRATE_IMAGE:-syncbase/migrate:local}
     environment:
       SYNCBASE_DATABASE_URL: postgres://syncbase:${SYNCBASE_POSTGRES_OWNER_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
-      SYNCBASE_MINIMUM_SCORE: "0.62"
+      SYNCBASE_MINIMUM_SCORE: *round1-minimum-score
     depends_on:
       roles:
         condition: service_completed_successfully
@@ -69,6 +72,7 @@ services:
       SYNCBASE_ADMIN_USERNAME: ${SYNCBASE_ADMIN_USERNAME:-admin}
       SYNCBASE_ADMIN_PASSWORD_BCRYPT: ${SYNCBASE_ADMIN_PASSWORD_BCRYPT:?required}
       SYNCBASE_COOKIE_SECURE: ${SYNCBASE_COOKIE_SECURE:-false}
+      SYNCBASE_MINIMUM_SCORE: *round1-minimum-score
       SYNCBASE_WEB_ADDR: :8080
       SYNCBASE_MCP_URL: http://mcp:8081/mcp
       SYNCBASE_MCP_TOKEN_FILE: /run/secrets/mcp_client_token
@@ -97,6 +101,7 @@ services:
       <<: *model-environment
       SYNCBASE_DATABASE_URL: postgres://syncbase_worker:${SYNCBASE_WORKER_DB_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
       SYNCBASE_ORIGINAL_ROOT: /data/originals
+      SYNCBASE_MINIMUM_SCORE: *round1-minimum-score
       SYNCBASE_WORKER_ID: worker-1
       SYNCBASE_WORKER_POLL_INTERVAL: 1s
       SYNCBASE_WORKER_HEALTH_ADDR: :8082
@@ -118,6 +123,7 @@ services:
     environment:
       <<: *model-environment
       SYNCBASE_DATABASE_URL: postgres://syncbase_mcp:${SYNCBASE_MCP_DB_PASSWORD:?required}@${SYNCBASE_DB_HOST:?required}:${SYNCBASE_DB_PORT:-5432}/${SYNCBASE_DB_NAME:-syncbase}?sslmode=${SYNCBASE_DB_SSLMODE:-require}
+      SYNCBASE_MINIMUM_SCORE: *round1-minimum-score
       SYNCBASE_MCP_TOKEN_SHA256: ${SYNCBASE_MCP_TOKEN_SHA256:?required}
       SYNCBASE_MCP_ALLOWED_HOSTS: ${SYNCBASE_MCP_ALLOWED_HOSTS:-localhost,127.0.0.1,mcp}
       SYNCBASE_MCP_ALLOWED_ORIGINS: ${SYNCBASE_MCP_ALLOWED_ORIGINS:-}
