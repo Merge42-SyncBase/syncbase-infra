@@ -1,0 +1,77 @@
+{
+  "artifact_hashes": {
+    "syncbase-infra/quality/verify_repositories.py": "07ee54631869e4fb78bcf28866400507491512cf6d09e5814b058d206c3169d3"
+  },
+  "completed_at": "2026-08-25T00:02:14.551540Z",
+  "evidence_grade": "SOURCE_BASELINE",
+  "failure_reason": "one or more canonical repositories are missing, invalid, or dirty",
+  "inputs": {
+    "allow_dirty": false,
+    "canonical_directories": {
+      "embedding": "syncbase-embedding",
+      "frontend": "SyncBase-FE",
+      "infra": "syncbase-infra",
+      "mcp": "syncbase-mcp",
+      "was": "syncbase-was"
+    }
+  },
+  "measurements": {
+    "clean_worktree_count": 0,
+    "dirty_worktree_count": 5,
+    "repository_count": 5
+  },
+  "overall_result": "FAIL",
+  "repositories": [
+    {
+      "directory": "SyncBase-FE",
+      "id": "frontend",
+      "reason": "uncommitted release content is present",
+      "result": "FAIL",
+      "revision": "890cd1230a03a17ce5fe9fcaab7758ad0d195a8f",
+      "worktree": "DIRTY"
+    },
+    {
+      "directory": "syncbase-embedding",
+      "id": "embedding",
+      "reason": "uncommitted release content is present",
+      "result": "FAIL",
+      "revision": "bf91ee529a7bbfc61e741e88d70eeb16a4a85f92",
+      "worktree": "DIRTY"
+    },
+    {
+      "directory": "syncbase-was",
+      "id": "was",
+      "reason": "uncommitted release content is present",
+      "result": "FAIL",
+      "revision": "96b280759f8bbf205bfcc5b39cabbfc5c3965f4f",
+      "worktree": "DIRTY"
+    },
+    {
+      "directory": "syncbase-infra",
+      "id": "infra",
+      "reason": "uncommitted release content is present",
+      "result": "FAIL",
+      "revision": "57d698c949b3e794bccf25cf66ff0c15ab62f8a0",
+      "worktree": "DIRTY"
+    },
+    {
+      "directory": "syncbase-mcp",
+      "id": "mcp",
+      "reason": "uncommitted release content is present",
+      "result": "FAIL",
+      "revision": "f5ce6d74df56e9595270cacd34e5f454a48cc635",
+      "worktree": "DIRTY"
+    }
+  ],
+  "repository_revisions": {
+    "embedding": "bf91ee529a7bbfc61e741e88d70eeb16a4a85f92",
+    "frontend": "890cd1230a03a17ce5fe9fcaab7758ad0d195a8f",
+    "infra": "57d698c949b3e794bccf25cf66ff0c15ab62f8a0",
+    "mcp": "f5ce6d74df56e9595270cacd34e5f454a48cc635",
+    "was": "96b280759f8bbf205bfcc5b39cabbfc5c3965f4f"
+  },
+  "run_id": "20260825T000201Z-development-preflight",
+  "schema_version": "1.0",
+  "started_at": "2026-08-25T00:02:14.335005Z",
+  "task_id": "C0_SOURCE_BASELINE"
+}

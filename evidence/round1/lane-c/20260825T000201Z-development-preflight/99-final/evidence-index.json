@@ -1,0 +1,46 @@
+{
+  "artifact_hashes": {
+    "01-repository-checks/result.json": "7142c268240202be4c6d25decad1d10f1f3bb7585f3e9736b0365d1f54143e4d",
+    "03-opensql-smoke/result.json": "bc56e79f0e454467c6d9e38518d2dcb6f602e1d4a8dbd4482a80e3eb8e0aaa77"
+  },
+  "completed_at": "2026-08-25T00:11:03.465668Z",
+  "evidence_grade": "EVIDENCE_INTEGRITY",
+  "failure_reason": "non-PASS evidence: C0_SOURCE_BASELINE=FAIL, C3_OPENSQL_SMOKE=BLOCKED",
+  "inputs": {
+    "required_tasks": [
+      "C0_SOURCE_BASELINE",
+      "C3_OPENSQL_SMOKE"
+    ]
+  },
+  "measurements": {
+    "claim_count": 0,
+    "result_count": 2,
+    "secret_scan": "PASS"
+  },
+  "overall_result": "FAIL",
+  "repository_revisions": {
+    "embedding": "bf91ee529a7bbfc61e741e88d70eeb16a4a85f92",
+    "frontend": "890cd1230a03a17ce5fe9fcaab7758ad0d195a8f",
+    "infra": "57d698c949b3e794bccf25cf66ff0c15ab62f8a0",
+    "mcp": "f5ce6d74df56e9595270cacd34e5f454a48cc635",
+    "was": "96b280759f8bbf205bfcc5b39cabbfc5c3965f4f"
+  },
+  "results": [
+    {
+      "overall_result": "FAIL",
+      "path": "01-repository-checks/result.json",
+      "sha256": "7142c268240202be4c6d25decad1d10f1f3bb7585f3e9736b0365d1f54143e4d",
+      "task_id": "C0_SOURCE_BASELINE"
+    },
+    {
+      "overall_result": "BLOCKED",
+      "path": "03-opensql-smoke/result.json",
+      "sha256": "bc56e79f0e454467c6d9e38518d2dcb6f602e1d4a8dbd4482a80e3eb8e0aaa77",
+      "task_id": "C3_OPENSQL_SMOKE"
+    }
+  ],
+  "run_id": "20260825T000201Z-development-preflight",
+  "schema_version": "1.0",
+  "started_at": "2026-08-25T00:11:03.465039Z",
+  "task_id": "C8_SEAL_EVIDENCE"
+}

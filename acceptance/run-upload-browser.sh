@@ -19,8 +19,8 @@ command -v npx >/dev/null 2>&1 || {
   exit 69
 }
 
-project_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-output_dir="${SYNCBASE_PLAYWRIGHT_OUTPUT_DIR:-$project_root/output/playwright/upload-real-api}"
+infra_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+output_dir="${SYNCBASE_PLAYWRIGHT_OUTPUT_DIR:-$infra_root/output/playwright/upload-real-api}"
 session="syncbase-upload-${GITHUB_RUN_ID:-$$}-${GITHUB_RUN_ATTEMPT:-1}"
 pwcli="${CODEX_HOME:-$HOME/.codex}/skills/playwright/scripts/playwright_cli.sh"
 storage_key='syncbase.upload./documents/new'

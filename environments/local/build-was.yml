@@ -1,7 +1,7 @@
 # Optional overlay: build syncbase-was from your local checkout instead of
-# pulling the published image. Requires syncbase-was checked out at ../was
-# relative to this file's parent (i.e. a sibling of syncbase-infra), and
-# SYNCBASE_GITHUB_TOKEN_FILE set (syncbase-embedding is a private module).
+# pulling the published image. Requires syncbase-was checked out as the
+# canonical sibling of syncbase-infra. Round-1 component modules are public,
+# so the build is anonymous and does not accept a GitHub credential.
 #
 # Usage:
 #   docker compose \
@@ -12,10 +12,8 @@
 name: syncbase
 
 x-was-build: &was-build
-  context: ../was
+  context: ../syncbase-was
   dockerfile: Dockerfile
-  secrets:
-    - github_token
 
 services:
   migrate:
@@ -35,7 +33,3 @@ services:
       <<: *was-build
       args:
         TARGET_PACKAGE: ./cmd/worker
-
-secrets:
-  github_token:
-    file: ${SYNCBASE_GITHUB_TOKEN_FILE:?required}

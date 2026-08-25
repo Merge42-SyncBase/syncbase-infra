@@ -1,4 +1,7 @@
 .env
+# The retired credential bootstrap is forbidden by the protected-material
+# policy. Keep it ignored as defense in depth against accidental restaging.
+bootstrap-shared-env.sh
 environments/*/.env
 environments/*/secrets/
 build/
@@ -7,3 +10,7 @@ __pycache__/
 *.py[cod]
 *.tfstate
 *.tfstate.*
+
+# Custom
+.playwright-cli
+PRODUCT.md

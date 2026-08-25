@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "task_id": "ROUND1-MCP-AUTHENTICATED-RETRIEVAL-SMOKE",
+  "run_id": "20260825T002227Z-development",
+  "overall_result": "PASS",
+  "evidence_grade": "DEVELOPMENT_RUNTIME_SMOKE_NOT_RELEASE_CLAIM_GRADE",
+  "started_at": "2026-08-25T00:22:27Z",
+  "completed_at": "2026-08-25T00:25:50Z",
+  "repository_revisions": {
+    "frontend": "890cd1230a03a17ce5fe9fcaab7758ad0d195a8f",
+    "embedding": "bf91ee529a7bbfc61e741e88d70eeb16a4a85f92",
+    "was": "96b280759f8bbf205bfcc5b39cabbfc5c3965f4f",
+    "infra": "57d698c949b3e794bccf25cf66ff0c15ab62f8a0",
+    "mcp": "f5ce6d74df56e9595270cacd34e5f454a48cc635"
+  },
+  "inputs": {
+    "transport": "MCP Streamable HTTP",
+    "endpoint_scope": "loopback only",
+    "query_sha256": "3fdb1dc4b610fab9b73198e8e05fdc78199d2b7d039b6bbbb124209218d506b9",
+    "limit": 5,
+    "credential_source": "ignored mode-0600 protected token file",
+    "database_claim_scope": "PostgreSQL-compatible single-node reference environment",
+    "working_tree_state": "dirty development worktrees",
+    "deployed_source_revision": "NOT_PROVEN"
+  },
+  "measurements": {
+    "readyz_http_status": 200,
+    "readyz_payload_status": "ready",
+    "authenticated_jsonrpc_error": false,
+    "authenticated_tool_error": false,
+    "authenticated_result_count": 5,
+    "result_fields": [
+      "document_id",
+      "document_name",
+      "document_version",
+      "page_number",
+      "rank",
+      "score",
+      "snippet",
+      "source_url",
+      "version_id"
+    ],
+    "unauthenticated_http_status": 401,
+    "invalid_bearer_http_status": 401,
+    "grounding_status_field": "ABSENT_IN_DEPLOYED_IMAGE",
+    "grounding_reason_field": "ABSENT_IN_DEPLOYED_IMAGE",
+    "deployed_mcp_image_id": "sha256:7a03355884953645b3424ef9ac40a27bb6255fe8e8d64b6c8a5a2ea056849830",
+    "deployed_mcp_repo_digest": "sha256:938ffe5a8c0b02fb084429c243f57eb7b30e659d26084751e1229c847c47f962",
+    "model_sha256": "ca456c06b3a9505ddfd9131408916dd79290368331e7d76bb621f1cba6bc8665",
+    "tokenizer_sha256": "0b44a9d7b51c3c62626640cda0e2c2f70fdacdc25bbbd68038369d14ebdf4c39"
+  },
+  "artifact_hashes": {},
+  "failure_reason": null,
+  "claim_limits": [
+    "This proves only a development authenticated-retrieval smoke against the recorded image digest.",
+    "The deployed image did not expose the new grounding contract, so grounding is not runtime-proven by this run.",
+    "The deployed image had no source-revision label, so this run cannot be tied to a source release.",
+    "The five checked-out repositories were dirty and are recorded only to identify the workspace baseline.",
+    "Actual OpenSQL product identity, ANN, retrieval-quality thresholds, outage recovery, and multi-node HA are not proved by this run."
+  ]
+}

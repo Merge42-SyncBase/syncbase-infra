@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://syncbase.example.invalid/schemas/round1-result.schema.json",
+  "title": "SyncBase Round-1 evidence result",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "task_id",
+    "run_id",
+    "overall_result",
+    "evidence_grade",
+    "started_at",
+    "completed_at",
+    "repository_revisions",
+    "inputs",
+    "measurements",
+    "artifact_hashes",
+    "failure_reason"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "task_id": {"type": "string", "minLength": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "overall_result": {
+      "enum": ["PASS", "FAIL", "BLOCKED", "TIMEBOX_EXPIRED", "SKIPPED"]
+    },
+    "evidence_grade": {"type": "string", "minLength": 1},
+    "started_at": {"type": "string", "format": "date-time"},
+    "completed_at": {"type": "string", "format": "date-time"},
+    "repository_revisions": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["frontend", "embedding", "was", "infra", "mcp"],
+      "properties": {
+        "frontend": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "embedding": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "was": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "infra": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+        "mcp": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+      }
+    },
+    "inputs": {"type": "object"},
+    "measurements": {"type": "object"},
+    "artifact_hashes": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "result_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "failure_reason": {"type": ["string", "null"]}
+  }
+}

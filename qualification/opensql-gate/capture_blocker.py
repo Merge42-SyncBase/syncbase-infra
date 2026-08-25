@@ -1,15 +1,31 @@
 #!/usr/bin/env python3
+"""Capture a truthful BLOCKED OpenSQL qualification result.
+
+This command records why an environment cannot be promoted to actual OpenSQL
+single-node evidence. It deliberately cannot emit PASS; successful product
+qualification needs a separate smoke run that proves identity and behavior.
+"""
+
 from __future__ import annotations
 
+import argparse
 import hashlib
+import importlib.util
 import json
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[3]
+INFRA_ROOT = Path(__file__).resolve().parents[2]
+WORKSPACE_ROOT = INFRA_ROOT.parent
 VM = "syncbase-opensql-ubuntu"
+RESULTS = {"PASS", "FAIL", "BLOCKED", "TIMEBOX_EXPIRED", "SKIPPED"}
+EVIDENCE_GRADES = {
+    "ACTUAL_OPENSQL_SINGLE_NODE",
+    "POSTGRES_REFERENCE",
+    "UNAVAILABLE",
+}
 
 
 def sha256(path: Path) -> str:
@@ -31,7 +47,15 @@ def unavailable_snapshot(reason: str) -> dict:
         "package_files": 0,
         "executables": {
             executable: "MISSING"
-            for executable in ("opensql", "postgres", "pg_ctl", "psql", "patroni", "etcd", "openproxy")
+            for executable in (
+                "opensql",
+                "postgres",
+                "pg_ctl",
+                "psql",
+                "patroni",
+                "etcd",
+                "openproxy",
+            )
         },
         "matching_processes": 0,
         "db_listeners": 0,
@@ -87,67 +111,156 @@ jq -n \
         return unavailable_snapshot("OrbStack snapshot returned invalid JSON")
 
 
-def source_revision() -> str:
-    try:
-        completed = subprocess.run(
-            ["git", "-C", str(ROOT), "rev-parse", "HEAD"],
-            check=False,
-            capture_output=True,
-            text=True,
-        )
-    except FileNotFoundError:
-        return "NO_VCS"
-    revision = completed.stdout.strip()
-    return revision if completed.returncode == 0 and revision else "NO_VCS"
+def load_repository_verifier():
+    module_path = INFRA_ROOT / "quality/verify_repositories.py"
+    specification = importlib.util.spec_from_file_location("verify_repositories", module_path)
+    if not specification or not specification.loader:
+        raise RuntimeError("repository verifier could not be loaded")
+    module = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(module)
+    return module
 
 
-def artifact_paths() -> tuple[Path, ...]:
+def repository_revisions(workspace_root: Path = WORKSPACE_ROOT) -> dict[str, str]:
+    verifier = load_repository_verifier()
+    inventory = verifier.collect(workspace_root, allow_dirty=True)
+    return inventory["repository_revisions"]
+
+
+def artifact_paths(workspace_root: Path = WORKSPACE_ROOT) -> tuple[Path, ...]:
     return (
-        ROOT / "was/internal/adapters/postgres/store.go",
-        ROOT / "was/internal/adapters/postgres/migrate.go",
-        ROOT / "infra/acceptance/run-failover.sh",
-        ROOT / "docs/repository-layout.md",
+        workspace_root / "syncbase-was/internal/adapters/postgres/store.go",
+        workspace_root / "syncbase-was/internal/adapters/postgres/migrate.go",
+        workspace_root / "syncbase-infra/acceptance/run-db-outage-recovery.sh",
+        workspace_root / "syncbase-infra/quality/verify_repositories.py",
+        workspace_root / "syncbase-infra/qualification/opensql-gate/capture_blocker.py",
+        workspace_root / "syncbase-infra/evidence/schemas/result.schema.json",
     )
 
 
-def main() -> None:
-    started_at = now()
-    observed = snapshot()
-    result = {
-        "artifacts": [
-            {"path": str(path.relative_to(ROOT)), "sha256": sha256(path)}
-            for path in artifact_paths()
-        ],
-        "candidates": {
-            "go": {
-                "client_gate": "POSTGRES_REFERENCE_PASS_OPENSQL_EXECUTION_BLOCKED",
-                "verdict": "BLOCKED",
-            },
-        },
-        "checks": [
-            {"actual": observed["package_files"], "expected": ">=1 vendor OpenSQL 3 package", "id": "vendor-package", "verdict": "BLOCKED"},
-            {"actual": observed["executables"], "expected": "OpenSQL server and client executables", "id": "executables", "verdict": "BLOCKED"},
-            {"actual": observed["db_listeners"], "expected": ">=1 database listener", "id": "database-listener", "verdict": "BLOCKED"},
-            {"actual": observed["matching_processes"], "expected": ">=1 OpenSQL topology process", "id": "database-process", "verdict": "BLOCKED"},
-            {"actual": "MISSING", "expected": "approved configtree credentials", "id": "datasource-config", "verdict": "BLOCKED"},
-        ],
-        "ended_at": now(),
-        "environment": observed | {"machine": VM, "opensql_version": "NOT_INSTALLED"},
-        "gate_id": "COMMON-OPENSQL-G0",
-        "overall_verdict": "BLOCKED",
-        "reason": "Current OpenSQL 3 Ubuntu package, running topology, listener, and approved datasource configuration are absent; PostgreSQL compatibility evidence cannot be promoted to OpenSQL PASS.",
-        "run_id": f"{datetime.now(timezone.utc).date()}-orbstack-ubuntu-go",
-        "schema_version": 2,
-        "source_revision": source_revision(),
-        "started_at": started_at,
+def classify_evidence_grade(observed: dict) -> str:
+    executables = observed.get("executables", {})
+    postgres_present = any(
+        executables.get(executable, "MISSING") != "MISSING"
+        for executable in ("postgres", "pg_ctl", "psql")
+    )
+    if postgres_present or int(observed.get("db_listeners", 0)) > 0:
+        return "POSTGRES_REFERENCE"
+    return "UNAVAILABLE"
+
+
+def build_result(
+    observed: dict,
+    revisions: dict[str, str],
+    *,
+    run_id: str,
+    started_at: str,
+    completed_at: str,
+    workspace_root: Path = WORKSPACE_ROOT,
+) -> dict:
+    grade = classify_evidence_grade(observed)
+    artifact_hashes = {
+        str(path.relative_to(workspace_root)): sha256(path)
+        for path in artifact_paths(workspace_root)
     }
-    canonical = json.dumps(result, ensure_ascii=False, separators=(",", ":"), sort_keys=True).encode("utf-8")
+    result = {
+        "schema_version": "1.0",
+        "task_id": "C3_OPENSQL_SMOKE",
+        "run_id": run_id,
+        "overall_result": "BLOCKED",
+        "evidence_grade": grade,
+        "started_at": started_at,
+        "completed_at": completed_at,
+        "repository_revisions": revisions,
+        "inputs": {
+            "machine_profile": VM,
+            "capture_kind": "qualification-blocker",
+        },
+        "measurements": {
+            "package_files": int(observed.get("package_files", 0)),
+            "matching_processes": int(observed.get("matching_processes", 0)),
+            "db_listeners": int(observed.get("db_listeners", 0)),
+        },
+        "artifact_hashes": artifact_hashes,
+        "checks": [
+            {
+                "id": "vendor-package",
+                "expected": ">=1 vendor OpenSQL package",
+                "actual": int(observed.get("package_files", 0)),
+                "result": "BLOCKED",
+            },
+            {
+                "id": "product-identity",
+                "expected": "authoritative OpenSQL product and version identity",
+                "actual": "NOT_PROVEN",
+                "result": "BLOCKED",
+            },
+            {
+                "id": "database-listener",
+                "expected": ">=1 qualified database listener",
+                "actual": int(observed.get("db_listeners", 0)),
+                "result": "BLOCKED",
+            },
+            {
+                "id": "smoke-flow",
+                "expected": "migrations, roles, pgvector, ingestion, active search, source",
+                "actual": "NOT_EXECUTED",
+                "result": "BLOCKED",
+            },
+        ],
+        "environment": observed | {"machine": VM, "opensql_version": "NOT_PROVEN"},
+        "failure_reason": (
+            "Actual OpenSQL product identity and the single-node application smoke flow "
+            "have not been proven; PostgreSQL-compatible evidence cannot be promoted."
+        ),
+    }
+    canonical = json.dumps(
+        result, ensure_ascii=False, separators=(",", ":"), sort_keys=True
+    ).encode("utf-8")
     result["result_sha256"] = hashlib.sha256(canonical).hexdigest()
-    output = ROOT / f"output/evidence/g0/COMMON-OPENSQL-G0/{result['run_id']}/result.json"
+    return result
+
+
+def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--snapshot-json", type=Path)
+    parser.add_argument("--output", type=Path)
+    parser.add_argument("--workspace-root", type=Path, default=WORKSPACE_ROOT)
+    parser.add_argument("--run-id")
+    return parser.parse_args(argv)
+
+
+def main(argv: list[str] | None = None) -> int:
+    arguments = parse_args(argv)
+    started_at = now()
+    observed = (
+        json.loads(arguments.snapshot_json.read_text(encoding="utf-8"))
+        if arguments.snapshot_json
+        else snapshot()
+    )
+    run_id = arguments.run_id or datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+    result = build_result(
+        observed,
+        repository_revisions(arguments.workspace_root),
+        run_id=run_id,
+        started_at=started_at,
+        completed_at=now(),
+        workspace_root=arguments.workspace_root,
+    )
+    output = arguments.output or (
+        INFRA_ROOT
+        / "evidence/round1/lane-c"
+        / run_id
+        / "03-opensql-smoke/result.json"
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
-    output.write_text(json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    output.write_text(
+        json.dumps(result, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
     print(output)
+    return 2
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
