@@ -1,4 +1,13 @@
-# SyncBase infrastructure
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/syncbase-logo-horizontal-inverse.svg">
+    <img src="assets/brand/syncbase-logo-horizontal.svg" alt="SyncBase" width="400">
+  </picture>
+</p>
+
+<h1 align="center">SyncBase infrastructure</h1>
+
+<p align="center">정합성 우선 AI 문서 관리·벡터 검색</p>
 
 이 저장소는 애플리케이션 소스가 아니라 실행 조립만 소유한다.
 
