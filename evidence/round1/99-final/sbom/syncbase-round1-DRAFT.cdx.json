@@ -2,10 +2,10 @@
   "$schema": "http://cyclonedx.org/schema/bom-1.5.schema.json",
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:18bf2d96-1430-54a0-8cbe-3fd02e06a4e1",
+  "serialNumber": "urn:uuid:86f30d55-f15f-56aa-969d-18cf7c2cc5e1",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-25T00:49:26Z",
+    "timestamp": "2026-08-26T08:19:08Z",
     "lifecycles": [
       {
         "phase": "pre-build"
@@ -20,7 +20,7 @@
       {
         "vendor": "npm",
         "name": "cli sbom",
-        "version": "12.0.2"
+        "version": "11.16.0"
       }
     ],
     "component": {
@@ -682,7 +682,7 @@
         },
         {
           "name": "syncbase:source.git.head",
-          "value": "5b61783029d7d9c4ac6eb81b23731c669f2b133e"
+          "value": "5fe51b56bf770dcb81acfe850d7bff338915c416"
         },
         {
           "name": "syncbase:source.go.mod.sha256",
@@ -698,7 +698,7 @@
         },
         {
           "name": "syncbase:source.target_tag_present",
-          "value": "false"
+          "value": "true"
         }
       ]
     },
@@ -736,11 +736,11 @@
         },
         {
           "name": "syncbase:source.git.dirty",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "syncbase:source.git.head",
-          "value": "d0b306a13f6165d534802542cea57a7726cb7113"
+          "value": "f756c9d0c161d64c6f253f2215f0824346a250be"
         },
         {
           "name": "syncbase:source.package-lock.json.sha256",
@@ -756,7 +756,7 @@
         },
         {
           "name": "syncbase:source.target_tag_present",
-          "value": "false"
+          "value": "true"
         }
       ],
       "version": "0.2.0"
@@ -795,15 +795,15 @@
         },
         {
           "name": "syncbase:source.compose.yml.sha256",
-          "value": "4528c167a8d9a77b998f13728b52702232d23de45b2ec82d56c23708f49781a2"
+          "value": "9aacd48a9c42cbe5e70ec6ad147d97a0e0760f5313228e9383f45a28082f3021"
         },
         {
           "name": "syncbase:source.git.dirty",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "syncbase:source.git.head",
-          "value": "57d698c949b3e794bccf25cf66ff0c15ab62f8a0"
+          "value": "7ec9d9087334885e0bbc01f51eabac2782346b24"
         },
         {
           "name": "syncbase:source.target_tag",
@@ -811,7 +811,7 @@
         },
         {
           "name": "syncbase:source.target_tag_present",
-          "value": "false"
+          "value": "true"
         }
       ]
     },
@@ -857,19 +857,19 @@
         },
         {
           "name": "syncbase:source.git.dirty",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "syncbase:source.git.head",
-          "value": "166bf3f0231db5a54052e8adf20d9cb6945807b3"
+          "value": "05352ee3637f389ceae175eb1aa2e347269b4fc7"
         },
         {
           "name": "syncbase:source.go.mod.sha256",
-          "value": "f0e5c65131a3c299ffe032deff79e7dbbe2060dd115f44f9b1e69263b49033ca"
+          "value": "cdd40f930fec6d5c47d03da51ce44e47a7244f58941da0400823be3601e0238c"
         },
         {
           "name": "syncbase:source.go.sum.sha256",
-          "value": "814a9974533c4b7c656cf20c01e72009442ecedc72a0eb78fdae89a6daf2e8a7"
+          "value": "d9bbf7b31efc2c84cee9ef53f33b1b4d98da9e3ef4c1d04cc7d28f4ea5be93d8"
         },
         {
           "name": "syncbase:source.target_tag",
@@ -877,7 +877,7 @@
         },
         {
           "name": "syncbase:source.target_tag_present",
-          "value": "false"
+          "value": "true"
         }
       ]
     },
@@ -923,11 +923,11 @@
         },
         {
           "name": "syncbase:source.git.dirty",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "syncbase:source.git.head",
-          "value": "9703e9f4e68eb6a5ebc5ce2a0b3e5950ceccc5fa"
+          "value": "63c2ef74b59604c1cff0275c7eba9748b2a58967"
         },
         {
           "name": "syncbase:source.go.mod.sha256",
@@ -943,7 +943,7 @@
         },
         {
           "name": "syncbase:source.target_tag_present",
-          "value": "false"
+          "value": "true"
         }
       ]
     },
@@ -995,12 +995,12 @@
       ]
     },
     {
-      "bom-ref": "go:github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260821062637-f2368bffb1c6",
+      "bom-ref": "go:github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260825005907-130f5c858edc",
       "type": "library",
       "name": "github.com/Merge42-SyncBase/syncbase-was",
-      "version": "v0.0.0-20260821062637-f2368bffb1c6",
+      "version": "v0.0.0-20260825005907-130f5c858edc",
       "scope": "required",
-      "purl": "pkg:golang/github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260821062637-f2368bffb1c6",
+      "purl": "pkg:golang/github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260825005907-130f5c858edc",
       "licenses": [
         {
           "license": {
@@ -1011,7 +1011,7 @@
       "externalReferences": [
         {
           "type": "website",
-          "url": "https://pkg.go.dev/github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260821062637-f2368bffb1c6"
+          "url": "https://pkg.go.dev/github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260825005907-130f5c858edc"
         }
       ],
       "properties": [
@@ -1029,7 +1029,7 @@
         },
         {
           "name": "syncbase:go.sum.module_h1",
-          "value": "h1:eAh+uk2Zr7u9WRS8xINildrYfK1JW1P84tl79h06PY4="
+          "value": "h1:1XaNhss9mYvgO3IY27nE59SCuyeOSnGgH8PoAQm8bSo="
         },
         {
           "name": "syncbase:inventory.source",
@@ -10940,7 +10940,7 @@
       "ref": "firstparty:mcp",
       "dependsOn": [
         "go:github.com/Merge42-SyncBase/syncbase-embedding@v0.0.0-20260816133742-bf91ee529a7b",
-        "go:github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260821062637-f2368bffb1c6",
+        "go:github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260825005907-130f5c858edc",
         "go:github.com/emirpasic/gods@v1.18.1",
         "go:github.com/google/jsonschema-go@v0.4.3",
         "go:github.com/google/uuid@v1.6.0",
@@ -11000,7 +11000,7 @@
       "dependsOn": []
     },
     {
-      "ref": "go:github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260821062637-f2368bffb1c6",
+      "ref": "go:github.com/Merge42-SyncBase/syncbase-was@v0.0.0-20260825005907-130f5c858edc",
       "dependsOn": []
     },
     {

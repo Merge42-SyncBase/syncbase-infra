@@ -1,8 +1,8 @@
 {
   "state": "DRAFT_UNTIL_RC",
-  "generated_at": "2026-08-25T00:49:26Z",
+  "generated_at": "2026-08-26T08:19:08Z",
   "sbom": "syncbase-round1-DRAFT.cdx.json",
-  "sbom_sha256": "de03c6ca8d76e05f302edab6effc536d10dc16764d183d7dc8913f1a66dec99c",
+  "sbom_sha256": "dd5fe04c34736b56ebb03ca4861c39c7825744a9337babd8658c3f5513ef581f",
   "cyclonedx_spec_version": "1.5",
   "counts": {
     "components": 294,
@@ -13,19 +13,8 @@
     "go_module_versions": 32,
     "release_blockers": 14
   },
-  "dirty_repositories": [
-    "frontend",
-    "infra",
-    "mcp",
-    "was"
-  ],
-  "missing_target_tags": [
-    "embedding",
-    "frontend",
-    "infra",
-    "mcp",
-    "was"
-  ],
+  "dirty_repositories": [],
+  "missing_target_tags": [],
   "release_blocker_bom_refs": [
     "container:debian:bookworm-slim@sha256:abd67ffcfa541b485a3dff59865ab629aa048a6c613e639d36e7456b0b229241",
     "container:docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e",

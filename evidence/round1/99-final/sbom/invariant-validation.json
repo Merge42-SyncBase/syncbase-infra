@@ -4,15 +4,12 @@
   "validation_scope": "structural, reference-integrity, source-state, required-artifact, public-safety",
   "official_schema_validation": "NOT_PERFORMED_BY_THIS_VALIDATOR",
   "sbom": "syncbase-round1-DRAFT.cdx.json",
-  "sbom_sha256": "de03c6ca8d76e05f302edab6effc536d10dc16764d183d7dc8913f1a66dec99c",
+  "sbom_sha256": "dd5fe04c34736b56ebb03ca4861c39c7825744a9337babd8658c3f5513ef581f",
   "components": 294,
   "dependency_nodes": 295,
   "dependency_edges": 442,
   "first_party_repositories": 5,
   "dirty_repositories": [
-    "SyncBase-FE",
-    "syncbase-was",
-    "syncbase-infra",
-    "syncbase-mcp"
+    "syncbase-infra"
   ]
 }
